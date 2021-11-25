@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GdpMapper">
+    <!--<cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />-->
+    <!--useCache="false"开启缓存 useCache="false"关闭缓存-->
+	<!--根据年份和区域查询gdp数据总览   全国和中部六省-->
+    <select id="querydataOverviewByAreaAndYear" parameterType="pd" resultType="pd" useCache="false">
+		SELECT  G.UNIT,G.GDP_LJZ,G.GDP_LJTB,G.AREA,G.AREA_NAME
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA A  ON G.AREA = A.AREA_VALUE
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		WHERE FLAG1='1'
+		<!--全国和中部六省 取省级-->
+		<if test='areaType=="1" or areaType=="4"'>
+			AND A.C_AREA_LEVEL ='1'
+		</if>
+		AND L.AREA_FLAG = #{areaType}
+		AND G.INTERVAL_DATE = #{year}
+		<if test="areaName != null and areaName != ''">
+			AND G.AREA_NAME like concat('%',#{areaName},'%')
+		</if>
+		 ORDER BY G.GDP_LJZ DESC
+    </select>
+	<!--根据年份和区域查询gdp数据总览   珠江三角洲和长江三角洲 包含抚州-->
+	<select id="querydataOverviewByAreaAndYear1" parameterType="pd" resultType="pd" useCache="false">
+		SELECT distinct * FROM(
+			SELECT  G.UNIT,G.GDP_LJZ,G.GDP_LJTB,G.AREA,G.AREA_NAME
+			FROM ZR_ZK_GDP G
+			LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+			WHERE G.FLAG1='1'
+			AND L.AREA_FLAG =#{areaType}
+			AND G.INTERVAL_DATE =#{year}
+			<if test="areaName != null and areaName != ''">
+				AND G.AREA_NAME like concat('%',#{areaName},'%')
+			</if>
+		UNION ALL
+		SELECT  G.UNIT,G.GDP_LJZ,G.GDP_LJTB,G.AREA,G.AREA_NAME
+			FROM ZR_ZK_GDP G
+			WHERE G.FLAG1='1'
+			AND G.INTERVAL_DATE =#{year}
+			AND AREA='361000'
+		) A
+		 ORDER BY A.GDP_LJZ DESC
+    </select>
+	<!--根据年份和区域查询gdp数据总览   珠江三角洲和长江三角洲 包含抚州-->
+	<select id="querydataOverviewByAreaAndYear8" parameterType="pd" resultType="pd" useCache="false">
+		select * from (
+		select * from (
+		SELECT A.*,CAST((@i:=@i+1) as CHAR) rank FROM(
+		SELECT G.UNIT,G.GDP_LJZ,G.GDP_LJTB,G.AREA,G.AREA_NAME
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		LEFT JOIN ZR_ZK_AREA B ON G.AREA = B.AREA_VALUE
+		WHERE G.FLAG1='1'
+		AND B.C_AREA_LEVEL ='1'
+		AND L.AREA_FLAG =#{areaType}
+		AND G.INTERVAL_DATE =#{year}
+		) A,(SELECT @i:=0) b
+		ORDER BY A.GDP_LJZ DESC  ) a
+		union all
+		SELECT  '' UNIT,ROUND(AVG(G.GDP_LJZ),2) GDP_LJZ ,'' GDP_LJTB, '' AREA, '平均值' AREA_NAME,'-'rank
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA A  ON G.AREA = A.AREA_VALUE
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		WHERE FLAG1='1'
+		AND A.C_AREA_LEVEL ='1'
+		AND L.AREA_FLAG =#{areaType}
+		AND G.INTERVAL_DATE =#{year}
+		) b order by b.GDP_LJZ desc
+    </select>
+	<!--根据年份和区域查询gdp数据总览   珠江三角洲和长江三角洲 包含抚州-->
+	<select id="querydataOverviewByAreaAndYear18" parameterType="pd" resultType="pd" useCache="false">
+			SELECT
+				*
+			FROM
+				(
+				SELECT
+					*
+				FROM
+					(
+					SELECT
+						A.*,
+						CAST( ( @i := @i + 1 ) AS CHAR ) rank
+					FROM
+						(
+						SELECT
+							G.GDP_LJTB,
+							G.AREA,
+							G.AREA_NAME
+						FROM
+							ZR_ZK_GDP G
+							LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+							LEFT JOIN ZR_ZK_AREA B ON G.AREA = B.AREA_VALUE
+						WHERE   FLAG1='1'
+								AND B.C_AREA_LEVEL ='1'
+								AND L.AREA_FLAG =#{areaType}
+								AND G.INTERVAL_DATE =#{year}
+						) A,
+						( SELECT @i := 0 ) b
+					ORDER BY
+						A.GDP_LJTB DESC
+					) a UNION ALL
+				SELECT
+					ROUND( AVG( G.GDP_LJTB ), 2 ) GDP_LJTB,
+					'' AREA,
+					'平均值' AREA_NAME,
+					'-' rank
+				FROM
+					ZR_ZK_GDP G
+					LEFT JOIN ZR_ZK_AREA A ON G.AREA = A.AREA_VALUE
+					LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+				WHERE
+					FLAG1 = '1'
+					AND A.C_AREA_LEVEL = '1'
+					AND L.AREA_FLAG =#{areaType}
+					AND G.INTERVAL_DATE =#{year}
+				) b
+			ORDER BY
+				b.GDP_LJTB DESC
+    </select>
+	<!--根据年份和区域查询gdp数据总览   珠江三角洲和长江三角洲 不包含抚州-->
+	<select id="querydataOverviewByAreaAndYear12" parameterType="pd" resultType="pd" useCache="false">
+			SELECT
+				*
+			FROM
+				(
+				SELECT
+					*
+				FROM
+					(
+					SELECT
+						A.*,
+						CAST( ( @i := @i + 1 ) AS CHAR ) rank
+					FROM
+						(
+						SELECT
+							G.GDP_LJTB,
+							G.AREA,
+							G.AREA_NAME
+						FROM
+							ZR_ZK_GDP G
+							LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+						WHERE
+							G.FLAG1 = '1'
+							AND L.AREA_FLAG =#{areaType}
+							AND G.INTERVAL_DATE =#{year}
+						) A,
+						( SELECT @i := 0 ) b
+					ORDER BY
+						A.GDP_LJTB DESC
+					) a UNION ALL
+				SELECT
+					ROUND( AVG( G.GDP_LJTB ), 2 ) GDP_LJTB,
+					'' AREA,
+					'平均值' AREA_NAME,
+					'-' rank
+				FROM
+					ZR_ZK_GDP G
+					LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+				WHERE
+					G.FLAG1 = '1'
+					AND L.AREA_FLAG =#{areaType}
+					AND G.INTERVAL_DATE =#{year}
+				) b
+			ORDER BY
+				b.GDP_LJTB DESC
+    </select>
+	<!--根据年份和区域查询gdp数据总览   珠江三角洲和长江三角洲 不包含抚州-->
+	<select id="querydataOverviewByAreaAndYear2" parameterType="pd" resultType="pd" useCache="false">
+		select * from (
+		select * from (
+		SELECT A.*,CAST((@i:=@i+1) as CHAR) rank FROM(
+		SELECT  G.UNIT,G.GDP_LJZ,G.GDP_LJTB,G.AREA,G.AREA_NAME
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		WHERE G.FLAG1='1'
+		AND L.AREA_FLAG =#{areaType}
+		AND G.INTERVAL_DATE =#{year}
+		) A,(SELECT @i:=0) b
+		ORDER BY A.GDP_LJZ DESC  ) a
+		union all
+		SELECT  '' UNIT,ROUND(AVG(G.GDP_LJZ),2) GDP_LJZ ,'' GDP_LJTB, '' AREA, '平均值' AREA_NAME,'-'rank
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		WHERE G.FLAG1='1'
+		AND L.AREA_FLAG =#{areaType}
+		AND G.INTERVAL_DATE =#{year}
+		) b order by b.GDP_LJZ desc
+    </select>
+	<!--GDP总量和总增速    全国和中部六省-->
+	<select id="dataSumAndSpeed" parameterType="pd" resultType="pd" useCache="false">
+		SELECT  G.UNIT,sum(G.GDP_LJZ) GDP_LJZ,round(avg(G.GDP_LJTB),2) GDP_LJTB,ROUND(AVG(G.GDP_LJZ),2)AVGGDPNUM
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA A  ON G.AREA = A.AREA_VALUE
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		WHERE FLAG1='1'
+		AND A.C_AREA_LEVEL ='1'
+		AND L.AREA_FLAG =#{areaType}
+		AND G.INTERVAL_DATE =#{year}
+    </select>
+	<!--GDP总量和总增速   珠江三角洲和长江三角洲-->
+	<select id="dataSumAndSpeed1" parameterType="pd" resultType="pd" useCache="false">
+			 SELECT  G.UNIT,sum(G.GDP_LJZ) GDP_LJZ,round(avg(G.GDP_LJTB),2) GDP_LJTB,ROUND(AVG(G.GDP_LJZ),2)AVGGDPNUM
+			FROM ZR_ZK_GDP G
+			LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+			WHERE G.FLAG1='1'
+			AND L.AREA_FLAG =#{areaType}
+			AND G.INTERVAL_DATE =#{year}
+    </select>
+	<!-- GDP增长趋势（近五年） 全国和中部六省-->
+	<select id="growthTrend" parameterType="pd" resultType="pd" useCache="false">
+		SELECT G.UNIT,G.INTERVAL_DATE,sum(G.GDP_LJZ) GDP_LJZ
+		FROM ZR_ZK_GDP G
+		LEFT JOIN ZR_ZK_AREA A  ON G.AREA = A.AREA_VALUE
+		LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+		WHERE FLAG1='1'
+		AND A.C_AREA_LEVEL ='1'
+		AND L.AREA_FLAG =#{areaType}
+		<if test='area !="" and area!=null'>
+			AND G.area=#{area}
+		</if>
+		AND G.INTERVAL_DATE in
+		<foreach item="years" index="index" collection="years" open="(" separator="," close=")" >
+			#{years}
+		</foreach>
+		group by INTERVAL_DATE
+    </select>
+	<!--GDP增长趋势（近五年） 珠江和长江三角洲-->
+	<select id="growthTrend1" parameterType="pd" resultType="pd" useCache="false">
+			 SELECT  G.UNIT,G.INTERVAL_DATE,sum(G.GDP_LJZ) GDP_LJZ
+			FROM ZR_ZK_GDP G
+			LEFT JOIN ZR_ZK_AREA_LINK L ON G.AREA = L.AREA_VALUE
+			WHERE G.FLAG1='1'
+			AND L.AREA_FLAG =#{areaType}
+			<if test='area !="" and area!=null'>
+				AND G.area=#{area}
+			</if>
+			AND G.INTERVAL_DATE  in
+			<foreach item="years" index="index" collection="years" open="(" separator="," close=")"  >
+				#{years}
+			</foreach>
+		group by INTERVAL_DATE
+    </select>
+<!--	获取年份列表-->
+	<select id="getYears" parameterType="pd" resultType="pd" useCache="false">
+		select INTERVAL_DATE from ZR_ZK_GDP where flag1='1' group by INTERVAL_DATE desc
+	</select>
+	<!--获取省市数据-->
+	<select id="getProvinceCityData" parameterType="pd" resultType="pd" useCache="false">
+		SELECT
+			AREA_NAME,
+        	concat(REMARK,'@150' )REMARK
+		FROM 	zr_zk_area t
+		WHERE	EXISTS
+    	(SELECT 1
+    	FROM zr_zk_area_link
+   		WHERE area_flag = #{areaType}
+        AND t.AREA_VALUE = AREA_VALUE)
+	</select>
+</mapper>

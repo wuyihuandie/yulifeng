@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--市场主体分析接口-->
+<mapper namespace="EntStatisticsMapper">
+    <cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />
+    <!--查询市场主体数量-->
+    <select id="EntNum" parameterType="pd" resultType="pd" useCache="false">
+		select AREA_NAME,IFNULL(ENTTOTALZS,0) ENTTOTALZS,UNIT
+		<if test="entType == '1'.toString()">
+            ,CAST(GTTOTALSUM AS CHAR) ENTTOTALSUM
+        </if>
+        <if test="entType == '2'.toString()">
+            ,CAST(NMZYTOTALSUM AS CHAR) ENTTOTALSUM
+        </if>
+        <if test="entType == '3'.toString()">
+            ,CAST(NZTOTALSUM AS CHAR) ENTTOTALSUM
+        </if>
+        <if test="entType == '4'.toString()">
+            ,CAST(WZTOTALSUM AS CHAR) ENTTOTALSUM
+        </if>
+        <if test="entType == null or entType == '' ">
+            ,CAST(ENTTOTALSUM AS CHAR) ENTTOTALSUM
+        </if>
+		from zr_zk_entstataction where AREA=#{area} and YEAR=#{year}
+        <if test="areaName != null and areaName != ''">
+            AND AREA_NAME like concat('%',#{areaName},'%')
+        </if>
+    </select>
+    <!--查询区域市场主体数量排名(全国)-->
+    <select id="AreaEntRank" parameterType="pd" resultType="Integer" useCache="false">
+        SELECT
+          COUNT(1)
+        FROM (SELECT
+                AREA
+              FROM zr_zk_entstataction t
+              WHERE
+                <if test="entType == '1'.toString()">
+                    GTTOTALSUM &gt; #{ENTTOTALSUM}
+                </if>
+                <if test="entType == '2'.toString()">
+                    NMZYTOTALSUM &gt; #{ENTTOTALSUM}
+                </if>
+                <if test="entType == '3'.toString()">
+                    NZTOTALSUM &gt; #{ENTTOTALSUM}
+                </if>
+                <if test="entType == '4'.toString()">
+                    WZTOTALSUM &gt; #{ENTTOTALSUM}
+                </if>
+                <if test="entType == null or entType == '' ">
+                    ENTTOTALSUM &gt; #{ENTTOTALSUM}
+                </if>
+                AND YEAR=#{year}
+                <choose>
+                    <!--全国排名 取全省-->
+                    <when test='areaType=="1"'>
+                        AND AREA_FLAG = '1'
+                    </when>
+                    <!--长江、珠江三角洲带上抚州比较-->
+                    <when test='areaType=="2" or areaType=="3"'>
+                        and exists(select 1 from zr_zk_area_link WHERE
+                        (area_flag=#{areaType} or area_value='361000') and t.AREA=AREA_VALUE)
+                    </when>
+                    <!--中部六省和抚州市-->
+                    <otherwise>
+                        and exists(select 1 from zr_zk_area_link WHERE area_flag=#{areaType} and t.AREA=AREA_VALUE)
+                    </otherwise>
+                </choose>
+              GROUP BY AREA) a
+    </select>
+    <!--查询市场主体总量-->
+    <select id="EntTotal" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        <if test="entType == '1'.toString()">
+            sum(GTTOTALSUM) ENTTOTALSUMS,
+        </if>
+        <if test="entType == '2'.toString()">
+            sum(NMZYTOTALSUM) ENTTOTALSUMS,
+        </if>
+        <if test="entType == '3'.toString()">
+            sum(NZTOTALSUM) ENTTOTALSUMS,
+        </if>
+        <if test="entType == '4'.toString()">
+            sum(WZTOTALSUM) ENTTOTALSUMS,
+        </if>
+        <if test="entType == null or entType == '' ">
+            sum(ENTTOTALSUM) ENTTOTALSUMS,
+        </if>
+        CAST(IFNULL(AVG(IFNULL(ENTTOTALZS,0)),0) AS CHAR) ENTTOTALZS,UNIT
+        <choose>
+            <!--全国市场主体总量-->
+            <when test='areaType=="1"'>
+                ,(select
+                <if test="entType == '1'.toString()">
+                    CAST(IFNULL(AVG(IFNULL(GTTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == '2'.toString()">
+                    CAST(IFNULL(AVG(IFNULL(NMZYTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == '3'.toString()">
+                    CAST(IFNULL(AVG(IFNULL(NZTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == '4'.toString()">
+                    CAST(IFNULL(AVG(IFNULL(WZTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == null or entType == '' ">
+                    CAST(IFNULL(AVG(IFNULL(ENTTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                 from zr_zk_entstataction
+                    where YEAR=#{year} and AREA_FLAG='1') AS ENTTOTALSUM_AVG
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                <if test="entType == '1'.toString()">
+                    ,CAST(IFNULL(AVG(IFNULL(GTTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == '2'.toString()">
+                    ,CAST(IFNULL(AVG(IFNULL(NMZYTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == '3'.toString()">
+                    ,CAST(IFNULL(AVG(IFNULL(NZTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == '4'.toString()">
+                    ,CAST(IFNULL(AVG(IFNULL(WZTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+                <if test="entType == null or entType == '' ">
+                    ,CAST(IFNULL(AVG(IFNULL(ENTTOTALSUM,0)),0) AS CHAR) AS ENTTOTALSUM_AVG
+                </if>
+            </otherwise>
+        </choose>
+
+            FROM zr_zk_entstataction t where YEAR=#{year}
+        <choose>
+            <!--全国市场主体总量-->
+            <when test='areaType=="1"'>
+                AND AREA='156'
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                and exists(select 1 from zr_zk_area_link WHERE area_flag=#{areaType} and t.AREA=AREA_VALUE)
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询市场主体占比数据-->
+    <select id="EntProportionList" parameterType="pd" resultType="pd" useCache="false">
+        select sum(NZTOTALSUM) NZTOTALSUMS,sum(WZTOTALSUM) WZTOTALSUMS,sum(GTTOTALSUM) GTTOTALSUMS,sum(NMZYTOTALSUM) NMZYTOTALSUMS
+            FROM zr_zk_entstataction t where YEAR=#{year}
+        <choose>
+            <!--全国市场主体总量-->
+            <when test='areaType=="1"'>
+                AND AREA='156'
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                and exists(select 1 from zr_zk_area_link WHERE area_flag=#{areaType} and t.AREA=AREA_VALUE)
+            </otherwise>
+        </choose>
+    </select>
+    <!--查询近5年的市场主体总量-->
+    <select id="EntGrowthTrendFiveYearList" parameterType="pd" resultType="pd" useCache="false">
+        SELECT a.c_year AS YEAR,
+        <if test="entType == '1'.toString()">
+            IFNULL(SUM(GTTOTALSUM),0) ENTTOTALSUMS,
+        </if>
+        <if test="entType == '2'.toString()">
+            IFNULL(SUM(NMZYTOTALSUM),0) ENTTOTALSUMS,
+        </if>
+        <if test="entType == '3'.toString()">
+            IFNULL(SUM(NZTOTALSUM),0) ENTTOTALSUMS,
+        </if>
+        <if test="entType == '4'.toString()">
+            IFNULL(SUM(WZTOTALSUM),0) ENTTOTALSUMS,
+        </if>
+        <if test="entType == null or entType == '' ">
+            IFNULL(SUM(ENTTOTALSUM),0) ENTTOTALSUMS,
+        </if>
+        IFNULL(UNIT,'') UNIT  FROM
+        (SELECT YEAR(NOW())-1 AS c_year UNION ALL
+            SELECT YEAR(NOW())-2 AS c_year UNION ALL
+            SELECT YEAR(NOW())-3 AS c_year UNION ALL
+            SELECT YEAR(NOW())-4 AS c_year UNION ALL
+            SELECT YEAR(NOW())-5 AS c_year ) a LEFT JOIN zr_zk_entstataction t
+            ON a.c_year=t.YEAR
+        <if test="area != null and area != ''">
+            and AREA = #{area}
+        </if>
+        <choose>
+            <!--全国市场主体总量-->
+            <when test='areaType=="1"'>
+                <if test="area == null or area == ''">
+                    AND AREA='156'
+                </if>
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                and exists(select 1 from zr_zk_area_link WHERE area_flag=#{areaType} and t.AREA=AREA_VALUE)
+            </otherwise>
+        </choose>
+        GROUP BY a.c_year
+    </select>
+    <!--查询市场主体列表-->
+    <select id="EntNumsRankList" parameterType="pd" resultType="pd" useCache="false">
+        select * from (
+        SELECT * from (
+        SELECT CAST((@i:=@i+1) AS CHAR) rank,CAST(AREA AS CHAR) AREA,AREA_NAME,
+        <if test="entType == '1'.toString()">
+            GTTOTALSUM AS ENTTOTALSUM,
+        </if>
+        <if test="entType == '2'.toString()">
+            NMZYTOTALSUM AS ENTTOTALSUM,
+        </if>
+        <if test="entType == '3'.toString()">
+            NZTOTALSUM AS ENTTOTALSUM,
+        </if>
+        <if test="entType == '4'.toString()">
+            WZTOTALSUM AS ENTTOTALSUM,
+        </if>
+        <if test="entType == null or entType == '' ">
+            ENTTOTALSUM,
+        </if>
+        '' AS rankChage,IFNULL(UNIT,'') UNIT
+        FROM zr_zk_entstataction t,(SELECT @i:=0) b where YEAR=#{year}
+        <choose>
+            <!--全国市场主体总量(全省)-->
+            <when test='areaType=="1"'>
+                AND AREA_FLAG = '1'
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                and exists(select 1 from zr_zk_area_link WHERE area_flag=#{areaType} and t.AREA=AREA_VALUE)
+            </otherwise>
+        </choose>
+        order by ENTTOTALSUM desc) a
+        union all
+        select '-' as rank,'' as AREA,'平均值' as AREA_NAME
+        <choose>
+            <!--全国市场主体总量-->
+            <when test='areaType=="1"'>
+                ,(select
+                <if test="entType == '1'.toString()">
+                    IFNULL(AVG(IFNULL(GTTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+                <if test="entType == '2'.toString()">
+                    IFNULL(AVG(IFNULL(NMZYTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+                <if test="entType == '3'.toString()">
+                    IFNULL(AVG(IFNULL(NZTOTALSUM,0)),0)  AS ENTTOTALSUM
+                </if>
+                <if test="entType == '4'.toString()">
+                    IFNULL(AVG(IFNULL(WZTOTALSUM,0)),0)  AS ENTTOTALSUM
+                </if>
+                <if test="entType == null or entType == '' ">
+                    IFNULL(AVG(IFNULL(ENTTOTALSUM,0)),0)  AS ENTTOTALSUM
+                </if>
+                from zr_zk_entstataction
+                where YEAR=#{year} and AREA_FLAG='1') AS ENTTOTALSUM
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                <if test="entType == '1'.toString()">
+                    ,IFNULL(AVG(IFNULL(GTTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+                <if test="entType == '2'.toString()">
+                    ,IFNULL(AVG(IFNULL(NMZYTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+                <if test="entType == '3'.toString()">
+                    ,IFNULL(AVG(IFNULL(NZTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+                <if test="entType == '4'.toString()">
+                    ,IFNULL(AVG(IFNULL(WZTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+                <if test="entType == null or entType == '' ">
+                    ,IFNULL(AVG(IFNULL(ENTTOTALSUM,0)),0) AS ENTTOTALSUM
+                </if>
+            </otherwise>
+        </choose>
+        ,'' AS rankChage,IFNULL(UNIT,'') UNIT FROM
+        zr_zk_entstataction t
+        where YEAR=#{year}
+        <choose>
+            <!--全国市场主体总量-->
+            <when test='areaType=="1"'>
+                AND AREA='156'
+            </when>
+            <!--中部六省、长江、珠江三角洲市场主体总量-->
+            <otherwise>
+                and exists(select 1 from zr_zk_area_link WHERE area_flag=#{areaType} and t.AREA=AREA_VALUE)
+            </otherwise>
+        </choose>
+        ) b order by b.ENTTOTALSUM desc
+    </select>
+    <!--市场主体分析可查询的年份-->
+    <select id="EntYearList" parameterType="pd" resultType="String" useCache="false">
+        SELECT YEAR FROM zr_zk_entstataction t GROUP BY YEAR DESC
+    </select>
+</mapper>

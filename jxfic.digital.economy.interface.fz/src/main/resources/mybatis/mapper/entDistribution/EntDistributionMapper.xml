@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--企业分布接口-->
+<mapper namespace="EntDistributionMapper">
+    <cache
+            eviction="LRU"
+            flushInterval="600000"
+            size="1024"
+            readOnly="true"
+    />
+    <!--行业分布-->
+    <select id="getHyfb" parameterType="pd" resultType="pd" useCache="false">
+        SELECT * FROM (SELECT
+              COUNT(1) COUNT,
+              t.CHAIN_ID,
+              (SELECT
+                 CHAIN_NAME
+               FROM ZR_ZK_SZJJDMB
+               WHERE zt = '1'
+                   AND CHAIN_ID = T.CHAIN_ID
+               LIMIT 1)    CHAIN_NAME
+            FROM zr_zk_szjjqygxb t
+            WHERE YEAR = (DATE_FORMAT(NOW(), '%Y'))
+                AND AREA = '361000'
+                AND STATE = '1'
+                AND t.PARENT_DL = #{PARENT_DL}
+            GROUP BY CHAIN_ID) a ORDER BY COUNT DESC
+
+    </select>
+    <!--行业营收-->
+    <select id="getHyys" parameterType="pd" resultType="pd" useCache="false">
+    SELECT T.*,
+        (SELECT CHAIN_NAME FROM ZR_ZK_SZJJDMB WHERE zt='1' and CHAIN_ID =T.CHAIN_ID LIMIT 1) CHAIN_NAME
+    FROM
+        (SELECT ROUND(IFNULL(SUM(HYYS),0)/10000,2)HYYS,CHAIN_ID ,COUNT(CHAIN_ID) COUNT FROM ZR_ZK_SZJJQYGXB
+         WHERE state='1' and CHAIN_ID IN(SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID in
+            (SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID=#{CHAIN_ID} AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+             AND AREA LIKE '3610%')
+             AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+             AND AREA LIKE '3610%')
+             AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+             AND AREA LIKE '3610%'
+            GROUP BY  CHAIN_ID) T
+    </select>
+    <!--获取抚州市等级为2的产业链编号-->
+    <select id="getChainId2" parameterType="pd" resultType="string" useCache="false">
+    SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID=#{CHAIN_ID} AND YEAR=(DATE_FORMAT(NOW(), '%Y')) AND AREA like '3610%'
+    </select>
+    <!--获取抚州市等级为3,4,5的产业链编号-->
+    <select id="getChainIds" parameterType="pd" resultType="string" useCache="false">
+        SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID in
+        <foreach item="item" index="index" collection="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA like '3610%'
+    </select>
+    <!--获取江西等级为2的产业链编号-->
+    <select id="getJxChainId2" parameterType="pd" resultType="string" useCache="false">
+    SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID=#{CHAIN_ID} AND YEAR=(DATE_FORMAT(NOW(), '%Y')) AND AREA like '36%'
+    </select>
+    <!--获取江西等级为3,4,5的产业链编号-->
+    <select id="getJxChainIds" parameterType="pd" resultType="string" useCache="false">
+        SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID in
+        <foreach item="item" index="index" collection="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA like '36%'
+    </select>
+    <!--获取抚州市等级为2的产业链编号-->
+    <select id="getChainId2Now" parameterType="pd" resultType="string" useCache="false">
+    SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID=#{CHAIN_ID} AND YEAR=(DATE_FORMAT(NOW(), '%Y')) AND AREA like '3610%'
+    </select>
+    <!--获取抚州市等级为3,4,5的产业链编号-->
+    <select id="getChainIdsNow" parameterType="pd" resultType="string" useCache="false">
+        SELECT CHAIN_ID FROM ZR_ZK_SZJJDMB WHERE zt='1' and PARENT_ID in
+        <foreach item="item" index="index" collection="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA like '3610%'
+    </select>
+    <!-- 获取抚州市所有的企业-->
+    <select id="getEnterpriseSite" parameterType="pd" resultType="pd" useCache="true">
+        SELECT
+          ENTNAME,
+          MAPX,
+          MAPY,
+          PRIPID,
+          REGNO
+        FROM e_baseinfo
+        WHERE PRIPID IN(SELECT DISTINCT
+                          PRIPID
+                        FROM ZR_ZK_SZJJQYGXB
+                        WHERE state = '1'
+                            AND PARENT_DL = #{PARENT_DL}
+                            AND YEAR = (DATE_FORMAT(NOW(), '%Y'))
+                            AND AREA LIKE '3610%')
+        AND MAPX IS NOT NULL AND MAPY IS NOT NULL
+    </select>
+    <!-- 获取抚州市区域上一年企业数量-->
+    <select id="getEntListOld" parameterType="pd" resultType="pd" useCache="false">
+        select CAST((@I:=@I+1) AS CHAR) RANK, t.* from(
+        SELECT REGORG,
+        (SELECT AREA_NAME
+        FROM ZR_ZK_AREA
+        WHERE AREA_VALUE=T.REGORG) AREA_NAME,COUNT(1)COUNT
+        FROM E_BASEINFO T
+        WHERE PRIPID IN
+        (SELECT DISTINCT PRIPID
+        FROM ZR_ZK_SZJJQYGXB
+        WHERE  state='1' and CHAIN_ID IN
+        <foreach item="itemOld" index="index" collection="itemOld" open="(" separator="," close=")" >
+            #{itemOld}
+        </foreach>
+        <if test="PARENT_DL != null and PARENT_DL != ''">
+            AND PARENT_DL = #{PARENT_DL}
+        </if>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '3610%')
+        GROUP BY  REGORG )t,(SELECT @I:=0) B
+    </select>
+    <!-- 获取抚州市区域所有企业-->
+    <select id="getPripids" parameterType="pd" resultType="pd" useCache="false">
+        SELECT DISTINCT PRIPID
+        FROM ZR_ZK_SZJJQYGXB
+        WHERE  state='1' and CHAIN_ID IN
+        <foreach item="item" index="index" collection="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '3610%'
+        GROUP BY  REGORG
+    </select>
+    <!-- 获取抚州市区域当前年企业数量-->
+    <select id="getEntListNow" parameterType="pd" resultType="pd" useCache="false">
+        select CAST((@I:=@I+1) AS CHAR) RANK, t.* from(
+        SELECT REGORG,
+        (SELECT AREA_NAME
+        FROM ZR_ZK_AREA
+        WHERE AREA_VALUE=T.REGORG) AREA_NAME,COUNT(1)COUNT
+        FROM E_BASEINFO T
+        WHERE PRIPID IN
+        (SELECT DISTINCT PRIPID
+        FROM ZR_ZK_SZJJQYGXB
+        WHERE  state='1' and CHAIN_ID IN
+        <foreach item="itemNow" index="index" collection="itemNow" open="(" separator="," close=")" >
+            #{itemNow}
+        </foreach>
+        <if test="PARENT_DL != null and PARENT_DL != ''">
+            AND PARENT_DL = #{PARENT_DL}
+        </if>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '3610%')
+        GROUP BY  REGORG )t,(SELECT @I:=0) B
+    </select>
+    <!-- 物联网企业分布情况-->
+    <select id="getWlwqyfb" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        A.*,
+        (
+        SELECT
+        IFNULL( ROUND( ( SUM( HYYS ) / 10000 ), 2 ), 0 ) HYYS
+        FROM
+        ZR_ZK_SZJJQYGXB
+        WHERE
+        YEAR = DATE_FORMAT( NOW( ), '%Y' )
+        AND PARENT_DL =#{PARENT_DL}
+        AND AREA = A.REGORG
+        ) HYYS,
+        (
+        SELECT
+        COUNT( 1 ) ZLRZE
+        FROM
+        ZR_ZK_SZJJQYGXB
+        WHERE
+        YEAR = DATE_FORMAT( NOW( ), '%Y' )
+        AND PARENT_DL=#{PARENT_DL}
+        AND AREA = A.REGORG
+        AND IFNULL(LRZE,0) > 0
+        ) ZLRZE
+        FROM
+        (
+        SELECT
+        ROUND( ( SUM( REGCAP ) / 10000 ), 2 ) REGCAP,
+        ENTTOTALSUM COUNT,
+        AREA REGORG,
+        AREA_NAME
+        FROM
+        ZR_ZK_CYFB
+        WHERE
+        YEAR = DATE_FORMAT( NOW( ), '%Y' )
+        AND PARENT_DL =#{PARENT_DL}
+        AND AREA LIKE '3610%'
+        AND AREA &lt;&gt;'361000'
+        GROUP BY
+        AREA
+        ORDER BY
+        AREA ASC
+        ) A
+
+    </select>
+    <!-- 得到抚州市各区域分布情况-->
+    <select id="getEntMsg" parameterType="pd" resultType="pd" useCache="false">
+        SELECT B.*,
+        (SELECT AREA_NAME
+        FROM ZR_ZK_AREA
+        WHERE AREA_VALUE=B.REGORG) AREA_NAME,IFNULL(A.ZLRZE,0)ZLRZE
+        FROM
+        (SELECT COUNT(PRIPID)COUNT,
+        REGORG,
+        ROUND(IFNULL(SUM(HYYS),0)/10000,2)HYYS,
+        ROUND(IFNULL(SUM(REGCAP),0)/10000,2)REGCAP
+        FROM
+        (SELECT DISTINCT PRIPID,
+        (SELECT REGORG
+        FROM E_BASEINFO
+        WHERE PRIPID=T.PRIPID)REGORG,IFNULL(HYYS,0)HYYS,IFNULL(LRZE,0)LRZE,
+        (SELECT REGCAP
+        FROM E_BASEINFO
+        WHERE PRIPID=T.PRIPID)REGCAP
+        FROM ZR_ZK_SZJJQYGXB T
+        WHERE state='1'
+        <!--and CHAIN_ID IN
+        <foreach item="item" index="index" collection="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>-->
+        and PARENT_DL=#{PARENT_DL}
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '3610%' )T 	where  T.REGORG &lt;&gt; '360000'
+        GROUP BY  T.REGORG ) B
+        LEFT JOIN
+        (SELECT COUNT(*)ZLRZE,
+        REGORG
+        FROM
+        (SELECT DISTINCT PRIPID,
+        (SELECT REGORG
+        FROM E_BASEINFO
+        WHERE PRIPID=T.PRIPID)REGORG,IFNULL(HYYS,0)HYYS,IFNULL(LRZE,0)LRZE,
+        (SELECT REGCAP
+        FROM E_BASEINFO
+        WHERE PRIPID=T.PRIPID)REGCAP
+        FROM ZR_ZK_SZJJQYGXB T
+        WHERE  state='1'
+        <!--and CHAIN_ID IN
+        <foreach item="item" index="index" collection="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>-->
+        and PARENT_DL=#{PARENT_DL}
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '3610%' )T
+        WHERE LRZE>0 AND REGORG &lt;&gt;'360000'
+        GROUP BY  T.REGORG ) A
+        ON A.REGORG=B.REGORG
+    </select>
+    <!-- 得到江西省所有市企业数量,企业数量排名-->
+    <select id="getQySjzl" parameterType="pd" resultType="pd" useCache="false">
+        SELECT Z.*,
+        (SELECT AREA_NAME
+        FROM ZR_ZK_AREA
+        WHERE SUBSTR(AREA_VALUE,1,4)=Z.AREA
+        AND C_AREA_LEVEL='2') AREA_NAME,CAST((@I:=@I+1) AS CHAR) QYRANK
+        FROM
+        (SELECT AREA,
+        COUNT(PRIPID)COUNT
+        FROM
+        (SELECT DISTINCT PRIPID,
+        SUBSTR(AREA,1,4) AREA
+        FROM state='1' and ZR_ZK_SZJJQYGXB
+        WHERE CHAIN_ID IN
+        <foreach item="jxItem" index="index" collection="jxItem" open="(" separator="," close=")" >
+            #{jxItem}
+        </foreach>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '36%' ) T
+        GROUP BY  AREA)Z,
+        (SELECT @I:=0) B
+        ORDER BY  Z.COUNT DESC
+    </select>
+    <!-- 得到江西省所有市行业营收,行业营收排名-->
+    <select id="getHySjzl" parameterType="pd" resultType="pd" useCache="false">
+        SELECT Z.*,
+        (SELECT AREA_NAME
+        FROM ZR_ZK_AREA
+        WHERE SUBSTR(AREA_VALUE,1,4)=Z.AREA
+        AND C_AREA_LEVEL='2') AREA_NAME,CAST((@I:=@I+1) AS CHAR) HYRANK
+        FROM
+        (SELECT AREA,
+        ROUND(IFNULL(SUM(HYYS),0)/10000,2)HYYS FROM
+        (SELECT DISTINCT PRIPID,
+        IFNULL(HYYS,0) HYYS,
+        SUBSTR(AREA,1,4) AREA
+        FROM ZR_ZK_SZJJQYGXB
+        WHERE  state='1' and CHAIN_ID IN
+        <foreach item="jxItem" index="index" collection="jxItem" open="(" separator="," close=")" >
+            #{jxItem}
+        </foreach>
+        AND YEAR=(DATE_FORMAT(NOW(), '%Y'))
+        AND AREA LIKE '36%' ) T
+        GROUP BY  AREA)Z,
+        (SELECT @I:=0) B
+        ORDER BY  Z.HYYS DESC
+    </select>
+    <!-- 获取各个县区企业发展-->
+    <select id="getEntListFz" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        CAST( ( @I := @I + 1 ) AS CHAR ) RANK,
+        T.*
+        FROM
+        (
+        SELECT
+        ROUND( ( IFNULL(ENTTOTALXZ,0) *100/ ENTTOTALSUM ), 2 ) ZS,
+        ENTTOTALSUM COUNT,
+        ENTTOTALXZ newNum,
+        AREA REGORG,
+        AREA_NAME
+        FROM
+        ZR_ZK_CYFB
+        WHERE
+        YEAR = DATE_FORMAT( NOW( ), '%Y' )
+        AND PARENT_DL = #{PARENT_DL}
+        AND AREA LIKE '3610%'
+        AND AREA &lt;&gt; '361000'
+        GROUP BY
+        AREA
+        ORDER BY
+        ZS DESC
+        ) T,
+        ( SELECT @I := 0 ) B
+    </select>
+    <!-- 根据企业数量,区域,新增数量得到企业列表-->
+    <select id="getEntListByAreaCount" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+            PRIPID,
+            ENTNAME,
+            REGNO,
+            CASE
+            WHEN UNISCID IS NOT NULL THEN
+            UNISCID ELSE REGNO
+            END UNISCID,
+            DATE_FORMAT(ESTDATE,'%Y-%m-%d')ESTDATE,
+            REGORG,
+            NAME
+        FROM
+            e_baseinfo
+        WHERE
+        REGORG = #{AREA}
+        <if test="TYPE != null and TYPE != '' and TYPE =='1'.toString()"> <!--新增-->
+            AND DATE_FORMAT(ESTDATE,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        </if>
+        <if test="NAME != null and NAME != ''"> <!--新增-->
+            AND NAME=#{NAME}
+        </if>
+        <if test="UNISCID != null and UNISCID != ''"> <!--新增-->
+            AND (entname like concat('%',concat(#{UNISCID},'%'))  or  regno=#{UNISCID} or uniscid=#{UNISCID} or name like concat('%',concat(#{UNISCID},'%')))
+        </if>
+        and
+            PRIPID IN (
+            SELECT
+                PRIPID
+            FROM
+                ZR_ZK_SZJJQYGXB t
+            WHERE
+                t.STATE = '1'
+                AND t.PARENT_DL = #{PARENT_DL}
+                AND AREA = '361000'
+                <choose>
+                    <when test="YEAR != null and YEAR != ''">
+                        and t.YEAR=#{YEAR}
+                    </when>
+                    <otherwise>
+                        AND t.YEAR=(DATE_FORMAT(NOW(), '%Y'))
+                    </otherwise>
+                </choose>
+            )
+    </select>
+</mapper>

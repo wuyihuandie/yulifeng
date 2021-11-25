@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="PreferencesImportWizard">
+	</section>
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="50" key="DIALOG_Y_ORIGIN"/>
+		<item value="676" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="NewWizardAction">
+	</section>
+	<section name="ShowViewDialog">
+		<item value="298" key="DIALOG_WIDTH"/>
+		<item value="org.tigris.subversion.subclipse.ui.repository.RepositoriesView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
+		<item value="201" key="DIALOG_Y_ORIGIN"/>
+		<item value="820" key="DIALOG_X_ORIGIN"/>
+		<item value="483" key="DIALOG_HEIGHT"/>
+		<item value="1|Microsoft YaHei UI|9.216|0|WINDOWS|1|-16|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
+		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.tigris.subversion.subclipse"/>
+		</list>
+	</section>
+	<section name="ImportExportAction">
+		<item value="org.tigris.subversion.subclipse.ui.wizards.import.CheckoutWizard" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.m2e"/>
+			<item value="org.tigris.subversion.subclipse.ui.svn"/>
+		</list>
+	</section>
+</section>

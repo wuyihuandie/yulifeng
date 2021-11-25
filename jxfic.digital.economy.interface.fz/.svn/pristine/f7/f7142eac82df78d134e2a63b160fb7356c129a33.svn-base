@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QueryEntMapper">
+
+	<!-- 查询 zr_data_szjjdmb 表数据 带出数量 -->
+	<select id="queryzrDataSzjjdmb" parameterType="pd" resultType="pd" useCache="false">
+		select 
+           *,
+         (SELECT COUNT(*) FROM cc_data_szjjqygxb  
+            WHERE 
+              FIND_IN_SET(zr_data_szjjdmb.PARENT_DL,CUSTOMIZE) 
+                 AND DELETEMARK = '0'
+                 AND YEAR = #{YEAR}) AS Number
+        from zr_data_szjjdmb
+    </select>
+
+	<!-- 查询出 企业名单信息 -->
+	<select id="findDataSzjjqygxbByCustomize" parameterType="pd" resultType="pd" useCache="false">
+		SELECT
+		IFNULL(zz.AREA_NAME, "无") AREA_NAME,
+		IFNULL(cd.ENTNAME, "无") ENTNAME,
+		IFNULL(eb.REGCAP, "0.0") REGCAP,
+		IFNULL(eb.ESTDATE, "无") ESTDATE,
+		IFNULL(eb.DOM, "无") DOM,
+		IFNULL(round(ab.VENDINC,2), "0.0") VENDINC,
+		IFNULL(round(ab.PROGRO,2), "0.0") PROGRO,
+		IFNULL(round(ab.RATGRO,2), "0.0") RATGRO,
+		IFNULL(round(ab.EMPNUM,2), "0") EMPNUM  FROM (
+		SELECT * FROM cc_data_szjjqygxb  WHERE DELETEMARK = '0' AND CUSTOMIZE LIKE concat('%',#{PARENT_DL},'%')) AS cd
+		LEFT JOIN (SELECT * FROM zr_zk_area_link  GROUP BY AREA_VALUE) AS zz
+		ON cd.AREA = zz.AREA_VALUE
+		LEFT JOIN an_baseinfo AS ab
+		ON cd.PRIPID = ab.PRIPID AND ab.ANCHEYEAR = #{YEAR} - 1
+		LEFT JOIN e_baseinfo AS eb
+		ON ab.PRIPID  = eb.PRIPID
+		where 1=1
+		<if test="ENTNAME !='' and ENTNAME != null">
+			and cd.ENTNAME =#{ENTNAME}
+		</if>
+		<if test="UNISCID !='' and UNISCID != null">
+			and ab.UNISCID=#{UNISCID}
+		</if>
+		<choose>
+			<when test="type != null and type =='PROGRO'">
+				ORDER BY ab.PROGRO DESC
+			</when>
+			<when test="type != null and type == 'RATGRO'">
+				ORDER BY ab.RATGRO DESC
+			</when>
+			<otherwise>
+				ORDER BY ab.VENDINC DESC
+			</otherwise>
+		</choose>
+
+	</select>
+
+	<!-- 获取企业总数与企业总营收 -->
+	<select id="getSumAndVentinc" parameterType="pd" resultType="pd" useCache="false">
+	    SELECT    
+		COUNT(*) AS SUM,SUM(round(ab.VENDINC,2)) AS VENDINC
+		  FROM (
+			SELECT * FROM cc_data_szjjqygxb  WHERE DELETEMARK = '0' AND CUSTOMIZE LIKE CONCAT ('%',#{PARENT_DL},'%') ) AS cd
+			LEFT JOIN (SELECT * FROM zr_zk_area_link  GROUP BY AREA_VALUE) AS zz 
+			ON cd.AREA = zz.AREA_VALUE
+			LEFT JOIN an_baseinfo AS ab 
+			ON cd.PRIPID = ab.PRIPID AND ab.ANCHEYEAR = #{YEAR} - 1
+	</select>
+
+	<select id="findDataSzjjqygxbEntname" resultType="java.lang.String" parameterType="pd">
+        select entname from cc_data_szjjqygxb
+    </select>
+	<update id="insertDataSzjjqygxbByEntname" parameterType="java.util.Map">
+        UPDATE  cc_data_szjjqygxb SET KEYNO = #{keyno} where ENTNAME = #{entname}
+    </update>
+
+</mapper>

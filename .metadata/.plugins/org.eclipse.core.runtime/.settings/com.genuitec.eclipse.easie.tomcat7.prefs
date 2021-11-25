@@ -1,0 +1,6 @@
+JDK_INSTALLATION_NAME=jdk1.8.0_131
+SERVER_ENABLEMENT=true
+TOMCAT_BASE=E\:\\Program Files\\Apache Software Foundation\\Tomcat 8.5
+TOMCAT_HOME=E\:\\Program Files\\Apache Software Foundation\\Tomcat 8.5
+TOMCAT_TEMP=E\:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\temp
+eclipse.preferences.version=1

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--产业园区接口-->
+<mapper namespace="IndustrialParkMapper">
+    <cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />
+
+    <!--产业园区介绍-->
+    <select id="queryIndustrialParkJSById" parameterType="pd" resultType="pd" useCache="false">
+        select i.PARK_ID,i.NAME,i.AREA_NAME,i.MJ,i.GHSJ,i.ENTTOTAL,i.PARK_LEVEL
+        from zr_zk_industrialpark i
+        where i.PARK_ID = #{PARK_ID}
+    </select>
+
+    <!--产业园区产业分布-->
+    <select id="queryIndustrialParkCYFB" parameterType="pd" resultType="pd" useCache="false">
+        select ZDCY,count(*) gdpNum
+        from zr_zk_industrialpark i
+        where ZDCY is not null
+        group by ZDCY
+    </select>
+
+    <!--产业园区地区分组-->
+    <select id="queryIndustrialParkGroupByArea" parameterType="pd" resultType="pd" useCache="false">
+        select AREA,AREA_NAME,count(*) gdpNum
+        <if test="state == '1'.toString()">
+            ,sum(ENTTOTAL) sumEnttotalGroupByArea
+            ,sum(MJ) sumMjGroupByArea
+            ,sum(SUM_REGCAP) sumRegcapGroupByArea
+        </if>
+        from zr_zk_industrialpark
+        group by AREA,AREA_NAME
+    </select>
+
+    <!--产业园经纬度-->
+    <select id="queryIndustrialParkLoAndLa" parameterType="pd" resultType="pd" useCache="false">
+        select NAME,MAPX,MAPY
+        from zr_zk_industrialpark
+    </select>
+
+    <!--产业园主导产业分组-->
+    <select id="queryIndustrialParkZDCY" parameterType="pd" resultType="pd" useCache="false">
+        select ZDCY
+        from zr_zk_industrialpark
+        where ZDCY is not null
+        group by ZDCY
+    </select>
+
+    <!--根据地区查询此地区细分产业的产业园数量-->
+    <select id="queryIndustrialParkZDCYByArea" parameterType="pd" resultType="pd" useCache="false">
+        select ZDCY,count(*) gdpNum
+        from zr_zk_industrialpark
+		where AREA = #{AREA}
+		and ZDCY is not null
+        group by ZDCY
+    </select>
+
+
+    <!--产业园区发展情况-->
+    <select id="queryIndustrialParkFZQK" parameterType="pd" resultType="pd" useCache="false">
+        select YEAR,count(*) gdpNum
+        from zr_zk_industrialpark i
+        inner join zr_zk_szjjqygxb s on i.PARK_ID = s.PARK_ID and s.state='1'
+        where i.PARK_ID = #{PARK_ID}
+        group by YEAR
+    </select>
+
+    <!--产业园区排名列表-->
+    <select id="queryIndustrialParkPMList" parameterType="pd" resultType="pd" useCache="false">
+        select z.*,CAST((@i:=@i+1) as CHAR) rank
+        from (
+        select i.PARK_ID,i.NAME,i.AREA_NAME,i.ENTTOTAL,i.SUM_REGCAP
+        from zr_zk_industrialpark i
+        ) z ,(SELECT @i:=0) b
+        order by z.SUM_REGCAP desc
+    </select>
+</mapper>

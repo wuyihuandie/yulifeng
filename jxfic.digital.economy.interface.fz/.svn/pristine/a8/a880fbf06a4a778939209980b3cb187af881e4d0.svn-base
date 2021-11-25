@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entHomePageMapper">
+    <!--江西省页面-->
+    <!--江西省企业总数、总营收与同比增速 -->
+    <select id="getJXSENTSUMSAndVENDINC" parameterType="pd" resultType="pd" useCache="false">
+        select ENTNUMS,
+        VENDINC,
+        ROUND((ENTNUMS-ENTNUMS1)/ENTNUMS1*100,2) ENTZS,
+        ROUND((VENDINC-VENDINC1)/VENDINC1*100,2) VENDINCZS
+        FROM (
+        SELECT SUM(z.ENTSUMS) AS  ENTNUMS,
+        cast((sum(z.VENDINC)/10000) as decimal(24,2)) VENDINC,
+        (
+        SELECT SUM(t.ENTSUMS) from zr_index t LEFT JOIN zr_data_szjjdmb s on t.parent_dl=s.parent_dl
+        WHERE t.YEAR = #{YEAR}-1 and s.type=2 and T.TYPE IS NULL
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            AND t.AREA_NAME = #{AREA_NAME}
+        </if>
+        ) ENTNUMS1,
+        (
+        SELECT cast((sum(t.VENDINC)/10000) as decimal(24,2)) from zr_index t LEFT JOIN zr_data_szjjdmb s on t.parent_dl=s.parent_dl
+        WHERE t.YEAR = #{YEAR}-1 and s.type=2 and T.TYPE IS NULL
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            AND t.AREA_NAME = #{AREA_NAME}
+        </if>
+        ) VENDINC1
+        FROM zr_index z LEFT JOIN zr_data_szjjdmb s on z.parent_dl=s.parent_dl
+        WHERE z.YEAR = #{YEAR} and s.type=2 and Z.TYPE IS NULL
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            AND z.AREA_NAME = #{AREA_NAME}
+        </if>
+        ) TT
+    </select>
+    <!--各产业近三年发展趋势-->
+    <select id="getChainYearAnalysis" parameterType="pd" resultType="pd" useCache="false">
+        select
+        <if test="CONDITION == 1">
+            SUM(z.ENTSUMS) AS SUMS,
+        </if>
+        <if test="CONDITION == 2">
+            cast((SUM(z.VENDINC)/10000) as decimal(24,2)) AS SUMS,
+        </if>
+        b.CHAIN_NAME,
+        z.YEAR,
+        z.PARENT_DL
+        from zr_index z
+        LEFT JOIN zr_data_szjjdmb b on z.PARENT_DL = b.PARENT_DL
+        where b.TYPE = 2 and Z.TYPE IS NULL and year &gt; DATE_FORMAT(NOW(),'%Y') - 3
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            AND z.AREA_NAME = #{AREA_NAME}
+        </if>
+        GROUP BY z.PARENT_DL,z.year
+        order by z.PARENT_DL
+    </select>
+    <!--各个地市各产业数量-->
+    <select id="getChainAnalysisByArea" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        z.YEAR,
+        z.PARENT_DL,
+        z.AREA_NAME,
+        <if test="CONDITION == 1">
+            SUM(ENTSUMS) AS SUMS,
+        </if>
+        <if test="CONDITION == 2">
+            cast((SUM(VENDINC)/10000) as decimal(24,2)) AS SUMS,
+        </if>
+        z.AREA_VALUE,
+        zd.CHAIN_NAME
+        FROM zr_index z LEFT JOIN zr_data_szjjdmb zd
+        ON z.PARENT_DL = zd.PARENT_DL
+        WHERE z.YEAR = #{YEAR} AND zd.TYPE = 2 and Z.TYPE IS NULL
+        GROUP BY z.AREA_VALUE,z.PARENT_DL order by z.AREA_VALUE,z.PARENT_DL
+    </select>
+    <!--根据条件 查询地区排名 -->
+    <select id="queryDigitalEconomyLJZAndZS" parameterType="pd" resultType="pd" useCache="false">
+         		SELECT (@i:=@i+1) as Serial,
+         		T.AREA_NAME,
+         		IFNULL(T.SUMS,0) SUMS FROM (		 
+				SELECT 
+				z.area_name,z.area_value
+				<if test="CONDITION == 1">
+                    ,SUM(ENTSUMS)
+                </if>
+				<if test="CONDITION == 2">
+                   ,cast((SUM(VENDINC)/10000) as decimal(24,2))
+                </if>
+				 AS SUMS FROM zr_index z left join zr_data_szjjdmb s on z.parent_dl=s.parent_dl
+				WHERE z.YEAR = #{YEAR} and s.type=2 and Z.TYPE IS NULL
+				GROUP BY z.AREA_VALUE
+				) AS T
+				,(select @i:=0) init
+			  ORDER BY 	T.SUMS DESC
+    </select>
+
+    <!--抚州市页面-->
+    <!--抚州市数字经济核心产业总览-->
+    <select id="getNanchangEntOverAll" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        (select count(1) from cc_data_szjjqygxb c
+        left join E_BASEINFO_1014 e on e.pripid=c.pripid
+        where c.YEAR=#{YEAR} and c.AREA=#{AREA}
+        and CONVERT(date_format(e.ESTDATE,'%Y'),SIGNED)  &lt;= CONVERT(#{year},SIGNED)
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+        </if>
+        ) ENTNUMS,
+        IFNULL(cast((sum(an.VENDINC)/10000) as decimal(24,2)),0) VENDINC,
+        IFNULL(cast((sum(an.RATGRO)/10000) as decimal(24,2)),0) RATGRO,
+        IFNULL(cast(sum(an.EMPNUM) as CHAR),0) EMPNUM
+        FROM cc_data_szjjqygxb c
+        LEFT JOIN an_baseinfo an ON an.PRIPID = C.PRIPID
+        left join E_BASEINFO_1014 e on e.pripid=c.pripid
+        where an.ANCHEYEAR = #{year} - 1
+        and CONVERT(date_format(e.ESTDATE,'%Y'),SIGNED)  &lt;= CONVERT(#{year},SIGNED)
+        and c.YEAR=#{YEAR}
+        and c.AREA=#{AREA}
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+        </if>
+    </select>
+    <!--抚州市数字经济核心产业规上企业总览-->
+    <select id="getNanchangGsEntOverAll" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        (select count(1) from cc_data_szjjqygxb c
+        left join E_BASEINFO_1014 e on e.pripid=c.pripid
+        where c.YEAR=#{YEAR} and c.CUSTOMIZE LIKE '%GSQY%'
+        and  CONVERT(date_format(e.ESTDATE,'%Y'),SIGNED)  &lt;= CONVERT(#{year},SIGNED)
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+        </if>
+        ) ENTNUMS,
+        IFNULL(cast((sum(an.VENDINC)/10000) as decimal(24,2)),0) VENDINC,
+        IFNULL(cast((sum(an.RATGRO)/10000) as decimal(24,2)),0) RATGRO,
+        IFNULL(cast(sum(an.EMPNUM) as CHAR),0) EMPNUM
+        FROM cc_data_szjjqygxb c
+        LEFT JOIN an_baseinfo an ON an.PRIPID = C.PRIPID
+        left join E_BASEINFO_1014 e on e.pripid=c.pripid
+        where c.CUSTOMIZE LIKE '%GSQY%'
+        and an.ANCHEYEAR = #{year} - 1
+        and CONVERT(date_format(e.ESTDATE,'%Y'),SIGNED)  &lt;= CONVERT(#{year},SIGNED)
+        and c.YEAR=#{YEAR}
+        and c.AREA=#{AREA}
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+        </if>
+    </select>
+
+    <!--某年各行业企业数量统计-->
+    <select id="getIndustryDataByYear" parameterType="pd" resultType="pd" useCache="false">
+        select CHAIN_NAME,a.PARENT_DL,IFNULL(b.SUMS,0) SUMS,(#{year}) YEAR from zr_data_szjjdmb a
+        LEFT JOIN (
+            select count(1) SUMS,
+            INDUSTRY
+            from cc_data_szjjqygxb c
+            inner join E_BASEINFO_1014 e on e.pripid=c.pripid
+            where c.YEAR=#{YEAR}
+            and AREA=#{AREA}
+            AND CONVERT(date_format(e.ESTDATE,'%Y'),SIGNED)  &lt;= CONVERT(#{year},SIGNED)
+            GROUP BY INDUSTRY
+        ) b ON a.PARENT_DL = b.INDUSTRY
+        where a.type = 2 order by PARENT_DL
+    </select>
+    <!--某年各行业年报数据统计-->
+    <select id="getIndustryNbDataByYear" parameterType="pd" resultType="pd" useCache="false">
+        select CHAIN_NAME,a.PARENT_DL,IFNULL(b.SUMS,0) SUMS,(#{year}) YEAR from zr_data_szjjdmb a
+        LEFT JOIN (
+            SELECT c.INDUSTRY
+            <if test="CONDITION == 2">
+                ,cast(sum(an.VENDINC)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 3">
+                ,cast(sum(an.RATGRO)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 5">
+                ,sum(an.EMPNUM)  SUMS
+            </if>
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+            inner join E_BASEINFO_1014 e on e.pripid=c.pripid
+            where an.ANCHEYEAR = #{year} - 1
+            and c.YEAR=#{YEAR}
+            and c.AREA=#{AREA}
+            AND CONVERT(date_format(e.ESTDATE,'%Y'),SIGNED)  &lt;= CONVERT(#{year},SIGNED)
+            GROUP BY c.INDUSTRY
+        ) b ON a.PARENT_DL = b.INDUSTRY
+        where a.type = 2 order by PARENT_DL
+    </select>
+
+    <!--查询行业-->
+    <select id="getIndustryByType" parameterType="pd" resultType="pd" useCache="false">
+        select CHAIN_NAME,PARENT_DL from zr_data_szjjdmb where type=2 order by PARENT_DL
+    </select>
+    <!--各个县区各产业企业数量-->
+    <select id="getNanchangChainEntAnalysis" parameterType="pd" resultType="pd" useCache="false">
+        SELECT AREA_NAME,
+        AREA_VALUE,
+        IFNULL(b.SUMS,0) SUMS from ZR_ZK_AREA a
+        LEFT JOIN (
+            SELECT E.REGORG,count(e.pripid) SUMS,C.INDUSTRY
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN zr_data_szjjdmb s on c.INDUSTRY = s.PARENT_DL
+            inner join E_BASEINFO_1014 e on e.pripid=c.pripid
+            where c.YEAR=#{YEAR}
+            and c.AREA=#{AREA}
+            AND c.INDUSTRY = #{PARENT_DL}
+            GROUP BY E.REGORG
+        ) b ON a.AREA_VALUE = b.REGORG
+        where AREA_VALUE LIKE '3610%' and c_area_level=3
+        order by A.AREA_VALUE
+    </select>
+    <!--各个县区各产业年报数据数量-->
+    <select id="getNanchangChainNbAnalysis" parameterType="pd" resultType="pd" useCache="false">
+        SELECT AREA_NAME,
+        AREA_VALUE,
+        IFNULL(b.SUMS,0) SUMS from ZR_ZK_AREA a
+        LEFT JOIN (
+            SELECT E.REGORG,C.INDUSTRY
+            <if test="CONDITION == 2">
+                ,cast(sum(an.VENDINC)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 3">
+                ,cast(sum(an.RATGRO)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 5">
+                ,sum(an.EMPNUM) SUMS
+            </if>
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN zr_data_szjjdmb s on c.INDUSTRY = s.PARENT_DL
+            LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+            inner join E_BASEINFO_1014 e on e.pripid=c.pripid
+            where c.YEAR=#{YEAR}
+            and an.ANCHEYEAR = #{YEAR} -1
+            and c.AREA=#{AREA}
+            AND c.INDUSTRY = #{PARENT_DL}
+            GROUP BY E.REGORG
+        ) b ON a.AREA_VALUE = b.REGORG
+        where AREA_VALUE LIKE '3610%' and c_area_level=3
+        order by A.AREA_VALUE
+
+    </select>
+
+    <!--各县区数字经济核心产业发展(企业数量 排名)情况-->
+    <select id="getNanchangSzjjEntByArea" parameterType="pd" resultType="pd" useCache="false">
+        SELECT AREA_NAME,
+        AREA_VALUE,
+        IFNULL(b.SUMS,0) SUMS from ZR_ZK_AREA a
+        LEFT JOIN (
+            SELECT E.REGORG,count(e.pripid) SUMS
+            FROM cc_data_szjjqygxb c
+            inner join E_BASEINFO_1014 e on e.pripid=c.pripid
+            where c.YEAR=#{YEAR}
+            and c.AREA=#{AREA}
+            GROUP BY E.REGORG
+        ) b ON a.AREA_VALUE = b.REGORG
+        where AREA_VALUE LIKE '3610%' and c_area_level=3
+        order by IFNULL(b.SUMS,0) desc
+    </select>
+    <!--各县区数字经济核心产业发展(营业收入、纳税、从业人数 排名)情况-->
+    <select id="getNanchangSzjjIncomeByArea" parameterType="pd" resultType="pd" useCache="false">
+        SELECT CASE WHEN AREA_NAME='抚州市' then '市本级' else AREA_NAME end AREA_NAME,
+        AREA_VALUE,
+        IFNULL(b.SUMS,0) SUMS from ZR_ZK_AREA a
+        LEFT JOIN (
+            SELECT E.REGORG
+            <if test="CONDITION == 2">
+                ,cast(sum(an.VENDINC)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 3">
+                ,cast(sum(an.RATGRO)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 5">
+                ,sum(an.EMPNUM) SUMS
+            </if>
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+            inner join E_BASEINFO_1014 e on e.pripid=c.pripid
+            where an.ANCHEYEAR = #{YEAR} -1
+            and c.YEAR=#{YEAR}
+            and c.AREA=#{AREA}
+            GROUP BY E.REGORG
+        ) b ON a.AREA_VALUE = b.REGORG
+        where AREA_VALUE LIKE '3610%' and c_area_level=3
+        order by IFNULL(b.SUMS,0) desc
+    </select>
+</mapper>

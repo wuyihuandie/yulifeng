@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DigitalEconomyMapper">
+    <!--<cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />-->
+    <!--useCache="true"开启缓存 useCache="false"关闭缓存-->
+
+    <!--数据经济预警总览-->
+    <select id="queryDigitalEconomyLJZAndZS" parameterType="pd" resultType="pd" useCache="false">
+		select g.GDP_SZJJ_LJZ,IFNULL(g.GDP_SZJJ_ZS,0) GDP_SZJJ_ZS,g.AREA,g.AREA_NAME,IFNULL(g.UNIT,'') UNIT from zr_zk_gdp g
+		inner join zr_zk_area a on g.AREA = a.AREA_VALUE
+        inner join
+        (select * from zr_zk_area_link  l
+        <where>
+            <if test="areaType != null and areaType != ''">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="areaType == '2'.toString() or areaType == '3'.toString() ">
+                or l.AREA_VALUE = '361000'
+            </if>
+        </where>
+            ) l
+        on g.AREA = l.AREA_VALUE
+		<where>
+		        and g.flag1='1'
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+            <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+                and a.C_AREA_LEVEL = '1'
+            </if>
+            <if test="areaName != null and areaName != ''">
+                AND g.AREA_NAME like concat('%',#{areaName},'%')
+            </if>
+        </where>
+        order by g.GDP_SZJJ_LJZ desc
+    </select>
+
+    <!--数字经济总量和总增速-->
+    <select id="queryDigitalEconomyZLAndZZS" parameterType="pd" resultType="pd" useCache="false">
+        select sum(g.GDP_SZJJ_LJZ) gdpNum,AVG(g.GDP_SZJJ_ZS) growthRate,IFNULL(g.UNIT,'') UNIT,
+        (
+        SELECT
+        ROUND(avg( g.GDP_SZJJ_LJZ ),2)
+        FROM
+        zr_zk_gdp g
+        INNER JOIN zr_zk_area_link l ON g.AREA = l.AREA_VALUE
+        INNER JOIN zr_zk_area a ON g.AREA = a.AREA_VALUE
+        WHERE
+        g.flag1 = '1'
+        AND l.AREA_FLAG = #{areaType}
+        AND g.INTERVAL_DATE = #{year}
+        <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+            AND a.C_AREA_LEVEL = '1'
+        </if>
+        )
+        avgGdpNum
+         from zr_zk_gdp g
+        inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+        <where>
+            and g.flag1='1'
+            <if test="areaType != null and areaType != ''">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+        </where>
+        group by l.AREA_FLAG desc
+    </select>
+
+    <!--数字经济总量和总增速-全国-->
+    <select id="queryDigitalEconomyZLAndZZSByAll" parameterType="pd" resultType="pd" useCache="false">
+        select g.GDP_SZJJ_LJZ gdpNum,g.GDP_SZJJ_ZS growthRate,IFNULL(g.UNIT,'') UNIT,
+        (
+        SELECT
+        ROUND(avg( g.GDP_SZJJ_LJZ ),2)
+        FROM
+        zr_zk_gdp g
+        INNER JOIN zr_zk_area_link l ON g.AREA = l.AREA_VALUE
+        INNER JOIN zr_zk_area a ON g.AREA = a.AREA_VALUE
+        WHERE
+        g.flag1 = '1'
+        AND l.AREA_FLAG = '1'
+        AND g.INTERVAL_DATE = #{year}
+        <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+            AND a.C_AREA_LEVEL = '1'
+        </if>
+        )
+        avgGdpNum
+         from zr_zk_gdp g
+        <where>
+            and g.flag1='1' and AREA = '156'
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+        </where>
+    </select>
+
+    <!--数字经济占GDP的比重及增速-->
+    <select id="queryDigitalEconomyGDPBZAndZS" parameterType="pd" resultType="pd" useCache="false">
+        select g.GDP_SZJJ_LJZ,g.GDP_SZJJ_ZS,g.GDP_SZJJ_ZB,g.AREA,g.AREA_NAME,IFNULL(g.UNIT,'') UNIT
+        from zr_zk_gdp g
+        inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+        <if test="areaType == '1'.toString() or areaType == '4'.toString() ">
+            inner join zr_zk_area a on g.AREA = a.AREA_VALUE
+        </if>
+        <where>
+            and g.flag1='1'
+            <if test="areaType != null and areaType != ''">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+            <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+                and a.C_AREA_LEVEL = '1'
+            </if>
+        </where>
+    </select>
+
+    <!--数字经济增长趋势-->
+    <select id="queryDigitalEconomyZZQS" parameterType="pd" resultType="pd" useCache="false">
+        select sum(g.GDP_SZJJ_LJZ) gdpNum,AVG(g.GDP_SZJJ_ZB) growthRate,g.INTERVAL_DATE,IFNULL(g.UNIT,'') UNIT
+        from zr_zk_gdp g
+        inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+        <where>
+            and g.flag1='1'
+            <if test="areaType != null and areaType != '' and (area == null or area == '')">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="area != null and area != ''">
+                and AREA = #{area}
+            </if>
+        </where>
+        group by g.INTERVAL_DATE
+    </select>
+
+    <!--数字经济增长趋势-全国-->
+    <select id="queryDigitalEconomyZZQSByAll" parameterType="pd" resultType="pd" useCache="false">
+        select g.GDP_SZJJ_LJZ gdpNum,g.GDP_SZJJ_ZB growthRate,g.INTERVAL_DATE,IFNULL(g.UNIT,'') UNIT
+        from zr_zk_gdp g
+        where g.flag1='1'
+        <if test="area != null and area != ''">
+            and AREA = #{area}
+            group by g.INTERVAL_DATE
+        </if>
+        <if test=" area == null or area == ''">
+            and g.AREA = '156'
+            and g.INTERVAL_DATE &gt;=2013
+        </if>
+    </select>
+
+    <!--数字经济排名-->
+    <!--<select id="queryDigitalEconomyPM" parameterType="pd" resultType="pd" useCache="false">
+        select * from (
+            select * from (
+            select z.*,CAST((@i:=@i+1) as CHAR) rank
+            from (
+            select g.GDP_SZJJ_LJZ,g.AREA,g.AREA_NAME,IFNULL(g.UNIT,'') UNIT
+            from zr_zk_gdp g
+            inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+            <if test="areaType == '1'.toString() or areaType == '4'.toString() ">
+                inner join zr_zk_area a on g.AREA = a.AREA_VALUE
+            </if>
+            <where>
+                and g.flag1='1'
+                <if test="areaType != null and areaType != '' ">
+                    and l.AREA_FLAG = #{areaType}
+                </if>
+                <if test="year != null and year != ''">
+                    and g.INTERVAL_DATE = #{year}
+                </if>
+                <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+                    and a.C_AREA_LEVEL = '1'
+                </if>
+            </where>
+            ) z ,(SELECT @i:=0) b
+            order by z.GDP_SZJJ_LJZ desc) a
+        union all
+        select avg(GDP_SZJJ_LJZ) GDP_SZJJ_LJZ,'' AREA,'平均值' AREA_NAME,'亿元' UNIT,'-' rank
+        from zr_zk_gdp g
+        inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+        <if test="areaType == '1'.toString() or areaType == '4'.toString() ">
+            inner join zr_zk_area a on g.AREA = a.AREA_VALUE
+        </if>
+        <where>
+            and g.flag1='1'
+            <if test="areaType != null and areaType != '' ">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+            <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+                and a.C_AREA_LEVEL = '1'
+            </if>
+        </where>) b order by b.GDP_SZJJ_LJZ desc
+    </select>-->
+
+    <select id="queryDigitalEconomyPM" parameterType="pd" resultType="pd" useCache="false">
+        select z.*,CAST((@i:=@i+1) as CHAR) rank
+        from (
+        select g.GDP_SZJJ_LJZ,g.AREA,g.AREA_NAME,IFNULL(g.UNIT,'') UNIT
+        from zr_zk_gdp g
+        inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+        <if test="areaType == '1'.toString() or areaType == '4'.toString() ">
+            inner join zr_zk_area a on g.AREA = a.AREA_VALUE
+        </if>
+        <where>
+            and g.flag1='1'
+            <if test="areaType != null and areaType != '' ">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+            <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+                and a.C_AREA_LEVEL = '1'
+            </if>
+        </where>
+        ) z ,(SELECT @i:=0) b
+        order by z.GDP_SZJJ_LJZ desc
+    </select>
+    
+    
+    
+    <select id="queryDigitalEconomyPMByZs" parameterType="pd" resultType="pd" useCache="false">
+        select z.*,CAST((@i:=@i+1) as CHAR) rank
+        from (
+        select g.GDP_SZJJ_LJZ,g.GDP_SZJJ_ZS,g.AREA,g.AREA_NAME,IFNULL(g.UNIT,'') UNIT
+        from zr_zk_gdp g
+        inner join zr_zk_area_link l on g.AREA = l.AREA_VALUE
+        <if test="areaType == '1'.toString() or areaType == '4'.toString() ">
+            inner join zr_zk_area a on g.AREA = a.AREA_VALUE
+        </if>
+        <where>
+            and g.flag1='1'
+            <if test="areaType != null and areaType != '' ">
+                and l.AREA_FLAG = #{areaType}
+            </if>
+            <if test="year != null and year != ''">
+                and g.INTERVAL_DATE = #{year}
+            </if>
+            <if test="areaType == '1'.toString() or areaType == '4'.toString()">
+                and a.C_AREA_LEVEL = '1'
+            </if>
+        </where>
+        ) z ,(SELECT @i:=0) b
+        order by z.GDP_SZJJ_ZS desc
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sysconfig>
+
+	<!-- 系统参数配置 -->
+	<defaultConfigs>
+		<!-- 激活的配置参数 -->
+		<activeConfig>jiangxi</activeConfig>
+		<!-- 模板配置 -->
+		<defaultConfig name="jiangxi">
+			<provinceShortCode>36</provinceShortCode>
+			<provinceCode>360000</provinceCode>
+			<provinceCodeName>江西</provinceCodeName>
+			<!-- ftp地址 -->
+			<deparUploadPath>ftp://admin:1234567@192.168.10.43:21/</deparUploadPath>
+			<!---登录缓存时长xx分钟-->
+			<loginTime>1440</loginTime>
+			<!--可以不需要登录的url,用英文分号分隔-->
+			<noLoginUrl>/toLogin;/login_login;/error;/industrialChainController/getDataLayers;/industrialChainController/getTopIndustrialChains;/industrialChainController/getYears;/industrialChainController/getEnterpriseList;/industrialChainController/getEnterpriseListByCondition;/queryEntController/getEntKeyNo</noLoginUrl>
+			<!---企查查AES密钥-->
+			<qccAesKey>jIMSui6A6zsTu2m00qHGEQ==</qccAesKey>
+			<!---企查查AES IV-->
+			<qccAesIV>b93fmg6alsvszdke</qccAesIV>
+			<!---企查查公司key-->
+			<qccKey>ff6dd69393f211ea89b97cd30aeb1e8c</qccKey>
+			<!---企查查公司秘钥-->
+			<qccSecretKey>B93FMG6ALSVSZDKE2W01X7YWBLSXWIJX</qccSecretKey>
+			<!---企查查公司用户名-->
+			<qccUserName>18807916526</qccUserName>
+		</defaultConfig>
+
+		<defaultConfig name="henan">
+			<provinceShortCode>41</provinceShortCode>
+			<provinceCode>410000</provinceCode>
+			<provinceCodeName>河南</provinceCodeName>
+		</defaultConfig>
+
+	</defaultConfigs>
+
+	<!-- 日志拦截配置 -->
+	<syslog>
+		<loggrade>sysuser,database</loggrade>
+		<databaseLogType>insert,delete,select,update</databaseLogType>
+	</syslog>
+</sysconfig>

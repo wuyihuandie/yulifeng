@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IndustrialChainMapper">
+     <cache
+            eviction="LRU"
+            flushInterval="600000"
+            size="1024"
+            readOnly="true"
+    /> 
+    <!--获取年份列表-->
+    <select id="getYears" parameterType="pd" resultType="pd" useCache="true">
+			select distinct YEAR from zr_zk_szjjdmb where zt='1'
+	</select>
+    <!--获取顶层产业链-->
+    <select id="getTopIndustrialChains" parameterType="pd" resultType="pd" useCache="true">
+        select CHAIN_ID,CHAIN_NAME,PARENT_DL,TBMC from zr_zk_szjjdmb where zt='1' and  chain_level='1'
+            <if test="AREA !='' and AREA != null">
+               AND AREA=#{AREA}
+            </if>
+            <if test="YEAR !='' and YEAR != null">
+                and YEAR=#{YEAR}
+            </if>
+            order by PARENT_DL  ASC
+	</select>
+    <!--获取中间数据层数据-->
+    <select id="getDataLayers" parameterType="pd" resultType="pd" useCache="true">
+		select  CHAIN_ID,CHAIN_NAME,PARENT_ID,CHAIN_LEVEL,PARENT_DL,TBMC from zr_zk_szjjdmb
+		where 1=1  and zt='1'
+            <if test="CHAIN_ID !='' and CHAIN_ID != null">
+                and  PARENT_ID=#{CHAIN_ID}
+            </if>
+            <if test="CHAIN_LEVEL !=''and CHAIN_LEVEL1 != null">
+                and CHAIN_LEVEL=#{CHAIN_LEVEL}
+            </if>
+            <if test="AREA !='' and AREA != null">
+               and AREA=#{AREA}
+            </if>
+            <if test="YEAR !='' and YEAR != null">
+                and YEAR=#{YEAR}
+            </if>
+            <if test="PARENT_DL !='' and PARENT_DL != null">
+                and PARENT_DL=#{PARENT_DL}
+            </if>
+    </select>
+    <!--获取中间数据层企业数量-->
+    <select id="getSum" parameterType="pd" resultType="Integer" useCache="true">
+        select  COUNT(1) CHAIN_ID from zr_zk_szjjqygxb
+        where 1=1 and state='1'
+        <if test="CHAIN_ID !='' and CHAIN_ID != null">
+            and  CHAIN_ID=#{CHAIN_ID}
+        </if>
+        <if test="YEAR !='' and YEAR != null">
+            and  YEAR=#{YEAR}
+        </if>
+        <if test="AREA !='' and AREA != null">
+            and  AREA=#{AREA}
+        </if>
+    </select>
+    <!--根据产业编号获取产业等级-->
+    <select id="getChainLevelByChainId" parameterType="pd" resultType="String" useCache="true">
+        select  CHAIN_LEVEL from zr_zk_szjjdmb
+        where 1=1 and zt='1'
+        <if test="CHAIN_ID !='' and CHAIN_ID != null">
+            and  CHAIN_ID=#{CHAIN_ID}
+        </if>
+        <if test="YEAR !='' and YEAR != null">
+            and  YEAR=#{YEAR}
+        </if>
+        <if test="AREA !='' and AREA != null">
+            and  AREA=#{AREA}
+        </if>
+    </select>
+    <!--获取产业链编号-->
+    <select id="getChainIds" parameterType="pd" resultType="string" useCache="true">
+        select  CHAIN_ID from zr_zk_szjjdmb
+        where 1=1 and zt='1'
+        <if test="CHAIN_ID !='' and CHAIN_ID != null">
+            and  parent_id=#{CHAIN_ID}
+        </if>
+        <if test="YEAR !='' and YEAR != null">
+            and  YEAR=#{YEAR}
+        </if>
+        <if test="AREA !='' and AREA != null">
+            and  AREA=#{AREA}
+        </if>
+    </select>
+    <!--获取产业链编号-->
+    <select id="getChainIds1" parameterType="pd" resultType="string" useCache="true">
+        select  CHAIN_ID from zr_zk_szjjdmb
+        where 1=1 and zt='1'
+        <if test="items !=null and items.size >0">
+            and  parent_id  in
+            <foreach item="items" index="index" collection="items" open="(" separator="," close=")"  >
+                #{items}
+            </foreach>
+        </if>
+        <if test="YEAR !='' and YEAR != null">
+            and  YEAR=#{YEAR}
+        </if>
+        <if test="AREA !='' and AREA != null">
+            and  AREA=#{AREA}
+        </if>
+    </select>
+    <!--获取企业信息-->
+    <select id="getEntMsg" parameterType="pd" resultType="pd" useCache="true">
+        SELECT PRIPID,
+        ENTNAME,
+        DOM,
+        date_format(ESTDATE,'%Y-%m-%d') ESTDATE,
+        UNISCID,REGNO
+        FROM
+        E_BASEINFO
+        WHERE PRIPID IN
+        (SELECT PRIPID FROM ZR_ZK_SZJJQYGXB WHERE 1=1 and state='1'
+        <if test="list !=null and list.size >0">
+            and CHAIN_ID IN
+            <foreach item="list" index="index" collection="list" open="(" separator="," close=")">
+                #{list}
+            </foreach>
+        </if>
+        <if test="YEAR !='' and YEAR != null">
+            and YEAR=#{YEAR}
+        </if>
+        <if test="BQ_JZZS !='' and BQ_JZZS != null">
+            and BQ_JZZS=#{BQ_JZZS}
+        </if>
+        <if test="AREA !='' and AREA != null">
+            and AREA=#{AREA}
+        </if>
+        )
+        order by REGCAP desc
+        limit 50
+    </select>
+    <!--获取区域编码-->
+    <select id="getAreaList" parameterType="pd" resultType="pd" useCache="true">
+        SELECT PRIPID,AREA,AREA_NAME FROM ZR_ZK_SZJJQYGXB
+        left join ZR_ZK_AREA on AREA_VALUE=AREA
+         WHERE 1=1 and state='1'
+        <if test="list !=null and list.size >0">
+            and CHAIN_ID IN
+            <foreach item="list" index="index" collection="list" open="(" separator="," close=")">
+                #{list}
+            </foreach>
+        </if>
+        <if test="YEAR !='' and YEAR != null">
+            and YEAR=#{YEAR}
+        </if>
+        <if test="AREA !='' and AREA != null">
+            and AREA=#{AREA}
+        </if>
+    </select>
+    <!--获取区域编码-->
+    <select id="getAreaName" parameterType="String" resultType="String" useCache="true">
+        SELECT AREA_NAME FROM ZR_ZK_AREA WHERE AREA_VALUE=#{AREA}
+    </select>
+    
+    
+     <!--根据排序条件 获取对应的企业信息-->
+    <select id="getEntMsgByCondition" parameterType="pd" resultType="pd" >
+        SELECT e.PRIPID,
+        e.ENTNAME,
+        e.DOM,
+        DATE_FORMAT(e.ESTDATE,'%Y-%m-%d') ESTDATE,
+        e.UNISCID,
+        e.REGNO,
+        cast(a.RATGRO as decimal(24,2)) RATGRO,
+        cast(a.VENDINC as decimal(24,2)) VENDINC,
+        CAST(a.EMPNUM AS CHAR ) EMPNUM,
+        cast(a.NETINC as decimal(24,2)) NETINC,
+        a.ANCHEYEAR,
+        (select
+              CASE 
+                WHEN AREA_NAME='抚州市' then '市本级'
+                  else AREA_NAME
+                     END 
+               FROM ZR_ZK_AREA WHERE AREA_VALUE = REGORG) AREA_NAME
+        FROM
+        cc_data_szjjqygxb c
+        LEFT JOIN an_baseinfo a ON a.PRIPID = C.PRIPID
+        left join E_BASEINFO e on e.pripid=c.pripid
+        where a.ANCHEYEAR = #{YEAR} - 1
+        <if test="PARENT_DL != null and PARENT_DL != ''">
+            AND c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+        </if>
+        <if test="YEAR != null and YEAR !=  ''">
+            and c.YEAR=#{YEAR}
+        </if>
+        <if test="BQ_JZZS != null and BQ_JZZS != ''">
+            and BQ_JZZS=#{BQ_JZZS}
+        </if>
+        <if test="AREA != null and AREA != ''">
+            and c.AREA=#{AREA}
+        </if>
+        <if test="CHAIN_LINK_ID != null and CHAIN_LINK_ID != ''">
+            and c.CHAIN_LINK_ID like concat('%',#{CHAIN_LINK_ID},'%')
+        </if>
+        <if test="CONDITION != null and CONDITION != ''">
+           ORDER BY cast(${CONDITION} as decimal(24,2)) DESC
+        </if>
+    </select>
+    <!--重点项目清单查询-->
+    <select id="getKeyProjectlist" parameterType="pd" resultType="pd">
+        select PROJECT_ID,
+        RESPONSIBLE_UNIT,
+        CONTRACTOR,
+        PROJECT_NAME,
+        APPLICATION_ID,
+        INVESTMENT,
+        CONSTRUCTION_CIRCLE,
+        VENDINC,
+        RATGRO,
+        TYPE,
+        PRODUCT_STATUS,
+        CONSTRUCTION_SITE,
+        AREA_CODE,
+        (select AREA_NAME FROM ZR_ZK_AREA WHERE AREA_VALUE = AREA_CODE) AREA_NAME,
+        case when TYPE=1 then '新建' when TYPE=1 then '技改' else '已立项' end TYPE_NAME,
+        case when PRODUCT_STATUS=1 then '在建'
+        when PRODUCT_STATUS=2 then '已开工'
+        when PRODUCT_STATUS=3 then '部分投产'
+        when PRODUCT_STATUS=4 then '完工投产' else '未开工' end PRODUCT_STATUS_NAME
+        from cc_key_project_list p
+        <where>
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                and PARENT_DL = #{PARENT_DL}
+            </if>
+            <if test="AREA != null and AREA != ''">
+                and AREA_CODE like concat(#{AREA},'%')
+            </if>
+        </where>
+    </select>
+    <!--政策清单查询-->
+    <select id="getPolicylist" parameterType="pd" resultType="pd">
+        select POLICY_ID,
+        `LEVEL`,
+        POLICY_NAME,
+        LICNO,
+        PUBLISH_UNIT,
+        CONTENT,
+        case when `LEVEL`=1 then '国家级'
+        when `LEVEL`=2 then '部委级'
+        when `LEVEL`=3 then '省级'
+        when `LEVEL`=4 then '市级' else '县（区）级' end LEVEL_NAME
+        from cc_policy_list p
+        <where>
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                and PARENT_DL = #{PARENT_DL}
+            </if>
+            <if test="POLICY_NAME != null and POLICY_NAME != ''">
+                and POLICY_NAME like concat('%',#{POLICY_NAME},'%')
+            </if>
+        </where>
+    </select>
+    <!--产业链图查询-->
+    <select id="getIndustryChainDatas" parameterType="pd" resultType="pd">
+        select LEVEL_NAME,CHAIN_LINK_NAME,c.CHAIN_LINK_ID,IFNULL(b.SUMS,0) SUMS from cc_data_link C
+        LEFT JOIN (
+        select count(1) SUMS,CHAIN_LINK_ID FROM (
+        SELECT
+        a.ENTNAME,
+        substring_index(
+        substring_index(
+        a.chain_link_id,
+        ',',
+        b.help_topic_id + 1
+        ),
+        ',' ,- 1
+        ) AS CHAIN_LINK_ID
+        FROM cc_data_szjjqygxb a
+        JOIN mysql.help_topic b ON b.help_topic_id &lt; (
+        length(a.chain_link_id) - length(
+        REPLACE (a.chain_link_id, ',', '')
+        ) + 1
+        )) t
+        GROUP BY CHAIN_LINK_ID
+        ) b  ON C.CHAIN_LINK_ID = b.CHAIN_LINK_ID
+        where PARENT_DL like concat('%',#{PARENT_DL},'%') AND YEAR = #{YEAR} AND AREA_CODE = #{AREA}
+        order by c.CREATEDATE ASC
+    </select>
+    <!--获取某个产业环节企业-->
+    <select id="getEntByChainId" parameterType="pd" resultType="pd">
+        select
+        e.PRIPID,
+        e.ENTNAME,
+        e.REGNO,
+        e.REGORG
+        from cc_data_szjjqygxb a
+        inner join e_baseinfo e on a.pripid=e.pripid
+        where a.chain_link_id like concat('%',#{CHAIN_LINK_ID},'%')
+    </select>
+
+    <!--根据链名查询企业-->
+    <select id="getEnterpriseBychainIdList" parameterType="pd" resultType="pd">
+        SELECT
+        e.ENTNAME,
+        e.UNISCID,
+        e.DOM,
+        IFNULL(CAST(an.VENDINC as decimal(24,2)),'') VENDINC,
+        IFNULL(CAST(an.RATGRO as decimal(24,2)),'') RATGRO,
+        IFNULL(CAST(an.NETINC as decimal(24,2)),'') NETINC,
+        IFNULL(CAST(an.EMPNUM AS CHAR ),'') EMPNUM,
+        z.CHAIN_NAME,
+        (CASE WHEN a.AREA_NAME='抚州市' then '市本级' else a.AREA_NAME end) as AREA_NAME
+        FROM e_baseinfo e
+        LEFT JOIN cc_data_szjjqygxb c on e.pripid=c.pripid
+        LEFT JOIN zr_data_szjjdmb z on c.PARENT_DL=z.PARENT_DL
+        LEFT JOIN ZR_ZK_AREA a on a.AREA_VALUE = e.REGORG
+        LEFT JOIN an_baseinfo an ON an.PRIPID = e.PRIPID and an.ANCHEYEAR = #{YEAR} - 1
+        LEFT JOIN cc_data_link l on c.CHAIN_LINK_ID like concat('%',l.CHAIN_LINK_ID,'%')
+        where l.PARENT_DL = #{PARENT_DL}
+        AND l.YEAR = #{YEAR}
+        AND l.AREA_CODE = #{AREA_CODE}
+        AND l.CHAIN_LINK_NAME= #{CHAIN_LINK_NAME}
+        <if test="ENTNAME != null and ENTNAME != ''">
+            and e.ENTNAME like concat('%',#{ENTNAME},'%')
+        </if>
+        <if test="UNISCID != null and UNISCID != ''">
+            and e.UNISCID like concat(#{UNISCID},'%')
+        </if>
+    </select>
+</mapper>

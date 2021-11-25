@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EntPanoramicMapper">
+    <cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />
+    <!--useCache="false"开启缓存 useCache="false"关闭缓存-->
+	<!--获取企业所属产业-->
+	<select id="getEntChainByPripid" parameterType="java.lang.String" resultType="pd" useCache="true">
+		select b.CHAIN_NAME from cc_data_szjjqygxb a left join zr_data_szjjdmb b on a.parent_dl=b.parent_dl
+		where pripid=(select pripid from e_baseinfo where regno=#{regno})
+    </select>
+	<!--查询企业-->
+	<select id="getSearchWideByTableDetails" parameterType="java.lang.String" resultType="pd" useCache="false">
+		SELECT
+			ENTNAME Name,
+			CONCAT( CONCAT( REGCAP, "万元" ), REGCAPCUR_CN ) RegistCapi,
+			ENTTYPE_CN EconKind,
+			DOM Address,
+			REGNO OrgNo,
+			REGNO No,
+			EntType,
+			UNISCID CreditCode,
+			REGSTATE_CN Status,
+			date_format(ESTDATE,"%Y-%m-%d %H:%i:%S") StartDate,
+			NAME OperName
+		FROM
+			e_baseinfo
+		WHERE
+			ENTNAME LIKE CONCAT(CONCAT("%",#{keyword}),'%' )
+    </select>
+	<!--查询企业数量-->
+	<select id="getSearchWideByTableDetailsCount" parameterType="java.lang.String" resultType="java.lang.Integer" useCache="false">
+		SELECT
+			count(1)
+		FROM
+			e_baseinfo
+		WHERE
+			ENTNAME LIKE CONCAT(CONCAT("%",#{keyword}),'%' )
+    </select>
+	<!--获取企业信息-->
+	<select id="getEntMsg" parameterType="pd" resultType="pd" useCache="true">
+		SELECT
+			PRIPID,
+			UNISCID,
+			ENTNAME,
+			NAME,
+			DOM,
+			DATE_FORMAT( ESTDATE, '%Y-%m-%d' ) ESTDATE,
+			CODE_NAME,
+			GROUP_CONCAT( t.CHAIN_NAME SEPARATOR ',' ) CHAIN_NAME
+		FROM
+			(
+			SELECT
+			 	a.PRIPID,
+				ENTNAME,
+				NAME,
+				DOM,
+				DATE_FORMAT( ESTDATE, '%Y-%m-%d' ) ESTDATE,
+				CHAIN_NAME,
+				u.CODE_NAME,
+			CASE
+					WHEN UNISCID IS NOT NULL THEN
+					UNISCID ELSE REGNO
+				END UNISCID
+		FROM
+			e_baseinfo a
+			LEFT JOIN up_codelist u on a.INDUSTRYCO=u.CODE_VALUE and u.CODETYPE='CA06'
+			LEFT JOIN zr_zk_szjjqygxb b ON a.pripid = b.PRIPID and b.state='1'
+			AND b.YEAR =(
+						DATE_FORMAT( NOW(), '%Y' )- 1
+						)
+			LEFT JOIN zr_zk_szjjdmb c ON b.PARENT_DL = c.PARENT_DL and c.zt='1'
+			AND c.YEAR =(
+							DATE_FORMAT( NOW(), '%Y' )- 1
+						)
+			AND c.CHAIN_LEVEL = '1'
+		WHERE
+			a.PRIPID = #{PRIPID}
+		GROUP BY
+			b.PARENT_DL
+			) t
+    </select>
+	<!--得到企业柱形图数据-->
+	<select id="getHistogramData" parameterType="pd" resultType="pd" useCache="true">
+			SELECT
+				ANCHEYEAR,
+				PRIPID,
+				VENDINC,
+				PROGRO,
+				RATGRO
+			FROM
+				an_baseinfo
+			WHERE
+				pripid = #{PRIPID}
+			GROUP BY
+				ANCHEYEAR
+			ORDER BY
+				ANCHEYEAR
+    </select>
+	<!--获取企业分数-->
+	<select id="getEntScore" parameterType="pd" resultType="pd" useCache="true">
+			SELECT
+				A.ID,
+				IFNULL( A.DF, 0 ) DF,
+				B.NAME
+			FROM
+			( SELECT * FROM ZR_ZK_SCORE_LINK A WHERE A.PRIPID = #{PRIPID} AND ZBJB = '1' ) A
+			LEFT JOIN ZR_ZK_SCORE B ON A.ID = B.ID
+    </select>
+	<!--获取新闻舆情-->
+	<select id="getEntNews" parameterType="pd" resultType="pd" useCache="true">
+		SELECT
+			ID,
+			NEWSID,
+			SOURCE,
+			TITLE,
+			URL,
+			DATE_FORMAT( PUBLISHTIME, '%Y-%m-%d' ) PUBLISHTIME,
+			EMOTIONTYPE,
+			CATEGORY,
+			NEWSTAGS,
+			CONTENT,
+			PRIPID,
+			ENTNAME
+		FROM
+			ZR_ZK_XWYQ T
+		WHERE  PRIPID=#{PRIPID}
+    </select>
+
+	<!--获取企业分数-->
+	<select id="getPRIPID" parameterType="pd" resultType="pd" useCache="true">
+			select PRIPID from e_baseinfo where REGNO = #{REGNO}
+    </select>
+</mapper>

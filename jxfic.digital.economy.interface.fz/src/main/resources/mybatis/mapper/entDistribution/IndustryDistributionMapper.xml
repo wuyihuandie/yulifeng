@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--产业布局接口-->
+<mapper namespace="IndustryDistributionMapper">
+    <cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />
+    <!--获取抚州市区域-->
+    <select id="getNcShiArea" parameterType="pd" resultType="pd" useCache="false">
+     SELECT AREA_NAME,AREA_VALUE FROM ZR_ZK_AREA WHERE AREA_VALUE LIKE'3610%' ORDER BY AREA_VALUE
+    </select>
+    <!--获取年份列表-->
+    <select id="getYearList" parameterType="pd" resultType="pd" useCache="false">
+    select  distinct INTERVAL_DATE  as year from ZR_ZK_GDP where flag1='1' and  INTERVAL_DATE in
+    (select distinct YEAR  from zr_zk_entstataction order by  YEAR ) order by INTERVAL_DATE
+    </select>
+    <!--数字经济发展情况（数字经济增长曲线）(全国)-->
+    <select id="szjjFiveYearList" parameterType="pd" resultType="pd" useCache="false">
+        SELECT a.c_year AS YEAR,SUM(IFNULL(SZJJCYZE,0)) GDP_SZJJ_ZSS FROM
+        (SELECT YEAR(NOW())-1 AS c_year UNION ALL
+        SELECT YEAR(NOW())-2 AS c_year UNION ALL
+        SELECT YEAR(NOW())-3 AS c_year UNION ALL
+        SELECT YEAR(NOW())-4 AS c_year UNION ALL
+        SELECT YEAR(NOW())-5 AS c_year ) a LEFT JOIN zr_zk_cyfb t
+        ON a.c_year=t.YEAR
+        <choose>
+            <when test="area != null and area != ''">
+                and t.AREA=#{area}
+            </when>
+            <otherwise>
+                AND t.AREA='360000'
+            </otherwise>
+        </choose>
+        <if test="PARENT_DL != null and PARENT_DL != ''">
+            AND PARENT_DL=#{PARENT_DL}
+        </if>
+        GROUP BY a.c_year
+        ORDER BY a.c_year
+    </select>
+    <!--数字经济发展情况（GDP增长曲线）(抚州)-->
+    <select id="gdpFiveYearList" parameterType="pd" resultType="pd" useCache="false">
+        SELECT a.c_year AS YEAR,IFNULL(SUM(GDP_LJTB),0) GDP_LJTBS FROM
+        (SELECT YEAR(NOW())-1 AS c_year UNION ALL
+            SELECT YEAR(NOW())-2 AS c_year UNION ALL
+            SELECT YEAR(NOW())-3 AS c_year UNION ALL
+            SELECT YEAR(NOW())-4 AS c_year UNION ALL
+            SELECT YEAR(NOW())-5 AS c_year ) a LEFT JOIN zr_zk_gdp t
+            ON a.c_year=t.INTERVAL_DATE
+            <choose>
+                <when test="area != null and area != ''">
+                    and t.AREA=#{area}
+                </when>
+                <otherwise>
+                    AND t.AREA='360000'
+                </otherwise>
+            </choose>
+            GROUP BY a.c_year
+            ORDER BY a.c_year
+    </select>
+    <!--查询区域列表-->
+    <select id="areaList" parameterType="pd" resultType="pd" useCache="false">
+            select AREA_VALUE,AREA_NAME from zr_zk_area t where AREA_VALUE like concat(#{area},'%') and C_AREA_LEVEL=#{areaLevel}
+    </select>
+    <!--数字经济地图数据-->
+    <select id="szjjMapData" parameterType="pd" resultType="pd" useCache="false">
+        select sum(ENTTOTALSUM) ENTTOTALSUM,
+        A.YEAR,
+        A.PARENT_DL,
+        B.CHAIN_NAME
+        from zr_zk_cyfb A
+        LEFT JOIN ZR_ZK_SZJJDMB B ON A.PARENT_DL = B.PARENT_DL
+        WHERE A.PARENT_DL = #{PARENT_DL}
+        AND B.AREA = #{AREA} AND B.YEAR = YEAR(NOW())
+        AND A.AREA = #{AREA_VALUE} AND A.YEAR = YEAR(NOW())
+        GROUP BY A.PARENT_DL
+    </select>
+    <select id="szjjAllMapData" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        SUM(IFNULL(ENTTOTALSUM,0)) ENTTOTALSUM,YEAR(NOW()) YEAR,'' PARENT_DL, '数字经济企业总数' CHAIN_NAME
+        FROM zr_zk_cyfb t
+        WHERE AREA = #{AREA_VALUE}
+            AND YEAR = (SELECT
+                          YEAR(NOW())  AS c_year)
+    </select>
+    <!--数字经济地图数据-->
+    <select id="getEntNum" parameterType="pd" resultType="Integer" useCache="false">
+        SELECT
+        SUM(IFNULL(ENTTOTALSUM,0)) ENTTOTALSUMS
+        FROM zr_zk_cyfb t
+        WHERE AREA = #{AREA_VALUE}
+            AND YEAR = (SELECT
+                          YEAR(NOW())  AS c_year)
+    </select>
+
+
+    <!--数字经济产业现状-->
+    <select id="getIndustryChainOverAll" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        (select count(1) from cc_data_szjjqygxb where YEAR=#{YEAR} and AREA like concat(substr(#{AREA},1,4),'%')
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                and PARENT_DL like concat('%',#{PARENT_DL},'%')
+            </if>
+            <if test="INDUSTRY != null and INDUSTRY != ''">
+                and INDUSTRY = #{INDUSTRY}
+            </if>
+        ) ENTNUMS,
+        (select count(1) from cc_data_szjjqygxb where YEAR=#{YEAR} and AREA like concat(substr(#{AREA},1,4),'%') AND CUSTOMIZE LIKE '%GSQY%'
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                and PARENT_DL like concat('%',#{PARENT_DL},'%')
+            </if>
+            <if test="INDUSTRY != null and INDUSTRY != ''">
+                and INDUSTRY = #{INDUSTRY}
+            </if>
+        ) GSENTNUMS,
+        cast((sum(an.VENDINC)/10000) as decimal(24,2)) VENDINC,
+        cast((sum(an.RATGRO)/10000) as decimal(24,2)) RATGRO,
+        cast((sum(an.NETINC)/10000) as decimal(24,2)) NETINC,
+        cast(sum(an.EMPNUM) as CHAR) EMPNUM
+        FROM cc_data_szjjqygxb c
+        LEFT JOIN an_baseinfo an ON an.PRIPID = C.PRIPID
+        left join E_BASEINFO e on e.pripid=c.pripid
+        where an.ANCHEYEAR = #{YEAR} - 1
+        and c.YEAR=#{YEAR}
+        <!--and c.AREA=#{AREA}-->
+        and c.AREA like concat(substr(#{AREA},1,4),'%')
+        <if test="PARENT_DL != null and PARENT_DL != ''">
+            and c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+        </if>
+        <if test="INDUSTRY != null and INDUSTRY != ''">
+            and c.INDUSTRY = #{INDUSTRY}
+        </if>
+    </select>
+
+    <!--各县区数字经济产业发展(企业数量 排名)情况-->
+    <select id="getSzjjEntByArea" parameterType="pd" resultType="pd" useCache="false">
+        SELECT CASE WHEN AREA_NAME='抚州市' then '市本级' else AREA_NAME end AREA_NAME,
+        AREA_VALUE,
+        IFNULL(b.SUMS,0) SUMS from ZR_ZK_AREA a
+        LEFT JOIN (
+            SELECT E.REGORG,count(e.pripid) SUMS
+            FROM cc_data_szjjqygxb c
+            inner join E_BASEINFO e on e.pripid=c.pripid
+            where c.YEAR=#{YEAR}
+            and c.AREA like concat(substr(#{AREA},1,4),'%')
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                and c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+            </if>
+            <if test="INDUSTRY != null and INDUSTRY != ''">
+                and c.INDUSTRY = #{INDUSTRY}
+            </if>
+            GROUP BY E.REGORG
+        ) b ON a.AREA_VALUE = b.REGORG
+        where AREA_VALUE LIKE '3610%' and c_area_level=3
+        order by IFNULL(b.SUMS,0) desc
+    </select>
+    <!--各县区数字经济产业发展(营业收入、纳税、净利润、从业人数 排名)情况-->
+    <select id="getSzjjIncomeByArea" parameterType="pd" resultType="pd" useCache="false">
+        SELECT CASE WHEN AREA_NAME='抚州市' then '市本级' else AREA_NAME end AREA_NAME,
+        AREA_VALUE,
+        IFNULL(b.SUMS,0) SUMS from ZR_ZK_AREA a
+        LEFT JOIN (
+            SELECT E.REGORG
+            <if test="CONDITION == 2">
+                ,cast(sum(an.VENDINC)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 3">
+                ,cast(sum(an.RATGRO)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 4">
+                ,cast(sum(an.NETINC)/10000 as decimal(24,2)) SUMS
+            </if>
+            <if test="CONDITION == 5">
+                ,sum(an.EMPNUM) SUMS
+            </if>
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+            inner join E_BASEINFO e on e.pripid=c.pripid
+            where an.ANCHEYEAR = #{YEAR} -1
+            and c.YEAR=#{YEAR}
+            and c.AREA like concat(substr(#{AREA},1,4),'%')
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                and c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+            </if>
+            <if test="INDUSTRY != null and INDUSTRY != ''">
+                and c.INDUSTRY = #{INDUSTRY}
+            </if>
+            GROUP BY E.REGORG
+        ) b ON a.AREA_VALUE = b.REGORG
+        where AREA_VALUE LIKE '3610%' and c_area_level=3
+        order by IFNULL(b.SUMS,0) desc
+    </select>
+
+    <!--获取各产业企业数量 排名 江西分类-->
+    <select id="getIndustryChainEntPmNums" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        CAST((@I:=@I+1) AS CHAR) RANK,
+        t.* from (
+            select CHAIN_NAME,a.PARENT_DL,IFNULL(b.SUMS,0) SUMS from zr_data_szjjdmb a
+            LEFT JOIN (
+                SELECT c.PARENT_DL,count(C.pripid) SUMS
+                FROM (
+                SELECT
+                a.ENTNAME,a.pripid,A.YEAR,A.AREA,
+                substring_index(
+                substring_index(
+                a.PARENT_DL,
+                ',',
+                b.help_topic_id + 1
+                ),
+                ',' ,- 1
+                ) AS PARENT_DL
+                FROM cc_data_szjjqygxb a
+                JOIN mysql.help_topic b ON b.help_topic_id &lt; (
+                length(a.PARENT_DL) - length(
+                REPLACE (a.PARENT_DL, ',', '')
+                ) + 1
+                )
+                ) C
+                inner JOIN E_BASEINFO E ON  E.PRIPID = C.PRIPID
+                where c.YEAR=#{YEAR}
+               <!-- and c.AREA=#{AREA}-->
+                and c.AREA like concat(substr(#{AREA},1,4),'%')
+                <if test="AREA_NAME != null and AREA_NAME != ''">
+                    and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+                </if>
+                GROUP BY c.PARENT_DL
+            ) b ON a.PARENT_DL = b.PARENT_DL
+            where a.type = 1
+        ) t,
+        (SELECT @I:=0) B
+        order by t.SUMS desc
+    </select>
+    <!--获取各产业营业收入、纳税、净利润、从业人数 排名 江西分类-->
+    <select id="getIndustryChainIncomePmNums" parameterType="pd" resultType="pd" useCache="false">
+        SELECT CAST((@I:=@I+1) AS CHAR) RANK,
+        t.* from (
+            select CHAIN_NAME,a.PARENT_DL,IFNULL(b.SUMS,0) SUMS from zr_data_szjjdmb a
+            LEFT JOIN (
+                SELECT c.PARENT_DL
+                <if test="CONDITION == 2">
+                    ,cast(sum(an.VENDINC)/10000 as decimal(24,2)) SUMS
+                </if>
+                <if test="CONDITION == 3">
+                    ,cast(sum(an.RATGRO)/10000 as decimal(24,2)) SUMS
+                </if>
+                <if test="CONDITION == 4">
+                    ,cast(sum(an.NETINC)/10000 as decimal(24,2)) SUMS
+                </if>
+                <if test="CONDITION == 5">
+                    ,sum(an.EMPNUM) SUMS
+                </if>
+                FROM (
+                    SELECT
+                    a.ENTNAME,a.pripid,A.YEAR,A.AREA,
+                    substring_index(
+                    substring_index(
+                    a.PARENT_DL,
+                    ',',
+                    b.help_topic_id + 1
+                    ),
+                    ',' ,- 1
+                    ) AS PARENT_DL
+                    FROM cc_data_szjjqygxb a
+                    JOIN mysql.help_topic b ON b.help_topic_id &lt; (
+                    length(a.PARENT_DL) - length(
+                    REPLACE (a.PARENT_DL, ',', '')
+                    ) + 1
+                    )
+                ) C
+                inner JOIN E_BASEINFO E ON  E.PRIPID = C.PRIPID
+                LEFT JOIN an_baseinfo an ON an.PRIPID = C.PRIPID
+                where an.ANCHEYEAR = #{YEAR} - 1
+                and c.YEAR=#{YEAR}
+                <!--and c.AREA=#{AREA}-->
+                and c.AREA like concat(substr(#{AREA},1,4),'%')
+                <if test="AREA_NAME != null and AREA_NAME != ''">
+                    and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+                </if>
+                GROUP BY c.PARENT_DL
+            ) b ON a.PARENT_DL = b.PARENT_DL
+            where a.type = 1
+        ) t,(SELECT @I:=0) B
+        order by t.SUMS desc
+    </select>
+
+    <!--获取各产业企业数量 排名 抚州分类-->
+    <select id="getIndustryEntPmNums" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        CAST((@I:=@I+1) AS CHAR) RANK,
+        t.* from (
+            select CHAIN_NAME,a.PARENT_DL,IFNULL(b.SUMS,0) SUMS from zr_data_szjjdmb a
+            LEFT JOIN (
+                select count(1) SUMS,
+                INDUSTRY
+                from cc_data_szjjqygxb c
+                inner join E_BASEINFO e on e.pripid=c.pripid
+                where YEAR=#{YEAR}
+                and AREA like concat(substr(#{AREA},1,4),'%')
+                GROUP BY INDUSTRY
+            ) b ON a.PARENT_DL = b.INDUSTRY
+            where a.type = 2
+        ) t,
+        (SELECT @I:=0) B
+        order by t.SUMS desc
+    </select>
+    <!--获取各产业营业收入、纳税、净利润、从业人数 排名 抚州分类-->
+    <select id="getIndustryIncomePmNums" parameterType="pd" resultType="pd" useCache="false">
+        SELECT CAST((@I:=@I+1) AS CHAR) RANK,
+        t.* from (
+        select CHAIN_NAME,a.PARENT_DL,IFNULL(b.SUMS,0) SUMS from zr_data_szjjdmb a
+        LEFT JOIN (
+        SELECT c.INDUSTRY
+        <if test="CONDITION == 2">
+            ,cast(sum(an.VENDINC)/10000 as decimal(24,2)) SUMS
+        </if>
+        <if test="CONDITION == 3">
+            ,cast(sum(an.RATGRO)/10000 as decimal(24,2)) SUMS
+        </if>
+        <if test="CONDITION == 4">
+            ,cast(sum(an.NETINC)/10000 as decimal(24,2)) SUMS
+        </if>
+        <if test="CONDITION == 5">
+            ,sum(an.EMPNUM)  SUMS
+        </if>
+        FROM cc_data_szjjqygxb c
+        LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+        inner join E_BASEINFO e on e.pripid=c.pripid
+        where an.ANCHEYEAR = #{YEAR} - 1
+        and c.YEAR=#{YEAR}
+        and c.AREA like concat(substr(#{AREA},1,4),'%')
+        GROUP BY c.INDUSTRY
+        ) b ON a.PARENT_DL = b.INDUSTRY
+        where a.type = 2
+        ) t,(SELECT @I:=0) B
+        order by t.SUMS desc
+    </select>
+
+    <!--数字经济产业 产业分析 获取企业列表 排名-->
+    <select id="getChainEnterprise" parameterType="pd" resultType="pd" useCache="true">
+        SELECT CAST((@I:=@I+1) AS CHAR) RANK,
+        Z.*
+        FROM
+        (
+            SELECT
+            e.PRIPID,
+            e.ENTNAME,
+            e.REGNO,
+            e.REGORG,
+            DATE_FORMAT(e.ESTDATE,'%Y-%m-%d') ESTDATE,
+            cast(an.RATGRO as decimal(24,2)) RATGRO,
+            cast(an.VENDINC as decimal(24,2)) VENDINC,
+            CAST(an.EMPNUM AS CHAR ) EMPNUM,
+            cast(an.NETINC as decimal(24,2)) NETINC,
+            (select CASE WHEN AREA_NAME='抚州市' then '市本级' else AREA_NAME end FROM ZR_ZK_AREA WHERE AREA_VALUE = REGORG) AREA_NAME
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+            inner join E_BASEINFO e on e.pripid=c.pripid
+            where an.ANCHEYEAR = #{YEAR} - 1
+		    and c.YEAR=#{YEAR}
+		    and c.AREA like concat(substr(#{AREA},1,4),'%')
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                AND c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+            </if>
+            <if test="INDUSTRY != null and INDUSTRY != ''">
+                and c.INDUSTRY = #{INDUSTRY}
+            </if>
+        ) Z,
+        (SELECT @I:=0) B
+        where 1=1
+        <if test="CONDITION == 1 || CONDITION == 2">
+            and VENDINC is not null
+            ORDER BY cast(VENDINC as decimal(24,2)) DESC
+        </if>
+        <if test="CONDITION == 3">
+            and RATGRO is not null
+            ORDER BY cast(RATGRO as decimal(24,2)) DESC
+        </if>
+        <if test="CONDITION == 4">
+            and NETINC is not null
+            ORDER BY cast(NETINC as decimal(24,2)) DESC
+        </if>
+        <if test="CONDITION == 5">
+            and EMPNUM is not null
+            ORDER BY cast(EMPNUM as decimal(24,2)) DESC
+        </if>
+        LIMIT 10
+    </select>
+
+    <!--数字经济 地域分析 城市发展 现状-->
+    <select id="getRegionAnalysisAll" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+        (select count(1) FROM cc_data_szjjqygxb b inner join E_BASEINFO a on a.pripid=b.pripid
+        where b.YEAR=#{YEAR} and b.AREA like concat(substr(#{AREA},1,4),'%')
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and a.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+        </if>
+        ) ENTNUMS,
+        cast((sum(an.VENDINC)/10000) as decimal(24,2)) VENDINC,
+        cast((sum(an.RATGRO)/10000) as decimal(24,2)) RATGRO,
+        cast((sum(an.NETINC)/10000) as decimal(24,2)) NETINC,
+        cast(sum(an.EMPNUM) as CHAR) EMPNUM
+        FROM cc_data_szjjqygxb c
+        LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+        inner join E_BASEINFO e on e.pripid=c.pripid
+        where an.ANCHEYEAR = #{YEAR} - 1
+        and c.YEAR=#{YEAR}
+        and c.AREA like concat(substr(#{AREA},1,4),'%')
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+        </if>
+    </select>
+    <!--数字经济产业 地域分析 获取企业列表 排名-->
+    <select id="getRegionEnterprise" parameterType="pd" resultType="pd" useCache="true">
+        SELECT CAST((@I:=@I+1) AS CHAR) RANK,
+        Z.*
+        FROM
+        (
+            SELECT
+            e.PRIPID,
+            e.ENTNAME,
+            e.REGNO,
+            e.REGORG,
+            DATE_FORMAT(e.ESTDATE,'%Y-%m-%d') ESTDATE,
+            cast(an.RATGRO as decimal(24,2)) RATGRO,
+            cast(an.VENDINC as decimal(24,2)) VENDINC,
+            CAST(an.EMPNUM AS CHAR ) EMPNUM,
+            cast(an.NETINC as decimal(24,2)) NETINC,
+            (select CASE WHEN AREA_NAME='抚州市' then '市本级' else AREA_NAME end FROM ZR_ZK_AREA WHERE AREA_VALUE = REGORG) AREA_NAME
+            FROM cc_data_szjjqygxb c
+            LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID
+            inner join E_BASEINFO e on e.pripid=c.pripid
+            where an.ANCHEYEAR = #{YEAR} - 1
+		    and c.YEAR=#{YEAR}
+		    and c.AREA like concat(substr(#{AREA},1,4),'%')
+            <if test="AREA_NAME != null and AREA_NAME != ''">
+                and e.REGORG = (select AREA_VALUE from ZR_ZK_AREA where AREA_NAME=#{AREA_NAME})
+            </if>
+            <if test="PARENT_DL != null and PARENT_DL != ''">
+                AND c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+            </if>
+        ) Z,
+        (SELECT @I:=0) B
+        where 1=1
+        <if test="CONDITION == 1 || CONDITION == 2">
+            and VENDINC is not null
+            ORDER BY cast(VENDINC as decimal(24,2)) DESC
+        </if>
+        <if test="CONDITION == 3">
+            and RATGRO is not null
+            ORDER BY cast(RATGRO as decimal(24,2)) DESC
+        </if>
+        <if test="CONDITION == 4">
+            and NETINC is not null
+            ORDER BY cast(NETINC as decimal(24,2)) DESC
+        </if>
+        <if test="CONDITION == 5">
+            and EMPNUM is not null
+            ORDER BY cast(EMPNUM as decimal(24,2)) DESC
+        </if>
+    </select>
+
+    <!--企业列表查询-->
+    <select id="getCompanyDetailsList" parameterType="pd" resultType="pd" useCache="true">
+        SELECT
+        e.ENTNAME,
+        e.UNISCID,
+        e.DOM,
+        IFNULL(CAST(an.VENDINC as decimal(24,2)),'') VENDINC,
+        IFNULL(CAST(an.RATGRO as decimal(24,2)),'') RATGRO,
+        IFNULL(CAST(an.NETINC as decimal(24,2)),'') NETINC,
+        IFNULL(CAST(an.EMPNUM AS CHAR ),'') EMPNUM,
+        GROUP_CONCAT(z.CHAIN_NAME) CHAIN_NAME,
+        (CASE WHEN a.AREA_NAME='抚州市' then '市本级' else a.AREA_NAME end) as AREA_NAME
+        FROM cc_data_szjjqygxb c
+        inner JOIN e_baseinfo e on e.pripid=c.pripid
+        left join zr_data_szjjdmb z ON FIND_IN_SET(z.PARENT_DL , c.PARENT_DL)
+        LEFT JOIN ZR_ZK_AREA a on a.AREA_VALUE = e.REGORG
+        LEFT JOIN an_baseinfo an ON an.PRIPID = c.PRIPID and an.ANCHEYEAR = #{YEAR} - 1
+        where c.YEAR=#{YEAR}
+        and c.AREA like concat(substr(#{AREA},1,4),'%')
+        <if test="AREA_NAME != null and AREA_NAME != ''">
+            and a.AREA_NAME=#{AREA_NAME}
+        </if>
+        <if test="CHAIN_NAME != null and CHAIN_NAME != ''">
+            and z.CHAIN_NAME=#{CHAIN_NAME}
+        </if>
+        <if test="PARENT_DL != null and PARENT_DL != ''">
+            and c.PARENT_DL like concat('%',#{PARENT_DL},'%')
+        </if>
+        <if test="ENTNAME != null and ENTNAME != ''">
+            and e.ENTNAME like concat('%',#{ENTNAME},'%')
+        </if>
+        <if test="UNISCID != null and UNISCID != ''">
+            and e.UNISCID like concat(#{UNISCID},'%')
+        </if>
+        group by c.pripid
+    </select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="legendsmart_api-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="legendsmart-middle-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-middle/legendsmart-middle">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-cache-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-cache/legendsmart-cache">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-mq-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-mq/legendsmart-mq">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-dianji-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-dianji/legendsmart-dianji">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-communication-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-communication/legendsmart-communication">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart_fastdfs-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart_fastdfs/legendsmart_fastdfs">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-mongo-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-mongo/legendsmart-mongo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-filed-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-filed/legendsmart-filed">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="legendsmart-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/legendsmart-common/legendsmart-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="legendsmart_api"/>
+        <property name="java-output-path" value="/legendsmart_api/build/classes"/>
+    </wb-module>
+</project-modules>

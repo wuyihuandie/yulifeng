@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CyycMapper">
+    <cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />
+    <!--useCache="true"开启缓存 useCache="false"关闭缓存-->
+    <!--获取产业预测年份列表-->
+    <select id="getCyycYears" parameterType="pd" resultType="java.lang.String" useCache="false">
+        select year
+            ( now( ) ) + 2 as year union all
+        select year
+            ( now( ) ) + 1 as year union all
+        select year
+            ( now( ) ) as year union all
+        select year
+            ( now( ) ) - 1 as year union all
+        select year
+            ( now( ) ) - 2 as year
+        order by
+        year
+	</select>
+    <!-- 年份列表-->
+    <sql id="CyycYears" >
+        (select year
+            ( now( ) ) + 2 as year union all
+        select year
+            ( now( ) ) + 1 as year union all
+        select year
+            ( now( ) ) as year union all
+        select year
+            ( now( ) ) - 1 as year union all
+        select year
+            ( now( ) ) - 2 as year
+        order by
+        year) a
+	</sql>
+    <!-- 产业投资预测-->
+    <select id="getCytzyc" parameterType="pd" resultType="pd" useCache="false">
+        select a.year,IFNULL(t.szjjcyze,0)szjjcyze from(select year,sum(ifnull(szjjcyze,0))szjjcyze from zr_zk_cyyc  where ARITHMETIC=#{ARITHMETIC} and AREA='361000' group by year order by year asc) t
+        right join
+        <include refid="CyycYears"></include>
+        on a.year=t.year
+	</select>
+    <!-- 产业投资信息-->
+    <sql id="CytzMsg">
+      ( select
+            parent_dl,
+            ( select chain_name from zr_zk_szjjdmb where parent_dl = t.parent_dl and chain_level = '1' limit 1 ) chain_name,
+            year,
+            sum( ifnull( szjjcyzjz, 0 ) ) szjjcyzjz,
+            ifnull( szjjzzl, 0 ) szjjzzl 
+            from
+                zr_zk_cyyc t 
+            where
+                parent_dl in ( 'ZK01', 'ZK06' )
+                and ARITHMETIC=#{ARITHMETIC} and AREA='361000'
+            group by
+                year,
+                parent_dl 
+            order by
+        year asc 
+            ) t
+    </sql>
+    <!-- 产业增加值预测-->
+    <select id="getCyzjzyc" parameterType="pd" resultType="pd" useCache="false">
+        select a.year,
+        ifnull(t.parent_dl,#{parent_dl})parent_dl,t.chain_name,ifnull(t.szjjcyzjz,0)szjjcyzjz,ifnull(t.szjjzzl,0)szjjzzl from (
+        select
+            *
+        from
+           <include refid="CytzMsg"/>
+            where  parent_dl=#{parent_dl} order by year asc)t
+        right join
+        <include refid="CyycYears"></include>
+        on a.year=t.year
+	</select>
+    <!-- 产业名称-->
+    <select id="getCyzjzycNames" parameterType="pd" resultType="java.lang.String" useCache="false">
+        select
+         distinct
+         chain_name
+        from
+        <include refid="CytzMsg"/>
+    </select>
+    <!-- 市场主体发展预测-->
+    <select id="getScztfzyc" parameterType="pd" resultType="pd" useCache="false">
+  select a.year,
+        ifnull(t.parent_dl,#{parent_dl})parent_dl,t.chain_name,ifnull(t.enttotalsum,0)enttotalsum,ifnull(t.enttotalxz,0)enttotalxz from (
+      select
+            *
+        from
+            (
+            select
+                parent_dl,
+                ( select chain_name from zr_zk_szjjdmb where parent_dl = t.parent_dl and chain_level = '1' limit 1 ) chain_name,
+                year,
+                sum( ifnull( enttotalsum, 0 ) ) enttotalsum,
+                ifnull( enttotalxz, 0 ) enttotalxz
+            from
+                zr_zk_cyyc t
+            where
+                parent_dl in ( 'zk01', 'zk06' )
+            and ARITHMETIC=#{ARITHMETIC} and AREA='361000'
+            group by
+                year,
+                parent_dl
+            order by
+            year asc
+            ) t
+        where
+            parent_dl = #{parent_dl} order by year asc)t
+        right join
+        <include refid="CyycYears"></include>
+        on a.year=t.year
+	</select>
+    <!-- 顶层指标-->
+    <select id="getTopZb" parameterType="pd" resultType="pd">
+        select ITEM_ID,ITEM_NAME from zr_zk_item_cyyc where PARENT_ID='0'
+    </select>
+    <!-- 第二层指标-->
+    <select id="getSecondZb" parameterType="java.lang.String" resultType="pd">
+        select ITEM_ID,ITEM_NAME,ITEM_UNIT,ifnull(ZS,"--")ZS from  zr_zk_item_cyyc where PARENT_ID IN(
+        select ITEM_ID from zr_zk_item_cyyc where PARENT_ID='0'AND ITEM_ID=#{ITEM_ID});
+    </select>
+    <!-- 第二层指标数据-->
+    <select id="getSecondData" parameterType="java.lang.String" resultType="pd">
+        SELECT A.`YEAR`,ITEM_VALUE FROM (SELECT * FROM ZR_ZK_ITEM_CYYC_DATA T WHERE ITEM_ID =#{ITEM_ID}) T RIGHT JOIN (
+           SELECT YEAR
+                    ( NOW( ) ) + 1 AS YEAR UNION ALL
+                SELECT YEAR
+                    ( NOW( ) ) AS YEAR UNION ALL
+                SELECT YEAR
+                    ( NOW( ) ) - 1 AS YEAR
+                ORDER BY
+                YEAR)A ON T.YEAR=A.YEAR
+    </select>
+    <!-- 年度列表-->
+    <select id="getYearListMb" parameterType="pd" resultType="java.lang.String">
+           SELECT YEAR
+                    ( NOW( ) ) + 1 AS YEAR UNION ALL
+                SELECT YEAR
+                    ( NOW( ) ) AS YEAR UNION ALL
+                SELECT YEAR
+                    ( NOW( ) ) - 1 AS YEAR
+                ORDER BY
+                YEAR
+    </select>
+</mapper>

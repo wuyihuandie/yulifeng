@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QyhydfxMapper">
+    <!--获取底部图表数据-->
+    <select id="getSaData" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        select MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE
+            from zr_sa_baseinfo where modename = #{modename} and types = #{types}
+            <if test="name !='' and name != null">
+                and name = #{name}
+            </if>
+            order by years asc
+    </select>
+    <!--查询历年状况-->
+    <select id="getIndustryOfYearInfo"  resultType="java.util.Map" parameterType="java.util.HashMap">
+        select a.years YEARS,
+        max(CASE
+        WHEN a.modename like '%存量' THEN
+        a.counts
+        ELSE  '' END) COUNTS,
+        max(CASE
+        WHEN a.modename like '%吊销' THEN
+        a.counts
+        ELSE  '' END) REVOKESUM,
+        max(CASE
+        WHEN a.modename like '%增量' THEN
+        a.counts
+        ELSE '' END) ADDSUM,
+        max(CASE
+        WHEN a.modename like '%注销' THEN
+        a.counts
+        ELSE '' END) REMOVESUM
+        from zr_sa_baseinfo a
+        where types = '总量'
+        <if test='type!=null and type!="" and type=="1"'>
+            AND modename like '内资%'
+        </if>
+        <if test='type!=null and type!="" and type=="2"'>
+            AND modename like '外资%'
+        </if>
+        <if test='type!=null and type!="" and type=="3"'>
+            AND modename like '农专%'
+        </if>
+        group by a.years
+        order by YEARS
+    </select>
+    <!--查询历年状况-->
+    <select id="getIndustryByYear"  resultType="java.util.Map" parameterType="java.util.HashMap">
+        select a.years YEARS,
+        max(CASE
+        WHEN a.modename like '%存量' THEN
+        a.counts
+        ELSE  '' END) COUNTS,
+        max(CASE
+        WHEN a.modename like '%吊销' THEN
+        a.counts
+        ELSE  '' END) REVOKESUM,
+        max(CASE
+        WHEN a.modename like '%增量' THEN
+        a.counts
+        ELSE '' END) ADDSUM,
+        max(CASE
+        WHEN a.modename like '%注销' THEN
+        a.counts
+        ELSE '' END) REMOVESUM
+        from zr_sa_baseinfo a
+        where types = '产业'
+        <if test='type!=null and type!="" and type=="1"'>
+            AND modename like '内资%'
+        </if>
+        <if test='type!=null and type!="" and type=="2"'>
+            AND modename like '外资%'
+        </if>
+        <if test='type!=null and type!="" and type=="3"'>
+            AND modename like '农专%'
+        </if>
+        <if test='flag!=null and flag!=""'>
+            AND name = #{flag}
+        </if>
+        group by a.years
+        order by YEARS
+    </select>
+    <!--查询年份-->
+    <select id="getMyqyYears" resultType="String" parameterType="java.util.HashMap">
+        select YEARS from zr_sa_baseinfo GROUP BY years order by years desc
+    </select>
+<!--    民营企业增加值(三产)-->
+    <select id="getMyqyCyByYear" parameterType="pd" resultType="pd">
+        select MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '民营企业存量' and types = '产业' and years = #{year}
+    </select>
+<!--    江西企业总数(三产)-->
+    <select id="getQyCyByYear" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '企业存量' and types = '产业' and years = #{year}
+    </select>
+<!--    江西个体工商户三产总数-->
+    <select id="getIndBusYear" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '个体存量' and types = '产业' and years = #{year}
+    </select>
+    <!--查询（外资，内资，农专）三产总数-->
+    <select id="getIndustry" parameterType="pd"  resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where types = '产业' and years = #{year}
+        <if test='type!=null and type!="" and type=="1"'>
+            AND modename='内资存量'
+        </if>
+        <if test='type!=null and type!="" and type=="2"'>
+            AND modename='外资企业存量'
+        </if>
+        <if test='type!=null and type!="" and type=="3"'>
+            AND modename='农专存量'
+        </if>
+    </select>
+<!--    江西民营企业分区域存量-->
+    <select id="getMyqyclClty" parameterType="pd" resultType="pd">
+       select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '民营企业存量' and types = '区域' and years = #{year} order by counts desc
+    </select>
+<!--    江西民营企业分区域增量-->
+    <select id="getMyqyzlClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '民营企业增量' and types = '区域' and years = #{year} order by counts desc
+    </select>
+<!--    江西民营企业分区域注销量-->
+    <select id="getMyqyzdxClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '民营企业注销' and types = '区域' and years = #{year} order by counts desc
+     </select>
+<!--    江西民营企业分区域吊销-->
+    <select id="getMyqyRevokeClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '民营企业吊销' and types = '区域' and years = #{year} order by counts desc
+     </select>
+<!--    江西企业分区域存量-->
+    <select id="getQyclClty" parameterType="pd" resultType="pd">
+       select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '企业存量' and types = '区域' and years = #{year} order by counts desc
+    </select>
+<!--    江西企业分区域增量-->
+    <select id="getQyzlClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '企业增量' and types = '区域' and years = #{year} order by counts desc
+    </select>
+<!--    江西企业分区域注销量-->
+    <select id="getQyzdxClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '企业注销' and types = '区域' and years = #{year} order by counts desc
+     </select>
+<!--    江西企业分区域吊销量-->
+    <select id="getQyRevokeClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '企业吊销' and types = '区域' and years = #{year} order by counts desc
+     </select>
+    <!-- 企业活跃度-个体工商户活跃度详情  -->
+    <select id="getIndBusclClty" parameterType="pd" resultType="pd">
+       select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '个体存量' and types = '区域' and years = #{year} order by counts desc
+    </select>
+<!--    江西个体工商户分区域增量-->
+    <select id="getIndBuszlClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '个体增量' and types = '区域' and years = #{year} order by counts desc
+    </select>
+<!--    江西个体工商户分区域注销量-->
+    <select id="getIndBuszdxClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '个体注销' and types = '区域' and years = #{year} order by counts desc
+     </select>
+<!--    江西个体工商户分区域注销量-->
+    <select id="getIndBusRevokeClty" parameterType="pd" resultType="pd">
+        select  MODENAME,TYPES,COUNTS,SUMS,YEARS,NAME,STATE from zr_sa_baseinfo where modename = '个体吊销' and types = '区域' and years = #{year} order by counts desc
+     </select>
+    <!--查询活跃度-->
+    <select id="getIndustryActive"  parameterType="pd" resultType="pd">
+        select a.name NAME,
+        max(CASE
+        WHEN a.modename like '%存量' THEN
+        a.counts
+        ELSE  '' END) COUNTS,
+        max(CASE
+        WHEN a.modename like '%吊销' THEN
+        a.counts
+        ELSE  '' END) MYQYDX,
+        max(CASE
+        WHEN a.modename like '%增量' THEN
+        a.counts
+        ELSE '' END) MYQYZJ,
+        max(CASE
+        WHEN a.modename like '%注销' THEN
+        a.counts
+        ELSE '' END) MYQYZX
+        from zr_sa_baseinfo a
+        where types = '区域'
+        and years = #{year}
+        <if test='type!=null and type!="" and type=="1"'>
+            AND modename like '内资%'
+        </if>
+        <if test='type!=null and type!="" and type=="2"'>
+            AND modename like '外资%'
+        </if>
+        <if test='type!=null and type!="" and type=="3"'>
+            AND modename like '农专%'
+        </if>
+        group by a.name
+        order by cast( COUNTS AS SIGNED) desc
+    </select>
+</mapper>

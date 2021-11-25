@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BusinessClimateMapper">
+    <cache
+        eviction="LRU"
+        flushInterval="600000"
+        size="1024"
+        readOnly="true"
+    />
+    <!--useCache="true"开启缓存 useCache="false"关闭缓存-->
+	<!--各地营商环境得分及类型-->
+	<select id="queryBusinessClimateByScoreAndType" parameterType="pd" resultType="pd" useCache="false">
+        SELECT
+            CAST( ( @I := @I + 1 ) AS CHAR ) RANK,
+            c.*
+        FROM
+            ( SELECT AREA_NAME, DF, LX FROM zr_zk_yshjgxb WHERE ID = '10002'
+                <choose>
+                    <when test="year != null and year != ''">
+                        and year=#{year}
+                    </when>
+                    <otherwise>
+                        AND year=(DATE_FORMAT(NOW(), '%Y'))
+                    </otherwise>
+                </choose>
+            ) c,
+            ( SELECT @I := 0 ) B
+        ORDER BY
+            c.DF DESC
+    </select>
+
+	<!--各地市子环境加权得分及排名-->
+	<select id="queryBusinessClimateByWeightedScoresAndRankings" parameterType="pd" resultType="pd" useCache="false">
+        select z.*,CAST((@i:=@i+1) as CHAR) rank
+        from (
+        select AREA_NAME,DF
+        from zr_zk_yshjgxb
+        <where>
+            and ID = #{index_id}
+            <choose>
+                <when test="year != null and year != ''">
+                    and year=#{year}
+                </when>
+                <otherwise>
+                    AND year=(DATE_FORMAT(NOW(), '%Y'))
+                </otherwise>
+            </choose>
+        </where>
+        ) z ,(SELECT @i:=0) b
+        order by z.DF desc
+    </select>
+
+    <!--查询所有各地市子环境营商环境指标ID-->
+    <select id="queryBusinessClimateByZhjIndexId" parameterType="pd" resultType="pd" useCache="false">
+        select ID,NAME,TB
+        from zr_zk_yshj where PARENT_ID = '10003' and ZBJB = '3'
+        <choose>
+        <when test="year != null and year != ''">
+            and year=#{year}
+        </when>
+        <otherwise>
+            AND year=(DATE_FORMAT(NOW(), '%Y'))
+        </otherwise>
+    </choose>
+    </select>
+
+    <!-- 获取微观问卷指标、宏观指标详情-->
+	<select id="getIndexXq" parameterType="pd" resultType="pd" useCache="false">
+        select
+            id,
+            name,
+            ifnull(score, 0 ) score,
+            round(score_zb,2) score_zb,
+            zbjb,
+            ifnull(bz, '' ) bz
+        from
+            (
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+                name = #{firstName} union all
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+                name = #{secondName} union all
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+                name = #{thirdName} union all
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+            parent_id = ( select id from zr_zk_yshj where name = #{thirdName} )
+            ) t
+            order by zbjb
+    </select>
+    <!-- 获取微观问卷指标、宏观指标详情-->
+    <select id="getIndexXqNew" parameterType="pd" resultType="pd" useCache="false">
+        select
+            id,
+            name,
+            ifnull(score, 0 ) score,
+            round(score_zb,2) score_zb,
+            zbjb,
+            ifnull(bz, '' ) bz
+        from
+            (
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+                id = #{firstId}
+                <choose>
+                    <when test="year != null and year != ''">
+                        and year=#{year}
+                    </when>
+                    <otherwise>
+                        AND year=(DATE_FORMAT(NOW(), '%Y'))
+                    </otherwise>
+                </choose>
+                 union all
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+                id = #{secondId}
+                <choose>
+                    <when test="year != null and year != ''">
+                        and year=#{year}
+                    </when>
+                    <otherwise>
+                        AND year=(DATE_FORMAT(NOW(), '%Y'))
+                    </otherwise>
+                </choose>
+                union all
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+                id = #{thirdId}
+                <choose>
+                    <when test="year != null and year != ''">
+                        and year=#{year}
+                    </when>
+                    <otherwise>
+                        AND year=(DATE_FORMAT(NOW(), '%Y'))
+                    </otherwise>
+                </choose>
+                union all
+            select
+                *
+            from
+                zr_zk_yshj
+            where
+            parent_id = #{thirdId}
+                <choose>
+                    <when test="year != null and year != ''">
+                        and year=#{year}
+                    </when>
+                    <otherwise>
+                        AND year=(DATE_FORMAT(NOW(), '%Y'))
+                    </otherwise>
+                </choose>
+            )t
+            order by zbjb
+    </select>
+    <!--获取年份列表-->
+    <select id="getYshjYears" parameterType="pd" resultType="pd" useCache="true">
+			select distinct year from zr_zk_yshj
+	</select>
+</mapper>
