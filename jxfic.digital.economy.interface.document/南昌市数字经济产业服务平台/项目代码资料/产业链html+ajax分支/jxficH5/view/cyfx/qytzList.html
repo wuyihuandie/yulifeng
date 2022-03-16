@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>产业布局</title>
+  <script type="text/javascript" src="../../source/js/public.js"></script>
+  <!--公共引入js、css-->
+  <script type="text/javascript" src="../../source/js/includefile.js"></script>
+  <!--公共方法js-->
+  <script type="text/javascript" src="../../source/js/cyfx/tzly.js"></script>
+  <link rel="stylesheet" href="../../source/css/cyl-3/cyl-qyqd-2.css" />
+  <link rel="stylesheet" href="../source/css/pagination.css"/>
+  <link rel="stylesheet" href="../source/css/common.css"/>
+  <style>
+    body,html{
+      background: #fff;
+      color: #000;
+    }
+    .all-body {
+      width: 100%;
+    }
+    .listDetailed{
+      border-left: 1px solid #4AABB3;
+      border-bottom: 1px solid #4AABB3;
+    }
+    .listDetailed tr td{
+      border-right: 1px solid #4AABB3;
+      border-top: 1px solid #4AABB3;
+    }
+    .layui-layer-setwin .layui-layer-close2 {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+    }
+    .boxContent .qylist {
+      display: grid;
+      grid-template-rows: 3rem 55rem;
+    }
+  </style>
+</head>
+<body>
+<!--内容div-->
+<div class="all-body">
+  <div class="layui-card-body">
+    <!--重点项目清单-->
+    <div class="boxContent" style="display: grid;">
+      <div class="line2">
+        <div class="cyfx_title_text" id="title"></div>
+        <div class="cyfx_title_line">
+          <div class="bleft"></div>
+          <div class="bcenter"></div>
+          <div class="bright"></div>
+        </div>
+      </div>
+      <!--左上div内容-->
+      <div class="qylist">
+        <div class="table-head">
+          <table>
+            <thead>
+            <tr>
+              <th class="td1">序号</th>
+              <th class="td2" style="width: 20%;">投资来源</th>
+              <th class="td3" >企业数量</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="table-body">
+          <table>
+            <table>
+              <tbody id="projectList">
+              </tbody>
+            </table>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

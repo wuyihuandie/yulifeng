@@ -1,0 +1,24 @@
+.all-body>div{
+	height: 100%;
+}
+.all-body-left-top{
+	height: 50%;
+}
+.all-body-left-bottom{
+	height: 50%;
+}
+.all-body-left-top-title{
+	height: 10%;
+	font-size: 1.5rem;
+	text-indent: 5%;
+	line-height: 240%;
+}
+.all-body-left-top-title-border{
+	height: 5%;
+	background: url(../../img/title_right.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.all-body-left-top-content{
+	height: 85%;
+}

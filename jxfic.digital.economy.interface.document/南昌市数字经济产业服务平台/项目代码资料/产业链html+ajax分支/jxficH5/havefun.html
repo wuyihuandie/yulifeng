@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1"> -->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=Edge">  -->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>南昌市数字经济产业服务平台</title>
+		<script type="text/javascript" src="source/js/public.js"></script>
+		<script type="text/javascript" src="source/js/includefile.js"></script>
+		<!--以上js顺序不能变-->
+		<style>
+			body{
+				height: 100vh;
+				background: url(source/img/login/bg.png);
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed;
+			}
+			.top{
+				text-align: center;
+				margin-top: 8%;
+			}
+			.top-img{
+				width: 100%;
+				font-size: 60px;
+				font-family: FZZhengHeiS-DB-GB;
+				font-weight: 400;
+				color: #FFFFFF;
+			}
+			.login-box{
+				width: 30%;
+				height: 42vh;
+				margin: auto;
+				margin-top: 5%;
+				background: url(source/img/login/k.png) no-repeat;
+				background-size: 100%;
+			}
+			#form_data{
+				width: 70%;
+				margin: auto;
+				padding: 8% 0;
+			}
+			.input-container{
+				width: 85%;
+				height: 40px;
+				margin: auto;
+				border: #1F879E solid 1px;
+				border-radius: 3px;
+				background: url(source/img/login/srk.png) no-repeat;
+				background-size: cover;
+				margin-top: 5%;
+			}
+			.input-container img{
+				height: 25px;
+				padding: 5px 15px;
+			}
+			.input-container input{
+				height: 40px;
+				width: 75%;
+				background: none;
+				border: none;
+				color:#ffffff;
+			}
+			input::-webkit-input-placeholder{
+				color:#ffffff;
+			}
+			input:-webkit-autofill , textarea:-webkit-autofill, select:-webkit-autofill {
+				-webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+				background-color: transparent !important;//设置input框记住密码背景颜色
+				background-image: none;
+				transition: background-color 50000s ease-in-out 0s;
+				-webkit-text-fill-color: #fff !important;//设置浏览器默认密码字体颜色
+			}
+			.login_button{
+				background: #31F7FB;
+				border: none;
+				border-radius: 3px;
+				height: 40px;
+				line-height: 40px;
+				width: 80%;
+				margin: auto;
+				margin-top: 8%;
+			}
+			#codeImg {
+				cursor: pointer;
+				background-color: #fff;
+				position: absolute;
+				top: 0;
+				right: -70%;
+				width: 100px;
+				height: 43px;
+				padding: 0;
+			}
+			.foot{
+				width: 100%;
+				position: relative;
+				height: 20vh;
+			}
+			.foot-img{
+				height: 3.4375rem;
+				width: 350px;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				text-align: center;
+			}
+			.foot-logo{
+				width: 100%;
+				height: 50%;
+				font-size: 21px;
+				font-family: SimHei;
+				font-weight: 500;
+				color: #5DCDE5;
+			}
+			.fot{
+				width: 100%;
+				height: 50%;
+				font-size: 18px;
+				font-family: SimHei;
+				font-weight: 500;
+				color: #5DCDE5;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="top">
+			<div class="top-img">
+				<img src="source/img/login/logo.png" >
+				数字经济产业分析平台
+			</div>
+			
+		</div>
+		<div class="login-box">
+			<form id="form_data">
+				<h3 style="font-size: 2.5vh;color: #31F7FB;text-align: center">用 户 登 录</h3>
+				<div class="input-container">
+					<img src="source/img/login/icon_name.png">
+					<input type="text" id="username" name="username" autocomplete="off" placeholder="请输入账号">
+				</div>
+				<div class="input-container">
+					<img src="source/img/login/icon_code.png">
+					<input type="password" id="password" name="password" autocomplete="off" placeholder="请输入密码">
+				</div>
+				<div class="input-container" style="position: relative;width: 50%;margin-left: 7%;">
+					<input type="text" id="captcha" name="code" placeholder="请输入验证码" autocomplete="off" class="layui-input admin-input admin-input-verify"value="">
+					<img id="codeImg" alt="点击更换" title="点击更换" onclick="changeCode();" class="admin-captcha"/>
+					</input>
+				</div>
+
+				<div style="text-align: center">
+					<input class="login_button" id="btnlogin" type="button"  value="登录"/>
+				</div>
+			</form>
+
+			<!--<form action="http://127.0.0.1:8181/goIndex" method="post">
+				<input type="text"  name="token"  value="ff84d569c6be4bf6a8b9cf4862bda1c0">
+				<button type="submit">提交</button>
+			</form>-->
+		</div>
+		<div class="foot">
+			<div class="foot-img">
+				<div class="foot-logo">
+					<img src="source/img/login/ncbd_small.png" alt="" style="width: 20%";>
+					<span id="systemDepart">南昌市大数据发展管理局</span>
+				</div>
+				<div class="fot">
+					技术支持：江西诚韬科技有限公司
+				</div>
+			</div>
+			
+		</div>
+	</body>
+	<script>
+
+		flag="login";
+		$(function(){
+			$("#btnlogin").on('click',function(){
+				var	username = $("#username").val()
+				var	password = $("#password").val()
+				var param= $("#captcha").serializeArray();
+				param.push({name:'username',value:encode64(username)});
+				param.push({name:'password',value:encode64(password)});
+				if($("#username").val().length > 0){
+					if($("#password").val().length > 0){
+						if($("#captcha").val()==''){
+							layer.tips('请输入验证码!', '#captcha', {tips: [2, '#f56c6c'], time: 3000});
+						}else{
+							$.ajax({
+								type: 'POST',
+								url : BASE_URL+'/login_login',
+								data:param,
+								success : function(text) {
+									var jsonData = JSON.parse(text);
+									console.log("jsonData:"+jsonData.status)
+									if(jsonData.status=='1'){
+										setCookie("token",jsonData.token,expireTime);//token存入cookie 24小时
+										setCookie("username",jsonData.user.username,expireTime);//token存入cookie 24小时
+										setCookie("area_value",jsonData.user.areacode,expireTime);//token存入cookie 24小时
+										setCookie("area_name",jsonData.user.area_name,expireTime);//token存入cookie 24小时
+										setCookie("realname",jsonData.user.realname,expireTime);//token存入cookie 24小时
+										window.location.href="view/sy/sy-nc2.html?menuType=0";
+									}else if(jsonData.status=='3'){
+										layer.tips('验证码输入有误', '#captcha', {tips: [2, '#f56c6c'], time: 3000});
+										$("#captcha").val('');
+										changeCode();
+									}else{
+										layer.tips('账号或密码有误', '#username', {tips: [2, '#f56c6c'], time: 3000});
+									}
+								}
+							})
+						}
+					}else{
+						layer.tips('请输入密码', '#password', {tips: [2, '#f56c6c'], time: 3000});
+					}
+				}else{
+					layer.tips('请输入账号', '#username', {tips: [2, '#f56c6c'], time: 3000});
+				}
+
+
+
+			})
+
+		})
+
+		$(document).keydown(function(event){
+			if(event.keyCode==13){
+				$("#btnlogin").click();
+			}
+		});
+		changeCode();
+
+
+		function changeCode() {
+			$("#codeImg").attr("src", BASE_URL+"/code?t=" + genTimestamp());
+		}
+		function genTimestamp() {
+			var time = new Date();
+			return time.getTime();
+		}
+
+	</script>
+</html>

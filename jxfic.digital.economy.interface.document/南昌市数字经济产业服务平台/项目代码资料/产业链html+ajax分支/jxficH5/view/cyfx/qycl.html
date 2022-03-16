@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>企业分析-核心企业</title>
+	<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/countUp.js" ></script>
+	<script type="text/javascript" src="../../source/js/qyfb/pagination.js"></script>
+	<link rel="stylesheet" href="../../source/css/cyfx/qycl.css" />
+	<script type="text/javascript" src="../../source/js/cyfx/qycl.js" ></script>
+	<link rel="stylesheet" href="../../source/ico/iconfont.css">
+	<link rel="stylesheet" href="../../source/css/pagination.css" />
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+	<!--头div-->
+	<div class="layui-col-md12 all-head" id="headDiv"></div>
+
+	<!--div(用于背景图)-->
+	<div class="layui-col-md12 all-body-bg">
+		<!--内容div-->
+		<div class="all-body">
+
+			<!--内容左边div-->
+			<div class="lay_left">
+				<div class="line1">
+					<span class="areaTitle">南昌市</span>数字经济核心产业新注册企业总览
+					<!--<div class="calendar">
+						<div class="cleft"></div>
+						<div class="ctitl"><span class="ctitle">2021</span>年</div>
+						<div class="cright"></div>
+					</div>-->
+					<div class="years">
+						<div class="cleft"></div>
+						<div class="ctitl"><span class="ctitle"></span>年</div>
+						<div class="cright"></div>
+					</div>
+					<div class="month">
+						<div class="mleft"></div>
+						<div class="mtitl"><span class="ctitle"></span>月</div>
+						<div class="mright"></div>
+					</div>
+				</div>
+				<div class="line2">
+					<div class="titles">
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div>
+					<div class="qyitems">
+						<div class="item qyzs" >
+							<dd style="width: 120px;font-size: 20px;" onclick="changeParentdl(4)">
+								企业总数
+							</dd>
+							<dt onclick="queryXz(4)" style="cursor: pointer"><span id="qyzs">-</span>家</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="zs">-</span>%</dt>
+						</div>
+						<div class="item gxqy" >
+							<dd style="width: 120px;" onclick="changeParentdl(0)">
+								计算机、通信和其他电子设备制造业
+							</dd>
+							<dt onclick="queryXz(0)" style="cursor: pointer"><span id="YJ">-</span>家</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="YJZS">-</span>%</dt>
+						</div>
+						<div class="item dxgb">
+							<dd style="width: 120px;" onclick="changeParentdl(1)">
+								电信、广播电视和卫星传输服务业
+							</dd>
+							<dt onclick="queryXz(1)" style="cursor: pointer"><span id="CS">-</span>家</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="CSZS">-</span>%</dt>
+						</div>
+						<div class="item gsqy">
+							<dd style="width: 120px;" onclick="changeParentdl(2)">互联网和相关服务业</dd>
+							<dt onclick="queryXz(2)" style="cursor: pointer"><span id="HLW">-</span>家</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="HLWZS">-</span>%</dt>
+						</div>
+						<div class="item xzqy">
+							<dd style="width: 120px;" onclick="changeParentdl(3)">
+								软件和信息技术服务业
+							</dd>
+							<dt onclick="queryXz(3)" style="cursor: pointer"><span id="RJ">-</span>家</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="RJZS">-</span>%</dt>
+						</div>
+					</div>
+				</div>
+				<div class="line3">
+					<div class="titles">
+						<div class="cyfx_title_text"><span class="areaTitle"></span>新注册企业注册资金占比</div>
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div>
+					<div id="chartsSJQK" class="pieDom"></div>
+				</div>
+				<div class="line4">
+					<div class="titles">
+						<div class="cyfx_title_text">
+							<span class="areaTitle"></span><span class="chartTitle">新注册企业投资来源占比</span>
+							<div data-tab='area' class="city cityM xz1" onclick="selectTzly(this);">
+								投资来源
+							</div>
+							<div data-tab='month' class="cityM" onclick="selectAge(this);">
+								老板年龄
+							</div>
+					    </div>
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div> 
+					<div id="chartsZCZJ" class="pieDom pieDoms"></div>
+					<div id="chartsNLJG" class="pieDom"></div>
+				</div>
+			</div>
+
+			<!-- 内容中间 -->
+			<div class="lay_center">
+				<div class="map">
+					<div class="box_bottom">
+						<div class="box-bs  box-bss" id="qycl">
+							新注册企业
+						</div>
+						<div class="box-bs" id="qyzx">
+							注销企业
+						</div>
+						<div class="box-bs" id="qycz">
+							活跃企业
+						</div>
+						
+					</div>
+					<div class="box-map">
+						<div class="box-map1">
+							<div class="box-map1-1">
+								<div class="ztk">
+								</div>
+							</div>
+						</div>
+						<div class="box-map2" id="mapData">
+							
+						</div>
+					</div>
+				</div>
+				<div class="bar">
+					<div class="bar-title">
+						<span class="areaTitle"></span>新注册企业月度变化情况
+					</div>
+					<div class="bar-img">
+						<img src="../../source/img/title_right.png" >
+					</div>
+					<div class="bar-box" id="barBox">
+
+					</div>
+				</div>
+			</div>
+			<!-- 内容右边 -->
+			<div class="lay_right">
+				<div class="ranking">
+					<div class="ranking-title">
+						各县区数字经济新注册企业数排名
+					</div>
+					<div class="ranking-img">
+						<img src="../../source/img/title_right.png" >
+					</div>
+					<div class="ranking-box" id="rankingBox">
+						<div>
+							<table class="all-body-middle-pm-table" id="areaTable">
+								<thead>
+								<tr>
+									<th width="21%" class="pdl0 pdr0">排名</th>
+									<th width="23%">地区</th>
+									<th width="23%">企业数(家)</th>
+									<!--<th width="20%">域外企业(家)</th>-->
+									<th width="23%">分公司数(家)</th>
+								</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="pie">
+					<div class="pie-title">
+						<span class="areaTitle"></span>新注册企业变化趋势
+					</div>
+					<div class="pie-img">
+						<img src="../../source/img/title_right.png" >
+					</div>
+					<div class="pie-box" id="pieBox">
+
+					</div>
+				</div>
+				<div class="cyfz_ly">
+					<div class="details">
+						数据来源：<span id="dataSource"></span>
+						</br>
+						数据采集截止日期：<span id="dataCollectionTime"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--底div-->
+
+</div>
+</body>
+
+</html>

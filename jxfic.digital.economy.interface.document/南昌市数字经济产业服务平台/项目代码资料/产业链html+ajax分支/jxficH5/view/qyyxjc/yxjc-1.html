@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>规上企业运行监测</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<script type="text/javascript" src="../../source/js/countUp.js" ></script>
+		<!--公共方法js-->
+		<link rel="stylesheet" href="../../source/css/qyyxjc/yxjc-1.css" />
+		<script src="http://webapi.amap.com/maps?v=1.4.15&key=3211a5d1334364ea16acf7960160932d"></script>
+		<script src="//a.amap.com/jsapi_demos/static/resource/heatmapData.js"></script>
+		<script src="//webapi.amap.com/ui/1.1/main.js?v=1.1.1"></script>
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv"></div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+						<div class="bleft">
+							<div class="left1"  >
+								<div class="titles">
+									<div class="border_title_text">
+										运行情况
+										<div class="years">
+											<div class="cleft"></div>
+											<div class="ctitl"><span class="ctitle">2020</span>年</div>
+											<div class="cright"></div>
+										</div>
+										<div class="month">
+											<div class="mleft"></div>
+											<div class="mtitl"><span class="ctitle">9</span>月</div>
+											<div class="mright"></div>
+										</div>
+									</div>
+									<div class="border_title_line">
+										<div class="bleft"></div>
+										<div class="bcenter"></div>
+										<div class="bright"></div>
+									</div>
+								</div>
+								<div class="qyitems">
+									<div class="item qyzs">
+										<dd>企业总数</dd>
+										<dt><span id="ENTNAMESUM">-</span>家</dt>
+									</div>
+									<div class="item zs">
+										<dd>同比<br>增速</dd>
+										<dt><span id="ENTZS">-</span>%</dt>
+									</div>
+									<div class="item qyys">
+										<dd>企业营收</dd>
+										<dt><span id="VENDINC">-</span>亿元</dt>
+									</div>
+									<div class="item zs">
+										<dd>同比<br>增速</dd>
+										<dt><span id="VENDINCZS">-</span>%</dt>
+									</div>
+									<div class="item nsje">
+										<dd>纳税金额</dd>
+										<dt><span id="RATGRO">-</span>亿元</dt>
+									</div>
+									<div class="item zs">
+										<dd>同比<br>增速</dd>
+										<dt><span id="RATGROZS">-</span>%</dt>
+									</div>
+									<div class="item cyry">
+										<dd>从业人员</dd>
+										<dt><span id="EMPNUM">-</span>人</dt>
+									</div>
+									<div class="item zs">
+										<dd>同比<br>增速</dd>
+										<dt><span id="EMPNUMZS">-</span>%</dt>
+									</div>
+								</div>
+							</div>
+							<div class="left3">
+								<div class="company" id="projectDiv">
+									<div class="companyCenter">
+										项目
+									</div>
+									<div class="companyCenter">
+										<span id="projectNum">-</span>个
+									</div>
+								</div>
+								<div class="company" id="brandDiv">
+									<div class="companyCenter">
+										商标
+									</div>
+									<div class="companyCenter">
+										<span id="brandNum">-</span>个
+									</div>
+								</div>
+								<div class="company" id="copyrightDiv">
+									<div class="companyCenter">
+										软著
+									</div>
+									<div class="companyCenter">
+										<span id="copyrightNum">-</span>个
+									</div>
+								</div>
+								<div class="company" id="patentDiv">
+									<div class="companyCenter">
+										专利
+									</div>
+									<div class="companyCenter">
+										<span id="patentNum">-</span>个
+									</div>
+								</div>
+
+								<div class="company" id="rewardDiv">
+									<div class="companyCenter">
+										证书
+									</div>
+									<div class="companyCenter">
+										<span id="rewardNum">-</span>项
+									</div>
+								</div>
+							</div>
+							<div class="left2" >
+								<div>
+									<div class="border_title_text">
+										<span class="chartTitle">南昌市</span>各县区规上企业<span class="chart2Title">数量</span>排名
+										<select style="height: 2rem; border:1px solid #ccc; background-color: #0c3154; color: #fff;" name="areaSelect" onchange="changeAreaData(this)">
+											<option value="1">企业数量</option>
+											<option value="2">营业收入</option>
+											<option value="3">累计纳税</option>
+											<!--<option value="4">利润总额</option>-->
+											<option value="5">从业人员</option>
+										</select>
+									</div>
+									<div class="border_title_line">
+										<div class="bleft"></div>
+										<div class="bcenter"></div>
+										<div class="bright"></div>
+									</div>
+								</div>
+								<div class="listtable">
+									<table class="all-body-middle-pm-table" >
+										<thead class="topHeader">
+											<tr>
+												<th width="15%" class="pdl0 pdr0">排名</th>
+												<th width="50%">县区</th>
+												<th class="tableTitle">企业数量(家)</th>
+											</tr>
+										</thead>
+										<tbody id="areaContent">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="bodycenter">
+							<div class="line1">
+								<span class="chainName">信息传输、软件和信息技术服务业</span>规上企业运行监测（<span id="sjzl">数据一览</span>）
+							</div>	
+							<div class="maparea" >
+					
+								<div class="mapCont">
+									<div id="hotMap" style="height: 100%; background: #666" ></div>
+								</div>
+							</div>
+							<div class="yyqkarea" >
+								<div >
+									<div class="border_title_text" >
+										<span class="areaTitle">南昌市</span>规上企业<span class="chartTitle">累计营收</span>趋势
+										<select  name="city" style="height: 2rem; border:1px solid #ccc; background-color: #0c3154; color: #fff;" lay-verify="required" onchange="changeSelect(this)">
+											<option value="2">营业收入</option>
+											<option value="3">累计纳税</option>
+											<!--<option value="4">利润总额</option>-->
+											<option value="5">从业人员</option>
+										</select>
+									</div>
+									<div class="border_title_line" >
+										<div class="bleft"></div>
+										<div class="bcenter"></div>
+										<div class="bright"></div>
+									</div>
+								</div>
+								<div class="yyqk">
+									<div id="chartsTrend"></div>
+								</div>
+							</div>
+						</div>
+						<div class="bodyright">
+							<div class="rightTit">
+								<div class="border_title_text">
+
+									<span class="areaTitle">南昌市</span>规上企业<span class="chartTitle">累计营收</span>排名
+									<select class="chainSelect" name="chainSelect" onchange="changeParentDl(this)">
+										<option value="NK05">信息传输、软件和信息技术服务业</option>
+										<option value="NK06">互联网和相关服务业、软件和信息技术服务业</option>
+										<option value="NK02">电信、广播电视和卫星传输服务</option>
+										<option value="NK03">互联网和相关服务业</option>
+										<option value="NK04">软件和信息技术服务业</option>
+									</select>
+								</div>
+								<div class="border_title_line">
+									<div class="bleft"></div>
+									<div class="bcenter"></div>
+									<div class="bright"></div>
+								</div>
+							</div>
+							<div class="listtable">
+								<div class="tabHead">
+									<table >
+										<thead>
+											<tr>
+												<th width="10%" class="pdl0 pdr0">排名</th>
+												<th width="50%">企业名称</th>
+												<th width="25%" class="table1Title sequence1" style="cursor: pointer">营业收入(万元)</th>
+												<th class="sequence2" style="cursor: pointer">增速(%)</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div class="tabList">
+									<table>
+										<tbody class="tbody" id="entList" ></tbody>
+									</table>
+								</div>
+								<div class="timePanel">
+									<!--<div class="botTime"><em>数据采集截止日期：2020-09-01 数据来源：江西省统计局</em></div>-->
+								</div>
+							</div>
+							<div class="cyfz_ly">
+								<div class="details">
+									数据来源：<span id="dataSource"></span>
+									</br>
+									规上企业数据采集截止日期：<span id="gsdataCollectionTime"></span>
+									</br>
+									其他数据采集截止日期：<span id="dataCollectionTime"></span>
+								</div>
+							</div>
+							
+						</div>
+				</div>
+			</div>
+			<!--底div-->
+
+		</div>
+	</body>
+	<script src="../../source/js/qyyxjc/yxjc-1.js"></script>
+</html>
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#fff;">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../../source/js/public.js"></script><!--公共引入js、css-->
+    <script type="text/javascript" src="../../source/js/includefile.js"></script><!--公共方法js-->
+
+    <link rel="stylesheet" href="../../source/css/pagination.css"/>
+    <link rel="stylesheet" href="../../source/css/common.css"/>
+    <style>
+        .layui-table th{
+            text-align: left;
+            background: #f7f7fa;
+            color: #000;
+        }
+        .layui-table td{
+            text-align: left;
+            color: #000;
+        }
+    </style>
+</head>
+<body style="background:#fff;">
+<form class="layui-form" style="margin-top: 15px;">
+    <table class="layui-table" style="width: 90%;margin: auto">
+        <tr>
+            <th width="30%" >软件名称</th>
+            <td id="Name"></td>
+        </tr>
+        <tr>
+            <th>版本号</th>
+            <td id="VersionNo"></td>
+        </tr>
+        <tr>
+            <th>发布日期</th>
+            <td id="AppDate"></td>
+        </tr>
+        <tr>
+            <th>软件简称</th>
+            <td id="ShortName"></td>
+        </tr>
+        <tr>
+            <th>登记号</th>
+            <td id="RegisterNo"></td>
+        </tr>
+        <tr>
+            <th>登记批准日期</th>
+            <td id="RegisterAperDate"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function(){
+        var datas = {};
+        datas.ID=getUrlValue("ID");
+        doData(BASE_URL+'/qyyxjcController/getIntellectualList',datas,function(result){
+            result.data.forEach(function (item, index) {
+                $("#Name").text(item.Name);
+                $("#VersionNo").text(item.VersionNo);
+                $("#AppDate").text(item.AppDate==''?'-':item.AppDate);
+                $("#ShortName").text(item.ShortName==''?'-':item.ShortName);
+                $("#RegisterNo").text(item.RegisterNo);
+                $("#RegisterAperDate").text(item.RegisterAperDate);
+            })
+        })
+    })
+</script>

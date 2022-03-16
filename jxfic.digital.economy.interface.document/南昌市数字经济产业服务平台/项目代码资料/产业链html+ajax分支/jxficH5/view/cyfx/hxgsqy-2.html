@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>企业分析-核心规上企业</title>
+		<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/countUp.js" ></script>
+		<script type="text/javascript" src="../../source/js/cyfx/hxgsqy.js" ></script>
+		<link rel="stylesheet" href="../../source/css/cyfx/hxgsqy-2.css" />
+		<link rel="stylesheet" href="../../source/ico/iconfont.css">
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+		
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv"></div>
+		
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<!-- 左侧+中间 -->
+					<div class="all-left">
+						<!-- 左侧上 -->
+						<div class="left-top">
+							<!-- 左上左 -->
+							<div class="top-left">
+								<div class="line1">
+									<div class="calendar">
+										<div class="cleft"></div>
+										<div class="ctitl"><span class="ctitle">2020</span>年</div>
+										<div class="cright"></div>
+									</div>
+								</div>
+								<div class="line2">
+									<div class="titles">
+										<div class="cyfx_title_text"><span class="areatitle"></span>数字经济核心规上企业</div>
+										<div class="cyfx_title_line">
+											<div class="bleft"></div>
+											<div class="bcenter"></div>
+											<div class="bright"></div>
+										</div>
+									</div>
+									<div class="qyitems">
+										<div class="item gxqy">
+											<dd>企业总数</dd>
+											<dt><span id="ENTNUMS">-</span>家</dt>
+										</div>
+										<div class="item rjqy">
+											<!--<dd>同比增速</dd>
+											<dt><span id="XZENTNUMS">-</span>%</dt>-->
+										</div>
+										<div class="item qyzs">
+											<dd>企业营收</dd>
+											<dt><span id="VENDINC">-</span>亿元</dt>
+										</div>
+										<div class="item rjqy">
+											<!--<dd>同比增速</dd>
+											<dt><span id="VENDINCZS">-</span>%</dt>-->
+										</div>
+										<div class="item gsqy">
+											<dd>软件企业营收</dd>
+											<dt><span id="SOFTVENDINC">-</span>亿元</dt>
+										</div>
+										<div class="item rjqy">
+											<!--<dd>同比增速</dd>
+											<dt><span id="SOFTVENDINCZS">-</span>%</dt>-->
+										</div>
+										<div class="item gxqy">
+											<dd>硬件企业营收</dd>
+											<dt><span id="HARDVENDINC">-</span>亿元</dt>
+										</div>
+										<div class="item rjqy">
+											<!--<dd>同比增速</dd>
+											<dt><span id="HARDVENDINCZS">-</span>%</dt>-->
+										</div>
+									</div>
+								</div>
+								<div class="line3">
+									<div class="titles">
+										<div class="cyfx_title_text"><span class="areatitle"></span>数字经济核心规上企业成立时间情况</div>
+										<div class="cyfx_title_line">
+											<div class="bleft"></div>
+											<div class="bcenter"></div>
+											<div class="bright"></div>
+										</div>
+									</div>
+									<div id="chartsSJQK" class="pieDom"></div>
+								</div>
+							</div>
+							<!-- 左上中间 -->
+							<div class="top-right">
+								<div class="box_hxcy">
+									<div class="titles">
+										<div class="cyfx_title_text"><span class="areatitle"></span>数字经济核心产业规上企业数量（<span class="unit">家</span>）</div>
+										<div class="cyfx_title_line">
+											<div class="bleft"></div>
+											<div class="bcenter"></div>
+											<div class="bright"></div>
+										</div>
+										<div class="btn_more">企业运行监测</div>
+									</div>
+									<div class="rect">
+										<div class="rectleft">
+											<div class="borders">
+												
+											</div>
+											<div class="l1" onclick="changeIndustry(4,this)">信息传输、软件和信息技术服务业（<span id="software"></span>）</div>
+											<div class="lbtn btn1" onclick="changeIndustry(1,this)"><span>电信、广播电视和卫星传输服务业</span><span id="software1" >(0)</span></div>
+											<div class="lbtn btn2" onclick="changeIndustry(2,this)"><span>互联网和相关服务业</span><span id="software2" >(0)</span></div>
+											<div class="lbtn btn3" onclick="changeIndustry(3,this)"><span>软件和信息技术服务业</span><span id="software3" >(0)</span></div>
+								
+										</div>
+										<div class="rectright rectbox" onclick="changeIndustry(0,this)">
+											<div class="borders">
+												
+											</div>
+											<div class="textitem">
+												<spna id="hardWareName">计算机、通信和其他电子设备制造业</spna>
+												<br/>
+												<spna id="hardWareSums">(0)</spna>
+											</div>
+										</div>
+									</div>
+								
+								</div>
+								
+								<div class="line4">
+									<div class="titles">
+										<div class="cyfx_title_text"><span class="areatitle"></span>数字经济核心规上企业注册资金情况</div>
+										<div class="cyfx_title_line">
+											<div class="bleft"></div>
+											<div class="bcenter"></div>
+											<div class="bright"></div>
+										</div>
+									</div>
+									<div id="chartsZCZJ" class="pieDom"></div>
+								</div>
+								
+							</div>
+						</div>
+						<!-- 左侧下 -->
+						<div class="left-foot">
+							<div class="right2">
+								<div class="titles">
+									<div class="cyfx_title_text"><span class="areatitle"></span>数字经济核心规上企业占比</div>
+									<div class="cyfx_title_line">
+										<div class="bleft"></div>
+										<div class="bcenter"></div>
+										<div class="bright"></div>
+									</div>
+								</div>
+								<div class="chartlist">
+									<div id="chart1"></div>
+									<div id="chart2"></div>
+									<div id="chart3"></div>
+								</div>
+							
+							</div>
+						</div>
+					</div>
+					<!-- 右边 -->
+					<div class="all-right">
+						<div class="r_right">
+							<div class="titles">
+								<div class="cyfx_title_text">
+									<span class="areatitle"></span>数字经济<span class="chartTitle">核心规上企业</span>排名
+									<div style="position: absolute; right: 2rem; top: 0.8rem;">
+										<select name="city" style="height: 2rem; border:1px solid #ccc; background-color: #0c3154; color: #fff;" lay-verify="required" onchange="changeSelect(this)">
+											<option value="2">营业收入</option>
+											<option value="3">纳税额</option>
+											<option value="5">从业人员</option>
+										</select>
+									</div>
+								</div>
+								<div class="cyfx_title_line">
+									<div class="bleft"></div>
+									<div class="bcenter"></div>
+									<div class="bright"></div>
+								</div>
+							</div>
+							<div class="pmlist">
+								<table class="topHeader vw120" style="width: 100%;">
+									<thead>
+									<tr>
+										<th width="10%" class="pdl0 pdr0">排名</th>
+										<th width="43%">企业名称</th>
+										<th class="th_title">营收（万元）</th>
+									</tr>
+									</thead>
+								</table>
+								<div class="layui-form rTbox" id="rTbox">
+									<table class="layui-table">
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="cyfz_ly">
+							<div class="details">
+								数据来源：<span id="dataSource"></span>
+								</br>
+								规上企业数据采集截止日期：<span id="gsdataCollectionTime"></span>
+								</br>
+								其他数据采集截止日期：<span id="dataCollectionTime"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--底div-->
+
+		</div>
+	</body>
+</html>

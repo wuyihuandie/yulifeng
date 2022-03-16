@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业预测</title>
+		<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	    <script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	    <link rel="stylesheet" href="../../source/css/cyyc/cyyc.css" />
+		<script src="../../source/js/cyyc/cyyc.js"></script>
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<!--内容右边div-->
+					<div class="layui-col-md3 all-body-left">
+						<!--右上div-->
+						<div class="layui-col-md12 all-body-left-top">
+							<!--右上div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								产业投资预测
+							</div>
+							<!--右上div标题下的边框-->
+							<div class="layui-col-md12 all-body-left-top-title-border">
+							</div>
+							<!--右上div内容-->
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div id="cytzyc"></div>
+							</div>
+						</div>
+						<!--右下div-->
+						<div class="layui-col-md12 all-body-left-bottom">
+							<!--右上div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								市场主体发展预测
+							</div>
+							<!--右上div标题下的边框-->
+							<div class="layui-col-md12 all-body-left-top-title-border">
+							</div>
+							<!--右上div内容-->
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div id="scztfzyc"></div>
+							</div>
+						</div>
+					</div>
+					<!--内容中间div-->
+					<div class="layui-col-md6 all-body-middle">
+						<div class="all-body-middle-body">
+							<!--右上div-->
+							<div class="layui-col-md12 all-body-middle-top">
+								<div class="layui-col-md12 all-body-middle-top-title">
+									产业数字经济预测
+								</div>
+								<div class="layui-col-md12 all-body-middle-top-title-border">
+								</div>
+								<div class="layui-col-md12 all-body-middle-top-content">
+									<div id="cyzjzyc"></div>
+								</div>
+							</div>
+							<!--右下div-->
+							<div class="layui-col-md12 all-body-middle-bottom">
+								<div class="layui-col-md12 all-body-middle-bottom-title">
+									预期目标
+								</div>
+								<div class="layui-col-md12 all-body-middle-bottom-title-border">
+								</div>
+								<div class="layui-col-md12 all-body-middle-bottom-content">
+									<table class="all-body-middle-bottom-content-table">
+										<thead>
+											<tr>
+												<th width="10%"></th>
+												<th width="38%" style="text-indent: 5%;">指标（单位）</th>
+												<th width="13%">2019年</th>
+												<th width="13%">2020年</th>
+												<th width="13%">2022年</th>
+												<th width="13%">平均增速</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!--<tr class="all-body-middle-bottom-content-table-border">
+												<td>
+													<div class="all-body-middle-bottom-content-table-img0">
+														<span class="all-body-middle-bottom-content-table-span">总量规模</span>
+													</div>
+												</td>
+												<td colspan="5">
+													<table class="all-body-middle-bottom-content-table2">
+														<tbody>
+															<tr>
+																<td width="38%"><p>数字经济增加值（亿元）</p></td>
+																<td width="13%"><p>1800</p></td>
+																<td width="13%"><p>4000</p></td>
+																<td width="13%"><p>2300</p></td>
+																<td width="13%"><p>30%</p></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+													&lt;!&ndash;<p>数字经济增加值（亿元）</p><p>数字经济增加值占GDP的比重（%）</p></td>
+												<td><p>1800</p><p>32</p></td>
+												<td><p>2300</p><p>38</p></td>
+												<td><p>4000</p><p>50</p></td>
+												<td><p>30%</p><p>&#45;&#45;</p></td>&ndash;&gt;
+											</tr>
+											<tr class="all-body-middle-bottom-content-table-border">
+												<td>
+													<div class="all-body-middle-bottom-content-table-img1">
+														<span class="all-body-middle-bottom-content-table-span">数字产业化</span>
+													</div>
+												</td>
+												<td colspan="5">
+													<table class="all-body-middle-bottom-content-table2">
+														<tbody>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														</tbody>
+													</table>
+													&lt;!&ndash;<p>规模以上电子信息制造业营业收入（亿元）</p>
+													<p>软件和信息服务业营业收入（亿元）</p>
+													<p>信息技术领域专利累计总量（万个）</p></td>
+												<td><p>1295</p><p>200</p><p>1.37</p></td>
+												<td><p>1750</p><p>250</p><p>1.44</p></td>
+												<td><p>3000</p><p>400</p><p>1.59</p></td>
+												<td><p>25%</p><p>26%</p><p>5%</p>&ndash;&gt;</td>
+											</tr>
+											<tr class="all-body-middle-bottom-content-table-border">
+												<td><div class="all-body-middle-bottom-content-table-img2">
+													<span class="all-body-middle-bottom-content-table-span">产业数字化</span>
+												</div></td>
+												<td colspan="5" >
+													<table class="all-body-middle-bottom-content-table2">
+														<tbody>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														<tr>
+															<td width="38%"><p>数字经济增加值（亿元）</p></td>
+															<td width="13%"><p>1800</p></td>
+															<td width="13%"><p>4000</p></td>
+															<td width="13%"><p>2300</p></td>
+															<td width="13%"><p>30%</p></td>
+														</tr>
+														</tbody>
+													</table>
+													&lt;!&ndash;<p>企业上云数（万个）</p>
+													<p>关键工序数控化率（%）</p>
+													<p>网络零售额（亿元）</p>
+													<p>农村网络零售额（亿元）</p></td>
+												<td><p>0.31</p><p>47</p><p>410</p><p>89</p></td>
+												<td><p>0.4</p><p>50</p><p>512</p><p>115</p></td>
+												<td><p>0.7</p><p>60</p><p>708</p><p>190</p></td>
+												<td><p>28%</p><p>&#45;&#45;</p><p>20%</p><p>28%</p>&ndash;&gt;</td>
+											</tr>-->
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--内容右边div-->
+					<div class="layui-col-md3 all-body-right">
+						<div class="layui-col-md12 all-body-right-body">
+							<div class="layui-col-md12 all-body-right-body-title">
+								预期目标
+							</div>
+							<div class="layui-col-md12 all-body-right-body-title-border">
+							</div>
+							<div class="layui-col-md12 all-body-right-body-content">
+								<div class="layui-col-md12 all-body-right-top" onclick="arithmetic('1')">
+									<div class="all-body-right-body-content-top all-body-right-body-content-top-xz" >
+										<div class="all-body-right-body-content-div">
+											<p class="all-body-right-body-content-div-title first-title">线性回归</p>
+											<p class="all-body-right-body-content-div-body">
+												线性回归是利用称为线性回归方程的最小平方函数对一个
+												或多个自变量和因变量之间的关系进行建模的一种回归分析。
+											</p>
+										</div>
+									</div>
+									<div class="all-body-right-body-content-top" onclick="arithmetic('2')">
+										<div class="all-body-right-body-content-div">
+											<p class="all-body-right-body-content-div-title ">随机森林</p>
+											<p class="all-body-right-body-content-div-body">
+												随机森林是一个包含多个决策树的分类器，并且其输出的类别是由个别数输出的类别的众数而定。</p>
+										</div>
+									</div>
+									<div class="all-body-right-body-content-top " onclick="arithmetic('3')">
+										<div class="all-body-right-body-content-div">
+											<p class="all-body-right-body-content-div-title" >梯度提升回归数</p>
+											<p class="all-body-right-body-content-div-body">
+												梯度提升回归数数是一种从他的的错误中进行学习的技术。它本质上就是集思广益，集成一堆较差的学习算法进行学习。</p>
+										</div>
+									</div>
+								</div>
+								<!--右下div-->
+								<div class="layui-col-md12 all-body-right-bottom">
+									<div class="all-body-right-bottom-body">
+										<p class="all-body-right-bottom-body-p">企业基本信息</p>
+										<p class="all-body-right-bottom-body-p">企业年报基本信息</p>
+										<p class="all-body-right-bottom-body-p">年报社保信息</p>
+										<p class="all-body-right-bottom-body-p">年报对外投资信息</p>
+										<p class="all-body-right-bottom-body-p">股权冻结被执行人信息</p>
+										<p class="all-body-right-bottom-body-p">股东冻结信息</p>
+										<p class="all-body-right-bottom-body-p">动产抵押登记信息</p>
+										<p class="all-body-right-bottom-body-p">各省市场主体数</p>
+										<p class="all-body-right-bottom-body-p">企业异常名录信息</p>
+										<p class="all-body-right-bottom-body-p">企业处罚信息</p>
+										<p class="all-body-right-bottom-body-p">主要人员信息</p>
+										<p class="all-body-right-bottom-body-p">严重违法失信企业信息</p>
+										<!--<p class="all-body-right-bottom-body-p">企业抽查检测结果数据</p>
+										<p class="all-body-right-bottom-body-p">非自然人出资信息</p>
+										<p class="all-body-right-bottom-body-p">自然人出资信息</p>
+										<p class="all-body-right-bottom-body-p">世界五百强企业信息</p>
+										<p class="all-body-right-bottom-body-p">中国各省近十年GDP信息</p>-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

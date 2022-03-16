@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #fff">
+<head>
+    <meta charset="UTF-8">
+    <title>证书列表</title>
+    <script type="text/javascript" src="../../source/js/public.js"></script><!--公共引入js、css-->
+    <script type="text/javascript" src="../../source/js/includefile.js"></script><!--公共方法js-->
+    <script type="text/javascript" src="../../source/js/qyfb/pagination.js"></script><!--分页方法js-->
+    <script type="text/javascript" src="../../source/js/qyyxjc/yxjc_intellitual.js"></script>
+
+    <link rel="stylesheet" href="../../source/css/pagination.css"/>
+    <link rel="stylesheet" href="../../source/css/common.css"/>
+    <style>
+        .layui-table td, .layui-table th {
+            text-align: center;
+        }
+        .layui-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body style="background: #fff;height: 100vh;">
+<!--内容div-->
+<div class="all-body">
+    <div class="layui-card-body">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto" style="padding: 0">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: auto;">总数：<span class="tSize" id="comTotal">0</span></label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: auto;">企业名称</label>
+                    <div class="layui-input-inline">
+                        <input id="ENTNAME" name="ENTNAME" type="text" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: auto;">商标名称</label>
+                    <div class="layui-input-inline">
+                        <input id="Name" name="Name" type="text" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: auto;">申请时间</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <input name="AppDate" id="AppDate" class="layui-input" readonly>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <span class="layui-btn layuiadmin-btn-list layui-btn-sm" id="query" data-type="reload">查询</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form rTbox">
+            <table class="layui-table">
+                <tr>
+                    <th width="10%" class="pdl0 pdr0">序号</th>
+                    <th width="40%">商标名称</th>
+                    <th width="15%">公开日期</th>
+                    <th width="35%">企业名称</th>
+                </tr>
+                <tbody id="rTbox">
+                </tbody>
+            </table>
+        </div>
+        <div id="page" class="page mgt10"></div><!-- 2.创建一个页码容器，设定宽度 -->
+    </div>
+</div>
+</body>
+</html>

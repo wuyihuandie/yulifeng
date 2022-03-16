@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业查询</title>
+		<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	    <script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+		<link rel="stylesheet" href="../../source/layui/css/layui.css">
+		<script src="../../source/layui/layui.js"></script>
+		<link rel="stylesheet" href="../../source/css/qycx/qycx_new.css">
+		<script src="../../source/js/qycx/qycx.js"></script>
+		<script src="../../source/js/jquery.nicescroll.js"></script>
+
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12" style="overflow: hidden;">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+				
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+
+					<!--内容中间div-->
+					<div class="layui-col-md12 all-body-middle">
+						<div class="all-body-center-title">
+							<img src="../../source/img/qycx/title .png" height="41" width="436"/>
+						</div>
+						<div class="all-body-center-search">
+							<input type="text" class="all-body-center-search-input" placeholder="　请输入企业名称" maxlength="38"/>
+							<input type="button" class="search_btn" title="点击或回车查询"/>
+							<form class="layui-form">
+									<div class="layui-input-block">
+										<input type="checkbox" name="qcc" lay-skin="primary" value="qcc" title="企查查" checked="">
+									</div>
+							</form>
+							<!--<input type="checkbox" name="like[write]" title="写作" id="qcc" value="qcc">-->
+							<!--<input type="checkbox" name="qcc" id="qcc" value="qcc"> 企查查查询-->
+						</div>
+						<div class="arealist">
+							<div class="key">高级搜索：</div>
+							<div id="divAreaList" class="values">
+								<span class="on">全国</span>
+								<span>黑龙江</span>
+								<span>吉林</span>
+								<span>辽宁</span>
+								<span>河北</span>
+								<span>内蒙古</span>
+								<span>新疆</span>
+								<span>甘肃</span>
+								<span>西藏</span>
+								<span>宁夏</span>
+								<span>山东</span>
+								<span>北京</span>
+								<span>天津</span>
+								<span>河南</span>
+								<span>陕西</span>
+								<span>山西</span>
+								<span>四川</span>
+								<span>青海</span>
+								<span>贵州</span>
+								<span>云南</span>
+								<span>广西</span>
+								<span>广东</span>
+								<span>海南</span>
+								<span>湖北</span>
+								<span>湖南</span>
+								<span>江西</span>
+								<span>福建</span>
+								<span>浙江</span>
+								<span>上海</span>
+								<span>江苏</span>
+								<span>重庆</span>
+							</div>
+							<div id="btnAreaShowMore" class="showmore">更多</div>
+						</div>
+						<div class="groupList">
+						</div>
+
+
+
+						<div class="all-body-center-body">
+							<div class="all-body-center-wz">
+							</div>
+							<div class="all-body-center-head">
+							</div>
+							<div id="fy"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--底div-->
+
+		</div>
+	</body>
+</html>

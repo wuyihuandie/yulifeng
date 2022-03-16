@@ -1,0 +1,455 @@
+/* 总体布局 */
+.all-body {
+  display: flex;
+}
+.all-body-center {
+  height: 95%;
+  width: 95%;
+  margin: auto;
+}
+
+.ent-list-info-zg-div {
+  width: 100%;
+  height: 100px;
+  /* padding-left: 5%; */
+  padding-top: 10px;
+  background: url("../../img/titile-line.png") no-repeat;
+  background-position: right bottom;
+  cursor: pointer;
+}
+.p-entname {
+  color: white;
+  font-size: 16px;
+}
+.p-dom,
+.p-zcdate {
+  color: #9AE0E6;
+  font-size: 12px;
+  text-indent: 5px;
+}
+.p-entname span {
+  background-color: #BB5845;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 35%;
+  margin-right: 3%;
+}
+
+/* 中间布局 */
+.all-body-center .center-top {
+  height: 25%;
+  width: 100%;
+}
+.all-body-center .center-top .top-one {
+  height: 20%;
+  width: 100%;
+  position: relative;
+}
+.all-body-center .center-top .top-one .topone-center {
+  width: 574px;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+.all-body-center .center-top .top-one .topone-center .years {
+  height: 40px;
+  width: 120px;
+  background: url(../../img/cyl/4-wx.png);
+  background-size: 100% 100%;
+  text-align: center;
+  line-height: 2.5rem;
+  margin-left: 10px;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.all-body-center .center-top .top-one .topone-center .enterprise {
+  color: #2CE0E9;
+  background: url(../../img/cyl/4-xz.png);
+  background-size: 100% 100%;
+}
+.all-body-center .center-top .top-two {
+  height: 10%;
+  position: relative;
+}
+.all-body-center .center-top .top-two .two-center {
+  width: 574px;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.all-body-center .center-top .top-two .two-center svg {
+  margin-left: 115px;
+}
+.all-body-center .center-top .top-two .two-center svg .circle-load-svg1 {
+  stroke-dasharray: 0 80;
+  animation: aot 2s linear infinite;
+}
+@keyframes aot {
+  100% {
+    stroke-dasharray: 80 80;
+  }
+}
+.all-body-center .center-top .top-three {
+  height: 20%;
+  position: relative;
+}
+.all-body-center .center-top .top-three .three-center {
+  width: 574px;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+.all-body-center .center-top .top-three .three-center .twobutton {
+  width: 210px;
+  height: 40px;
+  background: rgba(173, 203, 218, 0.18);
+  border: 1px solid #00FFFF;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+.all-body-center .center-top .top-three .three-center .twobutton:nth-child(1) {
+  margin-left: 70px;
+}
+.all-body-center .center-top .top-three .three-center .twobutton-exchange {
+  background: rgba(255, 255, 0, 0.2);
+  border: 1px solid #FFFF00;
+}
+.all-body-center .center-top .top-four {
+  height: 18%;
+}
+.all-body-center .center-top .top-four svg .circle-load-svg2 {
+  stroke-dasharray: 0 600;
+  animation: bot 4s linear infinite;
+}
+@keyframes bot {
+  100% {
+    stroke-dasharray: 600 600;
+  }
+}
+.all-body-center .center-top .top-five {
+  height: 30%;
+  display: flex;
+}
+.all-body-center .center-top .top-five .fourbutton {
+  width: 25%;
+  background: rgba(80, 235, 241, 0.2);
+  border: 1px solid #4AABB3;
+  text-align: center;
+  line-height: 68px;
+  font-size: 1.375rem;
+  cursor: pointer;
+}
+.all-body-center .center-top .top-five .button-exchange {
+  background: rgba(0, 255, 255, 0.6);
+}
+.all-body-center .center-body-jslx {
+  height: 67%;
+  width: 100%;
+  position: relative;
+}
+.all-body-center .center-foot {
+  height: 8%;
+  width: 100%;
+  position: relative;
+}
+.all-body-center .center-foot .datalogo {
+  width: 350px;
+  height: 25px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+	
+	font-size: 21px;
+	font-family: SimHei;
+	font-weight: 500;
+	color: #5DCDE5;
+	line-height: 53px;
+
+}
+.all-body-center .vanish {
+  display: none;
+}
+
+
+/* 中间应用领域 */
+.application{
+	width: 55%;
+	height: 100%;
+	position: relative;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.application .picture{
+	width: 456px;
+	height: 451px;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+/* 所有盒子 */
+.application .location{
+	width: 155px;
+	height: 90px;
+	background: url(../../img/cyl/inventory/wx.png) no-repeat;
+	background-size: 100% 100%;
+	color: #fff;
+	text-align: center;
+	font-size: 25px;
+}
+.application .location:hover{
+	color: yellow;
+	background: url(../../img/cyl/inventory/xz.png) no-repeat;
+}
+.application .locations{
+	color: yellow;
+	background: url(../../img/cyl/inventory/xz.png) no-repeat;
+}
+.application .location .title{
+	width: 100%;
+	height: 50%;
+	line-height: 70px;
+}
+.application .location .math{
+	width: 100%;
+	height: 50%;
+}
+/* 单个盒子 */
+.financial{
+	position: absolute;
+	cursor:pointer;
+	top: 0;
+	left: 300px;
+}
+.government{
+	position: absolute;
+	cursor:pointer;
+	top: 0;
+	right: 300px;
+}
+.education{
+	position: absolute;
+	cursor:pointer;
+	top: 100px;
+	left: 230px;
+}
+.manufacture{
+	position: absolute;
+	cursor:pointer;
+	top: 100px;
+	right: 230px;
+}
+.medical{
+	position: absolute;
+	cursor:pointer;
+	top: 200px;
+	left: 160px;
+}
+.game{
+	position: absolute;
+	cursor:pointer;
+	top: 200px;
+	right: 160px;
+}
+.energy{
+	position: absolute;
+	cursor:pointer;
+	top: 260px;
+	left: 0px;
+}
+.stockpile{
+	position: absolute;
+	cursor:pointer;
+	top: 260px;
+	right: 0px;
+}
+.transportation{
+	position: absolute;
+	cursor:pointer;
+	top: 320px;
+	left: 160px;
+}
+.safety{
+	position: absolute;
+	cursor:pointer;
+	top: 320px;
+	right: 160px;
+}
+.agriculture{
+	position: absolute;
+	cursor:pointer;
+	top: 420px;
+	left: 230px;
+	
+}
+.retail{
+	position: absolute;
+	cursor:pointer;
+	top: 420px;
+	right: 230px;
+}
+.media{
+	position: absolute;
+	cursor:pointer;
+	bottom: 0;
+	left: 300px;
+}
+.logistics{
+	position: absolute;
+	cursor:pointer;
+	bottom: 0;
+	right: 300px;
+	
+}
+
+/* 左边 */
+.all-left{
+	width: 20%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+}
+
+
+/* 右边 */
+.all-right{
+	width: 20%;
+	height: 100%;
+	position: absolute;
+	right: 0;
+}
+.left-two {
+  position: relative;
+  font-size: 24px;
+  height: 3%;
+}
+ .left-two .collect {
+  cursor: pointer;
+  height: 80%;
+  position: absolute;
+  line-height: 22px;
+  background: rgba(49, 247, 251, 0.2);
+  right: 0;
+  font-size: 10px;
+  bottom: 0;
+  color: #31F7FB;
+}
+.left-two .downBox {
+  position: absolute;
+  right: 0;
+  bottom: -15px;
+}
+.left-two .downBox .select {
+	height: 2rem;
+	border: 1px solid #ccc;
+	background-color: #0c3154;
+	color: #fff;
+    font-size: 1rem;
+}
+.left-three img {
+  width: 100%;
+}
+.left-five {
+  height: 80%;
+  overflow: auto;
+}
+ .right-five {
+  text-align: center;
+  /* line-height: 27px; */
+  height: 7%;
+  background: url(../../img/sjxx_bg.png);
+  background-size: 100% 100%;
+  color: #1BE9EF;
+  margin-top: 35px;
+}
+/*.p-entname {
+  color: white;
+  font-size: 16px;
+  margin-top: 10px;
+    margin-bottom: 5px;
+}
+.p-dom,
+.p-zcdate {
+  color: #9AE0E6;
+  font-size: 12px;
+  text-indent: 5px;
+}
+.p-entname span {
+  background-color: #BB5845;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 35%;
+  margin-right: 3%;
+}*/
+.p-entname {
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.p-dom,
+.p-zcdate {
+    color: #B0FDFF;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.p-entname span {
+    background-color: #BB5845;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 35%;
+    margin-right: 3%;
+}
+.p-zcdate b {
+    font-weight: 300;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+.all-left .left-top{
+    width: 100%;
+    height: 5%;
+    font-size: 24px;
+}
+.all-left .left-body{
+    width: 100%;
+    height: 5%;
+}
+.all-left .left-body img{
+    width: 100%;
+}
+.all-left .left{
+    width: 100%;
+    height: 90%;
+}

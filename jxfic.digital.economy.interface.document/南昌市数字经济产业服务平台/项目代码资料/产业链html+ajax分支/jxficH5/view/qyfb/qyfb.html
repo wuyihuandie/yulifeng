@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业分布</title>
+		<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	    <script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	    <script type="text/javascript" src="../../source/js/qyfb/qyfb.js"></script>
+	    <link rel="stylesheet" href="../../source/css/qyfb/qyfb.css" />
+	    <link rel="stylesheet" href="../../source/ico/iconfont.css">
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+				
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<!--内容右边div-->
+					<div class="layui-col-md4 all-body-left" style="width:28%">
+						<!--右上div-->
+						<div class="layui-col-md12 all-body-left-top">
+							<!--右上div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								行业分布
+							</div>
+							<!--右上div标题下的边框-->
+							<div class="layui-col-md12 all-body-left-top-title-border">
+							</div>
+							<!--右上div内容-->
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div id="hyfb"></div>
+							</div>
+						</div>
+						<!--右下div-->
+						<div class="layui-col-md12 all-body-left-bottom">
+							<!--右下div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								行业营收
+							</div>
+							<!--右下div标题下的边框-->
+							<div class="layui-col-md12 all-body-left-top-title-border">
+							</div>
+							<!--右下div内容-->
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div id="hyys"></div>
+							</div>
+						</div>
+					</div>
+					<!--内容中间div-->
+					<div class="layui-col-md4 all-body-middle" style="width:42%;padding-left: 2%;">
+						<div class="layui-col-md12 all-body-middle-top">
+							<div class="layui-col-md12 all-body-left-top-title middleTitle">
+								<ul>
+									<li class="growColumn">
+										<a href="distributions.html?menuType=2">
+											<span class="iconfont icon-buju"></span>产业布局
+										</a>
+									</li>
+									<li class="growColumn start">
+										<a href="qyfb.html?menuType=2">
+											<span class="iconfont icon-fenbu"></span>企业分布
+										</a>
+										<em><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i></em>
+									</li>
+									<li><select name="quiz" id="infoType">
+
+												</select></li>
+								</ul>
+								<!-- <table width="100%">
+									<tbody>
+										<tr>
+											<td width="5%" class="growColumn"><a href="distributions.html?menuType=2"><span class="iconfont icon-buju"></span>产业布局</a></td>
+											<td width="13%" class="growColumn start"><a href="qyfb.html?menuType=2"><span class="iconfont icon-fenbu"></span>企业分布</a></td>
+											<td width="10%">
+												<select name="quiz" id="infoType">
+
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table> -->
+							</div>
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div id="mapData"></div>
+							</div>
+						</div>
+						<div class="layui-col-md12 all-body-middle-bottom">
+							<div class="layui-col-md12 all-body-left-top-title">
+								企业分布特征
+							</div>
+							<div class="layui-col-md12 all-body-left-top-title-border">
+							</div>
+							<div class="layui-col-md12 all-body-left-top-content" style="position: relative">
+								<span class="all-body-middle-bottom-fd">
+									<img src="../../source/img/fd.png" title="放大" height="25" width="25"/>
+								</span>
+								<div id="qyfbtz"></div>
+							</div>
+						</div>
+					</div>
+					<!--内容右边div-->
+					<div class="layui-col-md4 all-body-right" style="width:30%;padding-left: 1%;">
+						<div class="layui-col-md12 all-body-right-top">
+							<div class="layui-col-md12 all-body-right-top-title">
+								各县区企业发展<span style="font-size: 1rem;margin-left: 2%;">(根据增速排名)</span>
+							</div>
+							<div class="layui-col-md12 all-body-right-top-title-border">
+							</div>
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div class="all-body-right-top-content-sbzs">
+									企业总数
+									<span id="sbzsHtml">
+
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md12 all-body-right-bottom">
+							<div class="layui-col-md12 all-body-left-top-content">
+								<table class="all-body-right-bottom-content" style="border-collapse: separate;border-spacing: 0px 10px;">
+									<thead>
+										<tr>
+											<th width="15%">排名</th>
+											<th width="23%">区/县名称</th>
+											<th width="23%">企业数量（户）</th>
+											<th width="23%">新增数量（户）</th>
+											<th width="16%">增速（%）</th>
+										</tr>
+									</thead>
+								</table>
+								<div class="all-body-right-bottom-body">
+									<table class="all-body-right-bottom-content">
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>产业布局</title>
+	<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/countUp.js" ></script>
+	<script type="text/javascript" src="../../source/js/cyfx/hxgsqy.js" ></script>
+	<link rel="stylesheet" href="../../source/css/cyfx/hxgsqy.css" />
+	<link rel="stylesheet" href="../../source/ico/iconfont.css">
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+	<!--头div-->
+	<div class="layui-col-md12 all-head" id="headDiv"></div>
+
+	<!--div(用于背景图)-->
+	<div class="layui-col-md12 all-body-bg">
+		<!--内容div-->
+		<div class="all-body">
+
+			<!--内容左边div-->
+			<div class="lay_left">
+				<div class="line1">
+					<div class="calendar">
+						<div class="cleft"></div>
+						<div class="ctitl"><span class="ctitle">2020</span>年</div>
+						<div class="cright"></div>
+					</div>
+				</div>
+				<div class="line2">
+					<div class="titles">
+						<div class="cyfx_title_text">南昌市数字经济核心规上企业</div>
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div>
+					<div class="qyitems">
+						<div class="item gxqy">
+							<dd>企业总数</dd>
+							<dt><span id="ENTNUMS">-</span>家</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="XZENTNUMS">-</span>%</dt>
+						</div>
+						<div class="item qyzs">
+							<dd>企业营收</dd>
+							<dt><span id="VENDINC">-</span>亿元</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="VENDINCZS">-</span>%</dt>
+						</div>
+						<div class="item gsqy">
+							<dd>软件企业营收</dd>
+							<dt><span id="SOFTVENDINC">-</span>亿元</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="SOFTVENDINCZS">-</span>%</dt>
+						</div>
+						<div class="item gxqy">
+							<dd>硬件企业营收</dd>
+							<dt><span id="HARDVENDINC">-</span>亿元</dt>
+						</div>
+						<div class="item rjqy">
+							<dd>同比增速</dd>
+							<dt><span id="HARDVENDINCZS">-</span>%</dt>
+						</div>
+					</div>
+				</div>
+				<div class="line3">
+					<div class="titles">
+						<div class="cyfx_title_text">南昌市数字经济核心规上企业成立时间情况</div>
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div>
+					<div id="chartsSJQK" class="pieDom"></div>
+				</div>
+				<div class="line4">
+					<div class="titles">
+						<div class="cyfx_title_text">南昌市数字经济核心规上企业注册资金情况</div>
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div>
+					<div id="chartsZCZJ" class="pieDom"></div>
+				</div>
+			</div>
+			<!--内容右边div-->
+			<div class="lay_right">
+				<div class="right1">
+					<div class="r_left">
+						<div class="box_hxcy">
+							<div class="titles">
+								<div class="cyfx_title_text">南昌市数字经济核心产业规上企业数量（<span class="unit">家</span>）</div>
+								<div class="cyfx_title_line">
+									<div class="bleft"></div>
+									<div class="bcenter"></div>
+									<div class="bright"></div>
+								</div>
+								<div class="btn_more">企业运行监测</div>
+							</div>
+							<div class="rect">
+								<div class="rectleft">
+									<div class="borders">
+										
+									</div>
+									<div class="l1" onclick="changeIndustry(4,this)">信息传输、软件和信息技术服务业（<span id="software"></span>）</div>
+									<div class="lbtn btn1" id="software1" onclick="changeIndustry(1,this)"></div>
+									<div class="lbtn btn2" id="software2" onclick="changeIndustry(2,this)"></div>
+									<div class="lbtn btn3" id="software3" onclick="changeIndustry(3,this)"></div>
+
+								</div>
+								<div class="rectright rectbox" onclick="changeIndustry(0,this)">
+									<div class="borders">
+										
+									</div>
+									<div class="textitem">
+										<spna id="hardWareName"></spna>
+										<br/>
+										<spna id="hardWareSums"></spna>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="box_wdxd">
+							<div class="titles">
+								<div class="cyfx_title_text">三大行动目标</div>
+								<div class="cyfx_title_line">
+									<div class="bleft"></div>
+									<div class="bcenter"></div>
+									<div class="bright"></div>
+								</div>
+							</div>
+							<div class="svgpanel">
+								<svg id="svgfzfx" width="600" height="260">
+									<g>
+										<image x="50" y="30" width="480" height="240" xlink:href="../../source/img/qyfxpng/base.png" />
+									</g>
+									<path d="M55 115 A100 30 0 0 1 460 115  A100 30 180 0 1 55 115"  stroke-width="0" fill="none" id="myPath" />   
+									<g class="svgItem" >
+										<text class="svgTitle" x="-35" y="-20">
+											目标<tspan class="spnTarget">1500</tspan>家,已完成<tspan class="spnComplete">785</tspan>家
+										</text>
+										<text class="svgseTitle" x="-35" y="-5" >"招商企业"</text>
+										<image class="svgIcon"  width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/cy.png" />
+										<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/cy_1.png" style="display: none"/>
+										<text class="percent" x="60" y="50" >92.2%</text>
+										<circle  cx="-30" cy="30" r="30" stroke-width="3" stroke-dasharray="180 220"   stroke-linecap="round"  />
+										<animateMotion begin="0s" dur = "45s" repeatCount = "indefinite">
+											<mpath xlink:href="#myPath"/>
+										</animateMotion>
+									</g>
+									<g class="svgItem">
+										<text class="svgTitle" x="-35" y="-20">
+											目标<tspan class="spnTarget">1500</tspan>家,已完成<tspan class="spnComplete">785</tspan>家
+										</text>
+										<text class="svgseTitle" x="-26" y="-5" >高成长型企业"瞪羚行动"</text>
+										<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/dl.png" />
+										<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/dl_1.png" style="display: none;"/>
+										<text class="percent" x="60" y="50" >35.3%</text>
+										<circle  cx="-30" cy="30" r="30" stroke-width="3" stroke-dasharray="80 220"   stroke-linecap="round"  />
+										<animateMotion begin="-15s" dur = "45s" repeatCount = "indefinite"  >
+											<mpath xlink:href="#myPath"/>
+										</animateMotion>
+									</g>
+									<g class="svgItem">
+										<text class="svgTitle" x="-35" y="-20">
+											目标<tspan class="spnTarget">1500</tspan>家,已完成<tspan class="spnComplete">785</tspan>家
+										</text>
+										<text class="svgseTitle" x="-22" y="-5" >领军企业"鲲鹏行动"</text>
+										<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/kp.png" />
+										<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/kp_1.png" style="display: none"/>
+										<text class="percent" x="60" y="50" >51.7%</text>
+										<circle  cx="-30" cy="30" r="30" stroke-width="3" stroke-dasharray="113 220"   stroke-linecap="round"  />
+										<animateMotion begin="-30s" dur = "45s" repeatCount = "indefinite"  >
+											<mpath xlink:href="#myPath"/>
+										</animateMotion>
+									</g>
+									
+								</svg>
+							</div>
+						</div>
+					</div>
+					<div class="r_right">
+						<div class="titles">
+							<div class="cyfx_title_text">
+								南昌市数字经济<span class="chartTitle">核心规上企业</span>排名
+								<div style="position: absolute; right: 2rem; top: 0.8rem;">
+									<select name="city" style="height: 2rem; border:1px solid #ccc; background-color: #0c3154; color: #fff;" lay-verify="required" onchange="changeSelect(this)">
+										<option value="2">营业收入</option>
+										<option value="3">纳税额</option>
+										<option value="5">从业人员</option>
+									</select>
+								</div>
+							</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<div class="pmlist">
+							<table class="topHeader vw120" style="width: 100%;">
+								<thead>
+								<tr>
+									<th width="10%" class="pdl0 pdr0">排名</th>
+									<th width="43%">企业名称</th>
+									<th class="th_title">营收（万元）</th>
+								</tr>
+								</thead>
+							</table>
+							<div class="layui-form rTbox" id="rTbox">
+								<table class="layui-table">
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="right2">
+					<div class="titles">
+						<div class="cyfx_title_text">南昌市数字经济核心规上企业占比</div>
+						<div class="cyfx_title_line">
+							<div class="bleft"></div>
+							<div class="bcenter"></div>
+							<div class="bright"></div>
+						</div>
+					</div>
+					<div class="chartlist">
+						<div id="chart1"></div>
+						<div id="chart2"></div>
+						<div id="chart3"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--底div-->
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <script type="text/javascript" src="../source/js/public.js"></script>
+    <script type="text/javascript" src="../source/js/includefile.js"></script>
+    <script>
+        $(function(){
+            flag="login";
+            setCookie("token",getUrlValue("token"),expireTime);//token存入cookie 24小时
+            setCookie("userid",getUrlValue("userid"),expireTime);//token存入cookie 24小时
+            window.location.href=realPath+"view/sy/sy-nc2.html";
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

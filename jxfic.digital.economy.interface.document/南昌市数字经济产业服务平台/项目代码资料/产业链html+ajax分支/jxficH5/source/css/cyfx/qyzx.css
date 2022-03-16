@@ -1,0 +1,222 @@
+html, body{
+	overflow-y: initial;
+}
+
+.all-body{display: flex;width: 96%;}
+
+
+.lay_left{width: 30%;height: 100%; }
+.lay_left .line1{position: relative;width: 100%;height: 5%;font-size: 1.2rem;line-height: 55px;
+    padding-left: 43px;}
+.lay_left .line2{width: 100%;height: 30%;}
+.lay_left .line3{width: 100%;height: 30%;}
+.lay_left .line3 .pieDom{height: 15rem;display: none;}
+.lay_left .line3 .pieDoms{display: block;}
+.cyfx_title_text .cityM{
+	width: 75px;
+	height: 30px;
+	background-color: #296B8D;
+	font-size: 14px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	cursor:pointer;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 5px;
+	text-indent: 0;
+}
+.cyfx_title_text .city{
+	position: absolute;
+	bottom: 0;
+	right: 95px;
+}
+.cyfx_title_text .xz1{
+	color: #FD773A;
+	font-weight: bold;
+	font-size: 16px;
+}
+.lay_left .line4{width: 100%;height: 30%;}
+.lay_left .line4 .pieDom{height: 17rem;display: none;}
+.lay_left .line4 .pieDoms{display: block;}
+
+/*左侧区域*/
+.calendar{width: 10rem;  height: 2.4rem; line-height: 2.4rem; display: grid; grid-template-columns: 1.7rem auto 1.7rem;
+position:absolute;  right: 0; bottom: 0;}
+.calendar .cleft{background-image: url(../../img/last@2x.png); background-size: 100% 100%; cursor: pointer;  }
+.calendar .ctitl{margin: 0 0.3rem; font-size: 1.2rem; background: #0a5f81;  color: #fff; text-align: center; }
+.calendar .cright{background-image: url(../../img/next@2x.png); background-size: 100% 100%;  cursor: pointer;   }
+
+/*核心企业总览*/
+.qyitems{padding:0 1rem 0 1rem; display: grid; grid-template-columns: 70% auto; grid-template-rows:3rem 3rem 3.5rem 3.5rem 3.5rem; }
+.qyitems .item{margin: 0.6rem 3%; background-size: 100% 100%; position: relative; }
+.qyitems .item.qyzs{background-image: url(../../img/cyfx/qycl/q2.png); }
+.qyitems .item.dxgb{background-image: url(../../img/cyfx/qycl/zongs.png); }
+.qyitems .item.rjqy{background-image: url(../../img/cyfx/qycl/zs.png); }
+.qyitems .item.gsqy{background-image: url(../../img/cyfx/qycl/q1.png); }
+.qyitems .item.gxqy{background-image: url(../../img/cyfx/qycl/q3.png); }
+.qyitems .item.xzqy{background-image: url(../../img/cyfx/qycl/q4.png); }
+.qyitems .item dd{position: absolute;font-size: 13px; left: 20%; bottom: 20%;cursor: pointer;}
+.qyitems .item dt{position: absolute; font-size: 0.9rem; left:70%; bottom: 20%;}
+.qyitems .item dt span{ font-size: 1.9rem; font-family:'electronicFont';color: yellow;}
+
+.cyfx_title_text{padding-top: 0.8rem; font-size: 1.2rem; text-indent: 2.6rem; overflow: hidden;position: relative; }
+.cyfx_title_line{height:1.5rem; margin: 0 1rem; display: grid; grid-template-columns: 250px auto 5px; overflow: hidden;}
+.cyfx_title_line .bleft{ background: url(../../img/title_border_left.png);  background-repeat:repeat-x; background-size:auto 100%; }
+.cyfx_title_line .bcenter{ background: url(../../img/title_border_center.png);  background-repeat:repeat-x; background-size:auto 100%; }
+.cyfx_title_line .bright{ background: url(../../img/title_border_right.png);  background-repeat:repeat-x; background-size:auto 100%; }
+
+
+
+
+/* 中间 */
+.lay_center{
+	width: 40%;
+	height: 100%;
+}
+.map{
+	width: 100%;
+	height: 60%;
+}
+.bar{
+	width: 100%;
+	height: 40%;
+}
+.box_bottom{
+	width: 100%;
+	height: 11%;
+}
+.lay_center .map .box_bottom{display: flex;}
+.lay_center .map .box_bottom .box-bs{
+	width: 140px;
+	height: 40px;
+	background: rgba(80, 235, 241, 0.2);
+	border: 1px solid #50B6BA;
+	text-align: center;
+	line-height: 40px;
+	font-size: 20px;
+	margin-left: 30px;
+	cursor:pointer;
+	margin-top: 10px;
+}
+.lay_center .map .box_bottom .box-bs:nth-child(1){
+	margin-left: 130px;
+}
+.lay_center .map .box_bottom .box-bss{
+background: rgba(0, 255, 255, 0.6);
+border: 1px solid #91EEFF;}
+
+.box-map{
+	width: 100%;
+	height: 85%;
+	display: flex;
+}
+.box-map .box-map1{width: 20%;height: 100%;}
+.box-map .box-map1-1{
+	width: 100%;
+	height: 3rem;
+	background: url(../../img/tkuang.png) no-repeat;
+	background-size: 100% 100%;
+	margin-top: 28rem;
+	display: none;
+}
+.box-map .box-map1-2{
+	display: block;
+}
+.box-map .box-map1-1 .ztk{
+	width: 90%;
+	height: 100%;
+	margin-left: 10%;
+}
+.box-map .box-map2{width: 80%;height: 100%;}
+
+.bar .bar-title{
+	width: 100%;
+	height: 10%;
+	font-size: 1.2rem;
+	padding-left: 2.1875rem;
+}
+.bar .bar-img{
+	width: 100%;
+	height: 10%;
+}
+.bar .bar-img img{width: 100%;}
+.bar .bar-box{
+	width: 100%;
+	height: 80%;
+}
+
+
+
+
+
+
+
+
+
+
+/* 右边 */
+.lay_right{
+	width: 30%;
+	height: 100%;
+	padding-left: 1.25rem;
+}
+.ranking{
+	width: 100%;
+	height: 60%;
+}
+.pie{
+	width: 100%;
+	height: 33%;
+}
+.cyfz_ly{width: 100%;height: 5%;background: url(../../img/sjxx_bg.png) no-repeat;background-size:100% 100%;position: relative;}
+.cyfz_ly .details{position: absolute;left: 0;right: 0;bottom: 0;top: 0;margin: auto;height: 100%;width: 85%;color: #1ad6df;padding-left:6.25rem}
+
+
+
+
+.ranking .ranking-title{
+	width: 100%;
+	height: 4%;
+	font-size: 1.2rem;
+	padding-left: 2.1875rem;
+}
+.ranking .ranking-img{
+	width: 100%;
+	height: 4%;
+}
+.ranking .ranking-img img{width: 100%;}
+.ranking .ranking-box{
+	width: 100%;
+	height: 90%;
+}
+.ranking .ranking-box .all-body-middle-pm-table tbody tr{
+	text-align: center;
+	height: 33.5px;
+}
+.i1{background:url(../../img/one.png) no-repeat;background-position:center;}
+.i2{background:url(../../img/two.png) no-repeat;background-position:center;}
+.i3{background:url(../../img/three.png) no-repeat;background-position:center;}
+.pie .pie-title{
+	width: 100%;
+	height: 7%;
+	font-size: 1.2rem;
+	padding-left: 2.1875rem;
+}
+.pie .pie-img{
+	width: 100%;
+	height: 10%;
+}
+.pie .pie-img img{width: 100%;}
+.pie .pie-box{
+	width: 100%;
+	height: 80%;
+}
+.ranking-box table{width: 100% !important; border-spacing: 0;}
+.ranking-box thead{height: 8%;width: 100%; text-align: center;color: #09D0EC;font-size: 14px;}
+.ranking-box thead th{text-align: center; padding: 0.5rem 0; white-space: nowrap;}
+
+
+/* .dyfx_box2 tr{height: auto;} */
+.ranking-box td{padding: 0.25rem 0.2rem;}
+.ranking-box td{font-size: 14px;}

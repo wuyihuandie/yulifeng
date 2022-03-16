@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>产业布局</title>
+	<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/includefile.js"></script><!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/countUp.js"></script>
+	<script type="text/javascript" src="../../source/js/qyhx/qyhx2.js"></script>
+	<script type="text/javascript" src="../../source/js/seamscroll.min.js"></script>
+
+	<link rel="stylesheet" href="../../source/css/qyhx/qyhx.css" />
+	<link rel="stylesheet" href="../../source/ico/iconfont.css" />
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+	<!--头div-->
+	<div class="layui-col-md12 all-head" id="headDiv"></div>
+
+	<!--div(用于背景图)-->
+	<div class="layui-col-md12 all-body-bg">
+		<!--内容div-->
+		<div class="all-body">
+			
+
+			<div class="layui-col-md3 qleft">
+				<div class="left1 qyhx_container">
+					<div class="qyhx_title">今年营收</div>
+					<div class="qyhx_title_border"></div>
+					<div class="qyhx_cont">
+						
+						<!-- <div class="case">
+							<div class="ltitle"><span>标签</span></div>
+							<div class="labels">
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<div class="left2 qyhx_container">
+					<div class="qyhx_title">知识产权</div>
+					<div class="qyhx_title_border"></div>
+					<div class="btnmore" onclick="toZscq()">查看列表</div>
+					<div class="qyhx_cont zscqbox">
+						<div class="desc">
+							<div class="item">
+								<div class="l1 c1">
+									<span id="PATENT">0</span>项
+								</div>
+								<div class="l2">专利</div>
+							</div>
+							<div class="split"></div>
+							<div class="item">
+								<div class="l1 c2">
+									<span id="SOFT_WORK">0</span>项
+								</div>
+								<div class="l2">著作权</div>
+							</div>
+							<div class="split"></div>
+							<div class="item">
+								<div class="l1 c3">
+									<span id="BRAND">0</span>个
+								</div>
+								<div class="l2">商标</div>
+							</div>
+						</div>
+						<div id="zscqDom" class="charts"></div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md6 qcenter">
+				<div class="ctop">
+					<div class="l1" id="ENTNAME"></div>
+					<div class="l2">
+						<span>国民经济行业分类:<span id="CODE_NAME"></span></span>
+					</div>
+					<div class="l3">
+						统一社会信用代码/注册号:<span id="UNISCID"></span>
+					</div>
+					<div class="l3">
+						法定代表人:<span id="NAME"></span>
+					</div>
+					<div class="l3">
+						地址:<span id="DOM"></span>
+					</div>
+					<div class="l3">
+						成立日期:<span id="ESTDATE"></span>
+					</div>
+
+					<div class="qyxq btnxyxq" onclick="qyxq()">企业信用详情</div>
+					<!--<div class="btnrzxq">企业融资信息</div>
+					<div class="btnshowmore">查看更多&gt;&gt;</div>-->
+
+				</div>
+				<div class="cbottom qyhx_container">
+					<div class="qyhx_title">企业近五年经营情况</div>
+					<div class="qyhx_title_border"></div>
+					<div class="qyhx_cont">
+						<div id="qyjynjyqk" class="chartsJYQK"></div>
+					</div>
+
+				</div>
+			</div>
+			<div class="layui-col-md3 qright">
+				<!--<div class="right1 qyhx_container">
+					<div class="qyhx_title">企业情况</div>
+					<div class="qyhx_title_border"></div>
+					<div class="qyhx_cont rqyqk">
+						<div class="countbox">
+							<div class="cbox">
+								<div class="l1">
+									<span>568</span>人
+								</div>
+								<div class="l2">参加社保人数</div>
+							</div>
+							<div class="split"></div>
+							<div class="cbox">
+								<div class="l1">
+									<span>18.2</span>亿元
+								</div>
+								<div class="l2">累计纳税总额</div>
+							</div>
+						</div>
+						<div id="chartsQYQK" class="chartsQYQK"></div>
+					</div>
+				</div>-->
+				<div class="right2 qyhx_container">
+					<div class="qyhx_title">企业全景视图</div>
+					<div class="qyhx_title_border"></div>
+					<div id="qjst" style="width: 100%;height: 47vh;">
+					</div>
+				</div>
+				<div class="right3 qyhx_container">
+					<div class="qyhx_title">舆情信息<span class="more" onclick="toNews()"></span></div>
+					<div class="qyhx_title_border"></div>
+					<div class="qyhx_cont ryqxx">
+						<div class="inner" id="qytable">
+						</div>
+					</div>
+					<!--<div class="right4 rmore">
+						<div class="botTime">数据采集截止日期：2020-09-01</div>
+					</div>-->
+				</div>
+
+
+			</div>
+
+
+
+			
+		</div>
+	</div>
+</div>
+</body>
+</html>

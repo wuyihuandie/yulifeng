@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业布局</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/cyl-3/cyl-qyqd-yyly.js"></script>
+		<link rel="stylesheet" href="../../source/css/cyl-3/cyl-qyqd-2.css" />
+		<style>
+			.listDetailed{
+				border-left: 1px solid #4AABB3;
+				border-bottom: 1px solid #4AABB3;
+			}
+			.listDetailed tr td{
+				border-right: 1px solid #4AABB3;
+				border-top: 1px solid #4AABB3;
+			}
+		</style>
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body ">
+					
+					<!--重点项目清单-->
+					<div class="boxContent" style="display: grid;">
+						<div class="line2">
+							<div class="cyfx_title_text">重点项目清单
+								<span>
+									<input class="search" onclick="searchProjectName()" type="button" value="搜索">
+								</span>
+								<span>
+									<input class="searchContent" id="projectName" type="text">
+								</span>
+								<span>项目名称：</span>
+							</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<!--左上div内容-->
+						<div class="qylist">
+							<div class="table-head">
+				                <table>
+				                    <thead>
+				                        <tr>
+											<th class="td1">序号</th>
+											<th class="td2" style="width: 20%;">项目名称</th>
+											<th class="td8">项目承建单位</th>
+											<th class="td3">
+												<div class="menusPControls">
+													<dd class="menuItem">
+														<dl data-select="">建设区域</dl>
+														<i></i>
+													</dd>
+													<div class="menuList">
+														<span data-key="">全部</span>
+														<span data-key="红谷滩区">红谷滩区</span>
+														<span data-key="高新开发区">高新开发区</span>
+														<span data-key="青山湖区">青山湖区</span>
+														<span data-key="西湖区">西湖区</span>
+														<span data-key="青云谱区">青云谱区</span>
+														<span data-key="南昌县">南昌县</span>
+														<span data-key="经济开发区">经济开发区</span>
+														<span data-key="东湖区">东湖区</span>
+														<span data-key="新建区">新建区</span>
+														<span data-key="安义县">安义县</span>
+														<span data-key="进贤县">进贤县</span>
+														<span data-key="湾里局">湾里局</span>
+														<span data-key="临空经济区">临空经济区</span>
+													</div>
+												</div>
+											</th>
+											<th class="td4">应用示范领域</th>
+											<th class="td5"><span class="sortSpan" data-key="INVESTMENT">总投资(万元)</span></th>
+											<th class="td6"><span class="sortSpan" data-key="CONSTRUCTION_CIRCLE">建设周期</span></th>
+											<th class="td7">项目性质</th>
+											<th class="td9">项目状态</th>
+										</tr>
+				                    </thead>
+				                </table>
+				            </div>
+				            <div class="table-body">
+				                <table>
+									<table>
+										<tbody id="projectList">
+										</tbody>
+									</table>
+				                </table>
+				            </div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

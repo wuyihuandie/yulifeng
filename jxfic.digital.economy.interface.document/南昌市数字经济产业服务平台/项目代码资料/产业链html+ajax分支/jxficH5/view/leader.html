@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <script type="text/javascript" src="../source/js/public.js"></script>
+    <script type="text/javascript" src="../source/js/includefile.js"></script>
+    <script>
+        $(function(){
+            flag="login";
+            doData(BASE_URL+"/verifyToken",{token:getUrlValue("token")},function(result){
+                if(result.status=='10001'){
+                    setCookie("token",result.token,expireTime);//token存入cookie 24小时
+                    setCookie("username",result.user.username,expireTime);//token存入cookie 24小时
+                    setCookie("area_value",result.user.area_value,expireTime);//token存入cookie 24小时
+                    setCookie("area_name",result.user.area_name,expireTime);//token存入cookie 24小时
+                    setCookie("realname",result.user.realname,expireTime);//token存入cookie 24小时
+                    window.location.href=realPath+"view/sy/sy-nc2.html?menuType=0";
+                }else{
+                    layer.alert("token失效");
+                    window.location.href=LOGIN_URL;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

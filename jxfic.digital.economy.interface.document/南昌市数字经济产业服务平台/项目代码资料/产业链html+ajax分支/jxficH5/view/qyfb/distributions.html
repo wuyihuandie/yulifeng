@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业布局</title>
+		<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	    <script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	    <script type="text/javascript" src="../../source/js/echartsModel/distributions.js" ></script>
+	    <script type="text/javascript" src="../../source/js/qyfb/pagination.js"></script>
+	    <link rel="stylesheet" href="../../source/css/demo/demo.css" />
+	    <link rel="stylesheet" href="../../source/css/common.css" />
+	    <link rel="stylesheet" href="../../source/css/qyfb/distributions.css" />
+	    <link rel="stylesheet" href="../../source/ico/iconfont.css">
+	    <link rel="stylesheet" href="../../source/css/pagination.css" />
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+			</div>
+			
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<!--内容左边div-->
+					<div class="layui-col-md4 all-body-left vpdl10 vw28">
+						<!--左上div-->
+						<div class="da-col-md12 all-body-left-top">
+							
+							<!--左上div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								数字经济产业发展情况
+							</div>
+							<!--左上div标题下的边框-->
+							<div class="layui-col-md12 all-body-left-top-title-border">
+							</div>
+							
+							<!--左上div内容-->
+							<div class="layui-col-md12 all-body-left-top-content">
+								<!--<div class="growDetails">
+									<em onclick='switchFun("0", "1")' class="star"><span>物联网</span></em>
+									<em onclick='switchFun("1", "2")'><span>大数据</span></em>
+								</div>-->
+								<div class="echartsGrow industry vw100 h100">
+								</div>
+							</div>
+						</div>
+						<!--左下div-->
+						<div class="layui-col-md12 all-body-left-bottom">
+							<!--左下div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								数字经济企业发展情况  
+							</div>
+							<!--左下div标题下的边框-->
+							<div class="layui-col-md12 all-body-left-top-title-border">	
+							</div>
+							
+							<!--左下div内容-->
+							<div class="layui-col-md12 all-body-left-top-content">
+								<div class="companyDetails">
+									<em onclick='companyFun("0", {industryType: "1", PARENT_DL: window.companyMain.PARENT_DL, area:window.companyMain.area})' class="star"><span>注册资本</span></em>
+									<em onclick='companyFun("1", {industryType: "2", PARENT_DL: window.companyMain.PARENT_DL, area:window.companyMain.area})'><span>市场主体总量</span></em>
+									<em onclick='companyFun("2", {industryType: "3", PARENT_DL: window.companyMain.PARENT_DL, area:window.companyMain.area})'><span>市场主体新增</span></em>
+								</div>
+								<div class="echartsGrow companyeGrow vw100 h100 mgt10">
+									
+								</div>
+							</div>
+						</div>
+				</div>
+				
+				<!--内容中间div-->
+				<div class="layui-col-md4 all-body-middle vpdl20 vw42">
+					<div class="echartsGrow" id="growMap">
+						<div class="growColumn">
+							<ul class="mgt10">
+								<li class="star">
+									<a href="distributions.html?menuType=2">
+										<span class="iconfont icon-buju"></span>产业布局
+										<em><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i></em>
+									</a>
+								</li>
+								<li>
+									<a href="qyfb.html?menuType=2"><span class="iconfont icon-fenbu"></span>企业分布</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="posr mgt10">
+						<div class="growContent l0 t0">
+							<ul id = "nemuList">
+							</ul>
+						</div>
+						<div class="posa t0 l0 h100 vw70 mapEcharts" style="margin-left: 30%;"></div>
+					</div>
+					<!--中下div-->
+					<div class="layui-col-md12 all-body-left-bottom">
+						<!--中下div标题-->
+						<div class="layui-col-md12 all-body-left-top-title">
+							各区域数字经济产业排名
+						</div>
+						<!--中下div标题下的边框-->
+						<div class="layui-col-md12 all-body-left-top-title-border2">
+						</div>
+						
+						<div class="countyEstateRank  vw100 h100">
+							
+						</div>
+						
+					</div>
+				</div>
+				<!--内容右边div-->
+				<div class="layui-col-md4 all-body-right vw30 vpdl20 vpdr10">
+					<!--右上div标题-->
+					<div class="layui-col-md12 all-body-left-top-title" style="height: 5%;">
+						数字经济企业<span class="mgl7" style="font-size: 1rem;">(根据注册资金排名)</span>
+					</div>
+					<!--左上div标题下的边框-->  
+					<div class="layui-col-md12 all-body-left-top-title-border" style="height: 2.5%;">
+					</div>
+					<div class="rDistributionsBox">
+						<h3>企业数量：<span   class="tSize" id="comTotal">0</span></h3>
+					</div>
+					
+					<table class="topHeader vw100">
+					 	<thead>
+					      <tr>
+					        <th width="10%" class="pdl0 pdr0">排名</th>
+					        <th width="43%">企业名称</th>
+					        <th width="24%">所在地</th>
+					        <th width="23%">类别</th>
+					      </tr> 
+					    </thead>
+					 </table>
+					 
+					<div class="layui-form rTbox" id="rTbox">
+					  <table class="layui-table">
+					    <tbody>
+					    </tbody>
+					  </table>
+					</div>
+					
+					<div id="page" class="page mgt10"></div><!-- 2.创建一个页码容器，设定宽度 -->
+					<div class="mgt10 posr">
+						<div class="posa r0 t0 botTime">
+							<em>数据采集截止日期：2020-09-01</em>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var companyNum = 0; // 企业总数
+		var wCurrent = 0; // 当前页
+		var wLimit = "12"; // 每页多少条数据
+		var listNum = 0; // 总页数
+		
+		var PROVINCE = "360000";
+		
+		var NANCHANG = "360100";
+		
+		//全局参数
+		var companyMain = {
+			industryType:"1", 
+			PARENT_DL:"", 
+			area: PROVINCE,
+			CHAIN_ID:"",
+			YEAR: "2020",
+			parent: 0 //标注为区域后不可点击(0:省， 1:地区)
+		}
+
+	</script>
+	<script>
+	$(function(){
+		
+		$("#dataTime").text(dtatTime);
+		
+		// 左上：产业发展情况
+		switchFun(window.companyMain.PARENT_DL,  window.companyMain.area);
+		
+		// 左下：企业发展情况
+		companyFun("0", window.companyMain);
+		
+		// 中上： 地图左侧菜单
+		getTopIndustrialChains(window.companyMain);
+		
+		// 地图数据交互
+		szjjMapData(window.companyMain,window.companyMain.PARENT_DL);
+		
+		// 中下：区域产业排名
+		szjjByAreaList(window.companyMain);
+		
+		// 右下： 企业列表
+		getEnterpriseList({page:"1", limit: window.wLimit, PARENT_DL: window.companyMain.PARENT_DL, AREA:window.companyMain.area});
+		
+	})
+	
+	/**
+	 * 前一天日期  yyy-MM-dd
+	 */
+	var dtatTime = function(){
+		var time=(new Date).getTime()-24*60*60*1000;
+		var yesterday=new Date(time);
+		var month=yesterday.getMonth();
+		var day=yesterday.getDate();
+		yesterday = yesterday.getFullYear() + "-" + (yesterday.getMonth()> 9 ? (yesterday.getMonth() + 1) : "0" + (yesterday.getMonth() + 1)) + "-" +(yesterday.getDate()> 9 ? (yesterday.getDate()) : "0" + (yesterday.getDate()))
+	    
+	    return yesterday;
+	}
+	
+	/**
+	 * liuliang (左上：产业发展情况)
+	 * @param parentDl  行业码
+	 * @param area 区域码
+	 */
+	function switchFun(parentDl, area){
+		
+		if(!parentDl){
+			parentDl = "ZK01";
+		}
+		
+		var params = {
+			PARENT_DL: parentDl,
+			area: area
+		}
+	
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + '/industryDistributionController/szjjFiveYearList',
+			data: {param: JSON.stringify(params)},
+			cache: false,
+			success: function(res){
+				
+				var result = JSON.parse(res);
+				
+				if(result.status == 10001) {
+					
+		            //遍历年份
+		           var years = result.data.dataNames;
+		           
+		           var dataEstate = {};
+		
+		           dataEstate.dataValuesGdp = result.data.dataValuesGdp;
+		           dataEstate.dataValuesSzjj = result.data.dataValuesSzjj;
+		
+		           renderLine(years, dataEstate);
+		            
+		          }else if(result.status == 10003) {
+		            localStorage.clear();
+		          }else{
+		            this.$message.error(result.data.msg);
+		          }
+		        }
+		})
+	}
+	
+	/**
+	 * liuliang (左下：产业发展情况)
+	 * @param num  对象下标
+	 * @param companyObj 统计类型、行业码、区域码
+	 */
+	function companyFun(num, companyObj){
+		
+		if(!num){
+			num = "1";
+		}
+		
+		var params = {
+			industryType: companyObj.industryType,
+			PARENT_DL: companyObj.PARENT_DL,
+			area: companyObj.area
+		}
+	
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + '/industryDistributionController/szjjEntFiveYearList',
+			data: {param: JSON.stringify(params)},
+			cache: false,
+			success: function(res){
+				var result = JSON.parse(res);
+				
+				if(result.status == 10001) {
+					
+					var years = result.data.dataNames;
+					   
+					var dataEstate = {};
+					dataEstate.dataValues = result.data.dataValues;
+					
+					$(".companyDetails em").eq(num).addClass("star").siblings().removeAttr("class")
+					
+					renderDevelopLine(num, years, dataEstate);
+				    
+				}else if(result.status == 10003) {
+					localStorage.clear();
+				}else{
+				    this.$message.error(result.data.msg);
+				}
+	        }
+		})
+	}
+	
+	/**
+	 * liuliang (中上：获取顶级菜单)
+	 * @param {Object} menuMapList 年、区域码
+	 */
+	function getTopIndustrialChains(menuMapList){
+		var params = {
+			YEAR: menuMapList.YEAR,
+			AREA: menuMapList.area
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + '/industrialChainController/getTopIndustrialChains',
+			data: {param: JSON.stringify(params)},
+			cache: false,
+			success: function(res){
+				var result = JSON.parse(res);
+				if(result.status == 10001) {
+					
+					// 打印菜单
+					result.data.topIndustrialChains.forEach(function(item, index){
+						
+						$("#nemuList").append('<li onclick = "menuEvent(this)" name = "'+ item.PARENT_DL +'" alt = "'+ item.CHAIN_ID +'"><span class="iconfont icon-'+item.TBMC+'"></span>'+ item.CHAIN_NAME +'<li>');
+					})
+					
+				    
+				}else if(result.status == 10003) {
+					localStorage.clear();
+				}else{
+				    this.$message.error(result.data.msg);
+				}
+	        }
+		})
+	}
+	
+	/**
+	 * 地图菜单列表
+	 * @param {Object} paramObj : 当前对象
+	 */
+	function menuEvent(paramObj){
+		
+		// 切换效果
+		$(paramObj).addClass("star").siblings().removeClass("star");
+		
+		// 配置全局变量
+		window.companyMain.PARENT_DL = $(paramObj).attr("name");
+		
+		// 左上：产业发展情况
+		switchFun(window.companyMain.PARENT_DL, window.companyMain.area);
+		
+		// 地图数据交互
+		szjjMapData(window.companyMain,window.companyMain.PARENT_DL);
+		
+		// 左下：企业发展情况
+		companyFun("0", window.companyMain);
+		
+		// 中下：区域产业排名
+		szjjByAreaList(window.companyMain);
+		
+		// 右下： 企业列表
+		getEnterpriseList({page:"1", limit: window.wLimit, PARENT_DL:window.companyMain.PARENT_DL});
+		
+	}
+	
+	/**
+	 * 地图数据交互
+	 * @param {Object} areaCode :区域代码
+	 */
+	function szjjMapData(areaCode){
+		var params = {
+			area: areaCode.area,
+			PARENT_DL: areaCode.PARENT_DL
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + '/industryDistributionController/szjjMapData',
+			data: {param: JSON.stringify(params)},
+			cache: false,
+			success: function(res){
+				var result = JSON.parse(res);
+				if(result.status == 10001) {
+					var jxMap = result.data.entlist;
+					renderMap(jxMap);
+				    
+				}else if(result.status == 10003) {
+					localStorage.clear();
+				}else{
+				    this.$message.error(result.data.msg);
+				}
+	        }
+		})
+		
+	}
+	
+	/**
+	 * liuliang (中下：各区域经济排名)
+	 * @param {Object} parentObj: 行业码、区域码
+	 */
+	function szjjByAreaList(parentObj){
+		
+		var params = {
+			PARENT_DL:parentObj.PARENT_DL,
+			area:parentObj.area
+		}
+		
+		if(parentObj.area == window.PROVINCE){
+			params.area = window.NANCHANG
+		}
+		
+		// 如果是县区禁止请求
+		if(params.area.substring(params.area.length - 2) != '00'){
+			return false;
+		}
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + '/industryDistributionController/szjjByAreaList',
+			data: {param: JSON.stringify(params)},
+			cache: false,
+			success: function(res){
+				
+				var result = JSON.parse(res);
+				
+				if(result.status == 10001) {
+				
+					var cityObj = {};
+					
+		            cityObj.dataNames = result.data.dataNames;
+			           
+		           	cityObj.dataValues = result.data.dataValues;
+		           	
+		           	renderRankBar(cityObj);
+				    
+				}else if(result.status == 10003) {
+					localStorage.clear();
+				}else{
+				    this.$message.error(result.data.msg);
+				}
+	        }
+		})
+	}
+	
+	/**
+	 * liuliang (右下： 企业排名)
+	 * @param {Object} paramsObj： 请求参数
+	 */
+	function getEnterpriseList(paramsObj){
+		
+		var params ={
+			page : paramsObj.page,
+			limit : paramsObj.limit,
+			PARENT_DL : paramsObj.PARENT_DL,
+			AREA: paramsObj.AREA
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + '/industryDistributionController/getEnterpriseList',
+			data: {param: JSON.stringify(params)},
+			cache: false,
+			success: function(res){
+				
+				var result = JSON.parse(res);
+				
+				if(result.status == 10001) {
+					
+					$("#rTbox table tbody tr").remove();
+					
+					// 总数量
+					window.companyNum = result.data.count;
+					
+					// 第几页
+					window.wCurrent = result.data.page;
+					
+					
+					// 统计总页数
+					window.listNum = companyNum/wLimit < 0 ? 0 : Math.ceil(companyNum/wLimit);
+					
+					result.data.list.forEach(function(item, index){
+						
+						indNum = window.wLimit*window.wCurrent -((window.wLimit - (index+1)));
+						if(indNum < 4){
+							$("#rTbox table tbody").append('<tr onclick= tzQyhx(\''+ item.PRIPID + '\',\'' + item.REGNO + '\',\''+ item.ENTNAME +'\')><td width="8%"><i>'+ indNum +'</i></td>'
+							+ '<td width="45%">'+ item.ENTNAME +'</td><td width="22%">'+ item.AREA_NAME +'</td>'
+							+ '<td width="25%">'+ item.INDUSTRYPHY_CN +'</td></tr>')
+						}else{
+							$("#rTbox table tbody").append('<tr onclick= tzQyhx(\''+ item.PRIPID + '\',\'' + item.REGNO + '\',\''+ item.ENTNAME +'\')><td width="8%">'+ indNum +'</td>'
+							+ '<td width="45%">'+ item.ENTNAME +'</td><td width="22%">'+ item.AREA_NAME +'</td>'
+							+ '<td width="25%">'+ item.INDUSTRYPHY_CN +'</td></tr>')
+						}
+					})
+					
+					// 显示企业总数
+					$("#comTotal").text(window.companyNum)
+					
+					pageObj(window.listNum, window.wCurrent,result.data.count);
+				    
+				}else if(result.status == 10003) {
+					localStorage.clear();
+				}else{
+				    this.$message.error(result.data.msg);
+				}
+	        }
+		})
+	}
+	
+	/**
+	 * 列表跳转
+	 * @param {Object} PRIPID
+	 * @param {Object} REGNO
+	 * @param {Object} ENTNAME
+	 */
+	function tzQyhx(PRIPID,REGNO,ENTNAME){
+		if(!REGNO || REGNO=='undefined'){//如果REGNO为空则传ENTNAME
+		window.location.href=realPath+"view/qyhx/qyhx.html?menuType=2&PRIPID="+PRIPID+"&REGNO="+ENTNAME;
+		}else{
+		window.location.href=realPath+"view/qyhx/qyhx.html?menuType=2&PRIPID="+PRIPID+"&REGNO="+REGNO;
+		}
+	}
+	</script>
+
+	<script>
+	/**
+	 * liuliang
+	 * @param {Object} listNum 总数
+	 * @param {Object} wCurrent 当前页
+	 */
+	function pageObj(listNum, wCurrent,recordCounts){
+		var box = new Pagination('#page', {
+			total: listNum,//总页数
+			recordCounts:recordCounts,
+			current: wCurrent,
+			showForwardInput: true,
+			count: 5,
+			pageChange: function (pageNum) {//切换页码成功回调
+				getEnterpriseList({page:pageNum+"", limit: window.wLimit, PARENT_DL: window.companyMain.PARENT_DL, AREA:window.companyMain.area});
+			}
+		});
+	}
+	</script>
+
+</html>

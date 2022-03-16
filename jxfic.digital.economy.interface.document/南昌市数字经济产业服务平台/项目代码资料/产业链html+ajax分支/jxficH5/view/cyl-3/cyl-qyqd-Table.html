@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业布局</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/cyl-3/cyl-qyqd-Table.js"></script>
+		<link rel="stylesheet" href="../../source/css/cyl-3/cyl-qyqd-2.css" />
+		<link rel="stylesheet" href="../source/css/pagination.css"/>
+		<link rel="stylesheet" href="../source/css/common.css"/>
+		<style>
+			.all-body {
+				width: 100%;
+			}
+			.listDetailed{
+				border-left: 1px solid #4AABB3;
+				border-bottom: 1px solid #4AABB3;
+			}
+			.listDetailed tr td{
+				border-right: 1px solid #4AABB3;
+				border-top: 1px solid #4AABB3;
+			}
+			.layui-layer-setwin .layui-layer-close2 {
+				position: absolute;
+				right: -10px;
+				top: -10px;
+			}
+			.boxContent .qylist {
+				display: grid;
+				grid-template-rows: 3rem 55rem;
+				overflow: auto;
+			}
+		</style>
+	</head>
+<body>
+	<!--内容div-->
+	<div class="all-body">
+		<div class="layui-card-body">
+			<!--重点项目清单-->
+			<div class="boxContent" style="display: grid;">
+						<div class="line2">
+							<div class="cyfx_title_text">申报企业列表
+							<span style="margin-left: 75%;">项目名称：</span>
+							<span>
+								<input class="searchContent" id="ENTNAME" type="text">
+							</span>
+							<span>
+								<input class="search" onclick="searchEntname()" type="button" value="搜索">
+							</span>
+							
+							</div>
+							
+							
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<!--左上div内容-->
+						<div class="qylist">
+							<div class="table-head">
+				                <table>
+				                    <thead>
+				                        <tr>
+											<th class="td1">序号</th>
+											<th class="td2" style="width: 20%;">项目名称</th>
+											<th class="td3" >申报单位</th>
+											<th class="td4" >项目金额(万元)</th>
+											<th class="td5">建设区域</th>
+											<th class="td6">申报类别</th>
+											<th class="td7">年度</th>
+											<th class="td8">是否入选 </th>
+										</tr>
+				                    </thead>
+				                </table>
+				            </div>
+				            <div class="table-body">
+				                <table>
+									<table>
+										<tbody id="projectList">
+										</tbody>
+									</table>
+				                </table>
+				            </div>
+						</div>
+					</div>
+		</div>
+	</div>
+</body>
+
+</html>

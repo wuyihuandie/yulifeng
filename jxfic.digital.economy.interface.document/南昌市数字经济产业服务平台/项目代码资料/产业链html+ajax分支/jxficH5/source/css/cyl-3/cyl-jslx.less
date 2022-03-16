@@ -1,0 +1,673 @@
+/* 总体布局 */
+.all-body{
+	display: flex;
+}
+.all-body-center{
+	height: 95%;
+	width: 95%;
+	// background-color: red;
+	margin:auto;
+}
+.all-body-left{
+	flex: 10;
+	width: 30%;
+	// background-color: #000;
+	display: none;
+	margin-left: 10px;
+}
+.all-body-right{
+	flex: 10;
+	width: 30%;
+	// background-color: yellow;
+	display: none;
+	margin-right: 10px;
+}
+.dd{
+	display: block;
+}
+.ee{
+	flex: 28;
+	width: 40%;
+}
+.ent-list-info-zg-div{
+	width: 100%;
+	height: 100px;
+	/* padding-left: 5%; */
+	padding-top: 10px;
+	background: url("../../img/titile-line.png") no-repeat;
+	background-position: right bottom;
+	cursor: pointer;
+}
+
+.p-entname{
+	color: white;
+	font-size: 16px;
+}
+.p-dom,.p-zcdate{
+	color: #9AE0E6;
+	font-size: 12px;
+	text-indent: 5px;
+}
+.p-entname span{
+	background-color: #BB5845;
+	font-size: 12px;
+	padding: 2px 6px;
+	border-radius: 35%;
+	margin-right: 3%;
+}
+
+/* 左侧布局 */
+.all-body-left{
+	
+	.left-one{
+		height: 7%;
+		width: 100%;
+		position: relative;
+		.logo{
+			position: absolute;
+			margin: auto;
+			left: 0;
+			font-size: 18px;
+			line-height: 4.125rem;
+			color: #31F7FA;
+			img{
+				vertical-align: text-bottom;
+			}
+		}
+		.particular-year{
+			position: absolute;
+			margin: auto;
+			right: 0;
+			width: 30%;
+			display: flex;
+			img{
+				cursor:pointer;
+			}
+			div{
+				width: 95px;
+				height: 30px;
+				text-align: center;
+				color: #FFFFFF;
+				line-height: 30px;
+				background: rgba(9, 181, 200, 0.4);
+			}
+		}
+	}
+	.left-two{
+		position: relative;
+		font-size: 24px;
+		height: 3%;
+		.collect{
+			cursor:pointer;
+			height: 80%;
+			position: absolute;
+			line-height: 22px;
+			background: rgba(49, 247, 251, 0.2);
+			right: 0;
+			font-size: 10px;
+			bottom: 0;
+		}
+	}
+	.left-three{
+		height: 2.55%;
+		img{
+			width: 100%;
+		}
+	}
+	.left-four{
+		height: 8.5%;
+		.ent-list-info-div-left{
+			display: flex;
+			height: 50%;
+			label{
+				cursor:pointer;
+				height: 80%;
+				padding-left: 10px;
+				padding-top: 8px;
+				img{
+					height: 100%;
+					width: 90%;
+				}
+			}
+		}
+		
+	}
+	.left-five{
+		height: 80%;
+		overflow: hidden;
+	}
+	
+}
+/* 中间布局 */
+// 点击事件改变高度宽度，写百分比
+.all-body-center{
+	// 头部不动
+	.center-top{
+		height: 25%;
+		width: 100%;
+		
+		.top-one{
+			height: 20%;
+			width: 100%;
+			position:relative;
+			.topone-center{
+				width: 574px;
+				height: 100%;
+				position:absolute;
+				margin:auto;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				display: flex;
+				.years{
+					height: 40px;
+					width: 120px;
+					background: url(../../img/cyl/4-wx.png);
+					background-size: 100% 100%;
+					text-align: center;
+					line-height: 2.5rem;
+					margin-left: 10px;
+					color: #ffffff;
+					font-size: 20px;
+					cursor:pointer;
+				}
+				.enterprise{
+					color: #2CE0E9;
+					background: url(../../img/cyl/4-xz.png);
+					background-size: 100% 100%;
+					
+				}
+				
+			}
+		}
+		.top-two{
+			height: 10%;
+			position:relative;
+			.two-center{
+				width: 574px;
+				height: 100%;
+				position:absolute;
+				margin:auto;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				svg{
+					margin-left: 115px;
+					.circle-load-svg1 {
+					    stroke-dasharray: 0 80;
+					    animation: aot 2s linear infinite;
+					}
+					@keyframes aot {
+					    100% {
+					        stroke-dasharray: 80 80;
+					    }
+					}
+				}
+			}
+		}
+		.top-three{
+			height: 20%;
+			position:relative;
+			.three-center{
+				width: 574px;
+				height: 100%;
+				position:absolute;
+				margin:auto;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				display: flex;
+				.twobutton{
+					width: 210px;
+					height: 40px;
+					background: rgba(173, 203, 218, 0.18);
+					border: 1px solid #00FFFF;
+					text-align: center;
+					line-height: 40px;
+				}
+			
+				.twobutton:nth-child(1){
+					margin-left: 70px;
+				}
+				.twobutton-exchange{
+					background: rgba(25, 240, 244, 0.2);
+				}
+			}
+		}
+		.top-four{
+			height: 18%;
+			svg{
+				// margin-left: 220px;
+				.circle-load-svg2{
+					stroke-dasharray: 0 600;
+					animation: bot 4s linear infinite;
+				}
+				@keyframes bot {
+				    100% {
+				        stroke-dasharray: 600 600;
+				    }
+				}
+			}
+		}
+		.top-five{
+			height: 30%;
+			display: flex;
+			.fourbutton{
+				width: 25%;
+				background: rgba(80, 235, 241, 0.2);
+				border: 1px solid #4AABB3;
+				text-align: center;
+				line-height: 68px;
+				font-size: 1.375rem;
+				cursor:pointer;
+			}
+			.button-exchange{
+				background: rgba(0, 255, 255, 0.6);
+			}
+		}
+		
+	}
+	
+	//技术路线图
+	.center-body-jslx{
+		height: 67%;
+		width: 100%;
+		position:relative;
+		img{
+			// width: 100%;
+			height: 100%;
+			position:absolute;
+			margin:auto;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+		}
+		.body-size{
+			width: 80%;
+			height: 100%;
+			position:absolute;
+			margin:auto;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			// background-color: #fff;
+			.js-top{
+				width: 100%;
+				height: 25%;
+				// background-color: red;
+				position:relative;
+				.technology{
+					width: 60%;
+					height: 100%;
+					// background-color: #fff;
+					position:absolute;
+					margin:auto;
+					top:0;
+					left:0;
+					right:0;
+					bottom:0;
+					.technology-box{
+						width: 100%;
+						height: 80%;
+						// background-color: #0000FF;
+						.technology1{
+							height: 45%;
+							width: 100%;
+							// background-color: #fff;
+							display: flex;
+							.technology1-Five{
+								width: 15%;
+								height: 95%;
+								// background-color: dodgerblue;
+								
+								background: rgba(41, 122, 220, 0.9);
+								border: 1px solid #91C0F6;
+								border-radius: 5px;
+								margin-left: 3%;
+								text-align: center;
+								line-height: 50px;
+							}
+						}
+						.technology2{
+							height: 10%;
+							width: 100%;
+							display: flex;
+							.technology2-Five{
+								width: 15%;
+								height: 95%;
+								// background-color: dodgerblue;
+								margin-left: 3%;
+								position:relative;
+								svg{
+									position:absolute;
+									margin:auto;
+									top:0;
+									left:0;
+									right:0;
+									bottom:0;
+								}
+							}
+						}
+						.technology3{
+							height: 45%;
+							width: 100%;
+							// background-color: #fff;
+							display: flex;
+							.technology3-Five{
+								width: 15%;
+								height: 95%;
+								background-color: dodgerblue;
+								background: rgba(41, 122, 220, 0.9);
+								border: 1px solid #91C0F6;
+								border-radius: 5px;
+								margin-left: 3%;
+								text-align: center;
+								line-height: 50px;
+							}
+						}
+					}
+					.technology-line{
+						width: 100%;
+						height: 20%;
+						// background-color: #00F7DE;
+					}
+				}
+			}
+			.js-body{
+				width: 100%;
+				height: 40%;
+				// background-color: darkred;
+				// height: 40%;
+				display: flex;
+				.box1{
+					width: 20%;
+					// background-color: red;
+					height: 100%;
+					overflow: hidden;
+					.box1-top{
+						margin-top: 10%;
+						width: 100;
+						height: 40%;
+						background: rgba(241, 145, 73, 0.9);
+						border: 1px solid #F3C89B;
+						border-radius: 5px;
+					}
+					.box1-foot{
+						margin-top: 10%;
+						width: 100;
+						height: 30%;
+						background: rgba(241, 145, 73, 0.9);
+						border: 1px solid #F3C89B;
+						border-radius: 5px;
+					}
+				}
+				.box2{
+					height: 100%;
+					width: 3%;
+					svg{
+						margin-top: 60px;
+						stroke-dasharray: 0 120;
+						animation: cot 2s linear infinite;
+					}
+					@keyframes cot{
+						100%{
+							stroke-dasharray: 120 130;
+						}
+					}
+				}
+				.box3{
+					height: 100%;
+					width: 125px;
+					// background-color: red;
+					background: url(../../img/cyl/line1.png) no-repeat;
+					background-size: 100% 100%;
+				}
+				.box4{
+					height: 100%;	
+					width: 5%;
+					svg{
+						margin-top: 120px;
+					}
+				}
+				.box5{
+					height: 100%;
+					width: 125px;
+					// background-color: red;
+					background: url(../../img/cyl/line2.png) no-repeat;
+					background-size: 100% 100%;
+				}
+				.box6{
+					height: 100%;	
+					width: 5%;
+					svg{
+						margin-top: 120px;
+					}
+					
+				}
+				.box7{
+					height: 100%;
+					width: 160px;
+					// background-color: red;
+					background: url(../../img/cyl/line3.png) no-repeat;
+					background-size: 100% 100%;
+				}
+				.box8{
+					height: 100%;	
+					width: 5%;
+					svg{
+						margin-top: 120px;
+					}
+				}
+				.box9{
+					height: 100%;
+					width: 125px;
+					// background-color: red;
+					background: url(../../img/cyl/line4.png) no-repeat;
+					background-size: 100% 100%;
+				}
+				.box10{
+					height: 100%;	
+					width: 3%;	
+					svg{
+						margin-top: 105px;
+						stroke-dasharray: 0 100;
+						animation: dot 2s linear infinite;
+						}
+						@keyframes dot{
+							100%{
+								stroke-dasharray: 100 100;
+							}
+						}
+				
+				}
+				.some{transform: scale(0.8) }
+				.box11{
+					height: 100%;	
+					width: 10%;
+					// background-color: red;
+					overflow: hidden;
+					.box11-top{
+						height: 40%;
+						width: 97%;
+						margin-top: 20%;
+						background: rgba(77, 193, 222, 0.9);
+						border: 1px solid #AAECFF;
+						border-radius: 5px;
+						text-align: center;
+						line-height: 3.125rem;
+					}
+					.box11-foot{
+						height: 40%;
+						width: 97%;
+						margin-top: 10%;
+						background: rgba(77, 193, 222, 0.9);
+						border: 1px solid #AAECFF;
+						border-radius: 5px;
+						text-align: center;
+						line-height: 3.125rem;
+					}
+				}
+			}
+			.js-foot{
+				width: 100%;
+				height: 20%;
+				// background-color: palevioletred;
+				position:relative;
+				.foot-over{
+					height: 100%;
+					width: 30%;
+					position:absolute;
+					margin:auto;
+					top:0;
+					left:0;
+					right:0;
+					bottom:0;
+					.foot1{
+						height: 30%;
+						width: 100%;
+					}
+					.foot2{
+						height: 70%;
+						width: 100%;
+						display: flex;
+						.twobox-l{
+							height: 95%;
+							width: 20%;
+							background: rgba(179, 142, 229, 0.9);
+							border: 1px solid #E4D0FC;
+							border-radius: 5px;
+							font-size:10%;
+						}
+						.twobox-r{
+							height: 95%;
+							width:75%;
+							margin-left: 3%;
+							background: rgba(179, 142, 229, 0.9);
+							border: 1px solid #E4D0FC;
+							border-radius: 5px;
+							// font-size:10%;
+						}
+					}
+				}
+				
+			}
+			.js-blank{
+				width: 100%;
+				height: 5%;
+				// background-color: #fff;
+			}
+		}
+	}
+	//底部不动
+	.center-foot{
+		height: 8%;
+		width: 100%;
+		// background-color: red;
+		position:relative;
+		.datalogo{
+			width: 350px;
+			height: 25px;
+			position:absolute;
+			
+			margin:auto;
+			
+			top:0;
+			
+			left:0;
+			
+			right:0;
+			
+			bottom:0;
+		}
+	}
+	.vanish{
+		display: none;
+	}
+}
+/* 右侧布局 */
+.all-body-right{
+	.right-one{
+		position: relative;
+		font-size: 24px;
+		height: 3%;
+		padding-top: 30px;
+		.collect{
+			cursor:pointer;
+			height: 40%;
+			position: absolute;
+			line-height: 22px;
+			background: rgba(49, 247, 251, 0.2);
+			right: 0;
+			font-size: 10px;
+			bottom: 0;
+		}
+	}
+	.right-two{
+		height: 2.55%;
+		img{
+			width: 100%;
+		}
+	}
+	.right-three{
+		height: 10%;
+		.three-top{
+			height: 50%;
+			display: flex;
+			margin-left: 20px;
+			margin-top: 12px;
+			.button{
+				width: 30%;
+				height: 70%;
+				margin-left: 10px;
+				background: url(../../img/cyl/mr.png) no-repeat;
+				background-size: 100% 100%;
+				text-align: center;
+				line-height: 33px;
+				color: #61C6CB;
+			}
+			.xz{
+				background: url(../../img/cyl/xz.png);
+				background-size: 100% 100%;
+			}
+		}
+		.three-foot{
+			height: 50%;
+			display: flex;
+			margin-left: 20px;
+			margin-top: 12px;
+			.button{
+				width: 30%;
+				height: 70%;
+				margin-left: 10px;
+				background: url(../../img/cyl/mr.png) no-repeat;
+				background-size: 100% 100%;
+				text-align: center;
+				line-height: 33px;
+				color: #61C6CB;
+			}
+			
+		}
+		
+	}
+	.right-four{
+		height: 70%;
+		// background-color: #FFFFFF;
+		overflow: hidden;
+		padding-left:10px ;
+	}
+	.right-five{
+		text-align: center;
+		line-height: 38px;
+		height: 4%;
+		background: url(../../img/sjxx_bg.png);
+		background-size: 100% 100%;
+		color:#1BE9EF;
+	}
+}
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业链</title>
+		<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	    <script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+		<link rel="stylesheet" href="../../source/css/cyl/cyl_new.css">
+		<script src="../../source/js/cyl/left.js"></script>
+		<script type="text/javascript" src="../../source/js/cyl/cylRank.js" ></script>
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+				
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<!--内容右边div-->
+					<div class="layui-col-md8 all-body-left">
+						<!--右上div-->
+						<div class="layui-col-md12 all-body-left-top">
+							<!--右上div标题-->
+							<div class="layui-col-md12 all-body-left-top-title">
+								<div class="all-left-head-one"><img src="../../source/img/icon_qysl.png"/>　<span>企业数量</span></div>
+								<div class="all-left-head-two"><img src="../../source/img/line.png"/></div>
+								<div class="all-left-head-three all-left-head-two">
+									<label class="ant-radio-button-wrapper "  onclick="qhArea(this,'156')">
+										<span>中国</span>
+									</label>
+									<label class="ant-radio-button-wrapper tradeNews" onclick="qhArea(this,'360000')">
+										<span>江西</span>
+									</label>
+									<label class="ant-radio-button-wrapper " onclick="qhArea(this,'360100')">
+										<span>南昌</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="layui-col-md12 all-body-left-body">
+							<div class="all-left-body-title">
+							</div>
+							<div class="all-left-body-wz">
+								<img src="../../source/img/sg.png" width="30px" height="15px" class="img-align">
+								<span class="all-left-body-wz-span">
+                    			</span>
+							</div>
+							<div class="all-left-body-tu-scroll" id="nc-scroll">
+								<div class="all-left-body-tu">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--内容右边div-->
+					<div class="layui-col-md4 all-body-right">
+						<!--右上div标题-->
+						<div class="layui-col-md12 all-body-left-top-title">
+							<div class="rightHead">
+								<div class="tally">
+								相关企业列表
+								</div>
+								<div class="rightHeadCenter">
+									<div class="tag a active" >
+									企业营收
+									</div>
+									<div class="tag b" >
+										纳税额
+									</div>
+									<div class="tag c" >
+										从业人数
+									</div>
+								</div>
+								
+								
+								<select name="infoType" id="infoType">
+								</select>
+							</div>
+							
+						</div>
+						<!--右上div标题下的边框-->
+						<div class="layui-col-md12 all-body-left-top-title-border">
+						</div>
+						<!--右上div内容-->
+						<div class="layui-col-md12 all-body-left-top-content">
+							<div class="ent-list-info qg-rank">
+								<div class="ent-list-info-div-left">
+									<label onclick="qhl(this,'zl','1')">
+										<img src="../../source/img/zl_bkx.png" data-name='zl'/>
+									</label>
+									<label onclick="qhl(this,'bl','2')">
+										<img src="../../source/img/bl_bkx.png" data-name='bl'/>
+									</label>
+									<label onclick="qhl(this,'wl','3')">
+										<img src="../../source/img/wl_bkx.png" data-name='wl'/>
+									</label>
+									<label onclick="qhl(this,'kl','4')">
+										<img src="../../source/img/kl_bkx.png" data-name='kl'/>
+									</label>
+									<label onclick="qhl(this,'ql','5')">
+										<img src="../../source/img/ql_bkx.png" data-name='ql'/>
+									</label>
+								</div>
+								<div class="ent-list-info-div-right" id="ranklist">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

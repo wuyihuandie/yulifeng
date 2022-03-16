@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>产业分析-南昌市</title>
+	<script type="text/javascript" src="../../source/js/public.js"></script>
+	<!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/includefile.js"></script>
+	<!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/countUp.js"></script>
+	<script type="text/javascript" src="../../source/js/ztfx/wlwzt.js"></script>
+	<!--分页方法js-->
+	<link rel="stylesheet" href="../../source/css/sy/sy-nc2.css" />
+	<style>
+		.all-body-middle-pm-table tr {
+			height: 45px;
+		}
+	</style>
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+	<!--头div-->
+	<div class="layui-col-md12 all-head" id="headDiv">
+	</div>
+
+	<!--div(用于背景图)-->
+	<div class="layui-col-md12 all-body-bg">
+		<!--内容div-->
+		<div class="all-body">
+			<!--内容左边div-->
+			<div class="layui-col-md4 all-body-left vpdl10 vw28 cyfx_container" style="width: 33%">
+
+				<!--左上div标题-->
+				<div class="layui-col-md12 cyfz_title">
+					<span class="areaTitle">南昌市</span>物联网规上企业数量
+				</div>
+				<!-- 数字经济核心产业规上企业营收规模-->
+				<!--左上div标题下的边框-->
+				<div class="layui-col-md12 cyfx_title_border"></div>
+				<!--左上div内容-->
+				<div class="layui-col-md12 cyfz_foorm" style="height:45%">
+					<div class="cyxz_box hcqy_box">
+						<div class="boxl1" style="height: 13%;border: none;">
+							<div class="rect1 rectbox" style="cursor: pointer">
+								<div>
+									<dd>
+										<span id="ENTNUMS" onclick="queryZsList();">0</span>
+									</dd>
+									<dt>企业总数（家）</dt>
+								</div>
+
+							</div>
+							<div class="rect2 rectbox">
+								<div>
+									<dd>
+										<span id="VENDINC">0</span>
+									</dd>
+									<dt>营业收入（万元）</dt>
+								</div>
+							</div>
+							<div class="rect2 rectbox" style="cursor: pointer">
+								<div>
+									<dd>
+										<span id="VENDINCZS">-</span>
+									</dd>
+									<dt>营收增速（%）</dt>
+								</div>
+							</div>
+						</div>
+						<div id="qyzbDom" style="width: 96%; height: 87%;margin: auto">
+
+						</div>
+					</div>
+				</div>
+				<!--左下div标题-->
+				<div class="layui-col-md12 cyfz_title">
+					各县区物联网规上企业营收情况统计
+				</div>
+				<!--左下div标题下的边框-->
+				<div class="layui-col-md12 cyfx_title_border"></div>
+				<!--左下div内容-->
+				<div class="layui-col-md12" style="height: 33%">
+					<div id="gdsxzpmDom" style="width: 96%; height: 100%;margin: auto">
+
+					</div>
+				</div>
+				<div class="layui-col-md12 cyfz_ly" style="height: 5%">
+					<div class="details">
+						数据来源：<span id="dataSource"></span>
+						</br>
+						数据采集截止日期：<span id="gsdataCollectionTime"></span>
+					</div>
+				</div>
+			</div>
+
+			<!-- 内容右边 -->
+			<div class="layui-col-md8 all-body-all vw70" style="width: 67%">
+				<!-- 内容右上 -->
+				<div class="layui-col-md12 all-body-top">
+					<!-- 地图及按钮 -->
+					<div class="all-body-top-left" style="width: 58%">
+						<div class="layui-col-md12 cyfx_map ">
+							<div class="dyfxbox">
+								<div class="dyfx_box"  style="width: 5rem">
+									<div class="years" style="left: -80px">
+										<div class="cleft"></div>
+										<div class="ctitl"><span class="ctitle"></span>年</div>
+										<div class="cright"></div>
+									</div>
+									<div class="month" style="left: 35px;">
+										<div class="mleft"></div>
+										<div class="mtitl" style="width:75px;"><span class="ctitle"></span>季度</div>
+										<div class="mright"></div>
+									</div>
+									<div class="button1" onclick="generateInternetReport()" style="margin-top: 0;margin-left: 170px;">
+										<p>生成报告</p>
+									</div>
+								</div>
+								<div id="mapData" class="dyfx_box1" style="width: 80%;height: 90%;margin-top: 6%;"></div>
+							</div>
+						</div>
+
+					</div>
+					<!-- 排名 -->
+					<div class="all-body-top-right" style="width: 42%">
+						<!--右上div标题-->
+						<div class="layui-col-md12 all-body-left-top-title" style="height: 8%;">
+							各县区物联网规上企业数量排名
+						</div>
+						<!--左上div标题下的边框-->
+						<div class="layui-col-md12 all-body-left-top-title-border" style="height: 2.5%;">
+						</div>
+						<div class="dyfx_box2">
+							<div>
+								<table class="all-body-middle-pm-table" id="areaTable">
+									<thead>
+									<tr>
+										<th width="12%" class="pdl0 pdr0">排名</th>
+										<th width="30%">地区</th>
+										<th class="th_title sequence">企业数量(家)</th>
+										<th width="15%"  class="sequenced">营收(万元)</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div id="page" class="page mgt10"></div><!-- 2.创建一个页码容器，设定宽度 -->
+
+					</div>
+				</div>
+				<!-- 内容右下 -->
+				<div class="layui-col-md12 all-body-foot">
+					<!--增速排名-->
+					<div class="all-body-foot-left" style="width: 57%">
+						<!--右上div标题-->
+						<div class="all-body-left-top-title" style="height: 12%;">
+							各县区物联网规上企业营收占比情况
+						</div>
+						<!--左上div标题下的边框-->
+						<div class="all-body-left-top-title-border" style="height: 6%;width: 93%;margin: auto">
+						</div>
+						<div id="cyfxDom" style="width: 95%;height: 80%;margin: auto">
+						</div>
+					</div>
+
+					<!--四大类饼图-->
+					<div class="all-body-foot-right" style="width: 41%">
+						<!--右上div标题-->
+						<div class="all-body-left-top-title" style="height: 12%;">
+							<span class="areaTitle">南昌市</span>物联网规上企业营收趋势
+						</div>
+						<!--左上div标题下的边框-->
+						<div class="all-body-left-top-title-border" style="height: 6%;">
+
+						</div>
+						<div id="gsxFZQK" style="width: 100%;height: 80%;">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="display: none">
+	<form class="layui-form" id="myForm" style="margin: 50px 30px 10px 0;height: 85vh;" method="post" enctype="multipart/form-data">
+		<div id="list1" style="width:600px;height: 400px;"></div>
+		<div id="list2" style="width:600px;height: 350px;"></div>
+		<div id="list3" style="width:600px;height: 350px;"></div>
+		<input id="imageValue1" name="base64Info1" type="hidden"/>
+		<input id="imageValue2" name="base64Info2" type="hidden"/>
+		<input id="imageValue3" name="base64Info3" type="hidden"/>
+		<input id="YEAR" name="YEAR" type="hidden"/>
+	</form>
+</div>
+</body>
+<script>
+	/**
+	 * 将多个canvas画布组成的图表合成为一个完整的canvas,并获取完整的dataURl
+	 * @param divId divId 包含整个画布的divId
+	 * @returns {String} widthXheight@dataURL 例：
+	 * 400X300@data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA
+	 */
+	function getFullCanvasDataURL(divId){
+		//将第一个画布作为基准。
+		var baseCanvas = $("#"+divId).find("canvas").first()[0];
+		if(!baseCanvas){
+			return false;
+		};
+		var width = baseCanvas.width;
+		var height = baseCanvas.height;
+		var ctx = baseCanvas.getContext("2d");
+		//遍历，将后续的画布添加到在第一个上
+		$("#"+divId).find("canvas").each(function(i,canvasObj){
+			if(i>0){
+				var canvasTmp = $(canvasObj)[0];
+				ctx.drawImage(canvasTmp,0,0,width,height);
+			}
+		});
+		//获取base64位的url
+		return baseCanvas.toDataURL();
+	}
+
+	function generateInternetReport() {
+		$("#imageValue1").val(getFullCanvasDataURL("list1"));
+		$("#imageValue2").val(getFullCanvasDataURL("list2"));
+		$("#imageValue3").val(getFullCanvasDataURL("list3"));
+		$("#myForm").attr("action",LOGIN_ADMIN_URL + '/reportController/generateInternetReport');
+		$("#myForm").submit();
+	}
+</script>
+</html>

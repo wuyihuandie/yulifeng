@@ -1,0 +1,215 @@
+.all-body>div{
+	height: 100%;
+}
+.all-body-left-top{
+	height: 50%;
+}
+.all-body-left-bottom{
+	height: 50%;
+}
+.all-body-middle-top{
+	height: 60%;
+}
+.all-body-middle-bottom{
+	height: 40%;
+}
+.all-body-right-top{
+	height: 20%;
+}
+.all-body-right-bottom{
+	height: 100%;
+}
+.all-body-left-top-title{
+	height: 10%;
+	font-size: 1.2rem;
+	text-indent: 5%;
+	line-height: 240%;
+}
+.all-body-left-top-title-border{
+	height: 5%;
+	background: url(../../img/title_right.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.all-body-left-top-content{
+	height: 90%;
+}
+.all-body-right-bottom-content{
+	color: #04ABBC;
+	width: 90%;
+	border-collapse:separate;
+	border-spacing:0px 20px;
+	margin: auto;
+}
+.all-body-right-bottom-content>tbody>tr{
+	text-align: center;
+	color: #ffffff;
+}
+.rankOne{
+	background:  url(../../img/one.png) no-repeat;
+	background-size: 100%;
+}
+.rank{
+	height: 1.1rem;
+	width: 1.1rem;
+	margin: auto;
+}
+.rankTwo{
+	background:  url(../../img/two.png) no-repeat;
+	background-size: 100%;
+}
+.rankThree{
+	background:  url(../../img/three.png) no-repeat;
+	background-size: 100%;
+}
+.all-body-right-top-content-sbzs{
+	text-align: center;
+	line-height: 450%;
+	font-size: 1.2rem;
+}
+.sbzs{
+	padding: 10px;
+	background-color: #072C60;
+	margin-right: 10px;
+	color: #57CDED;
+	font-weight: bold;
+}
+.all-body-right-top-title{
+	height: 25%;
+	font-size: 1.2rem;
+	text-indent: 5%;
+	line-height: 240%;
+}
+.all-body-right-top-title-border{
+	height: 15%;
+	background: url(../../img/title_right.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.growColumn ul li a, .growColumn ul li, .growColumn ul{
+	display: inline-block;
+}
+
+.growColumn ul li{
+	margin-right: .2rem;
+	margin-left: .2rem;
+}
+
+.growColumn a{
+	padding:.5rem 1.4rem .5rem 1.4rem;
+	color:#fff;
+	background:rgba(6,172,189,.4);
+	border:1px solid rgba(6,172,189,.6)
+}
+
+.start a{
+	background:rgba(6,172,189,1);
+	border:1px solid #30c1d4;
+	cursor: pointer;
+}
+#infoType{
+	border: 0;
+	background:url("../../img/xl_all.png");
+	color: #ffffff;
+	width: 155px;
+	height: 29px;
+	padding-left: 10px;
+}
+select {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+select option{
+	background: rgba(11, 49, 82,1);
+}
+select::-ms-expand {
+	display: none;
+}
+.all-body-right-bottom-body{
+	height: 100%;
+	width: 100%;
+	margin: auto;
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 0;
+}
+.all-body-left-top-title ul{
+	font-size: 1rem;
+	text-indent:0;
+}
+#fy{
+	text-align: right;
+}
+.layui-laypage a{
+	color: #ffffff;
+}
+.layui-laypage a, .layui-laypage span{
+	background-color: #05274b;!important;
+	margin-left: 10px;
+}
+.layui-laypage a, .layui-laypage button, .layui-laypage input, .layui-laypage select, .layui-laypage span {
+	border: 1px solid #05274b;
+}
+.layui-disabled, .layui-disabled:hover {
+	color: #5b5858!important;
+	cursor: not-allowed!important;
+}
+.all-body-center-body{
+	width: 71.5%;
+	height: 90%;
+	margin: auto;
+}
+.sch-button{
+	/*display: inline-block;
+	height: 30px;
+	line-height: 100%;
+	padding: .5rem;
+	color: #fff;
+	border: 0;
+	white-space: nowrap;
+	text-align: center;
+	cursor: pointer;
+	background-color: #1C84BE;
+	margin: .6rem 0;
+	border-radius: 2px;*/
+	background: url("../../img/qycx/icon_search.png") left center no-repeat;
+	width: 51px;
+	height: 43px;
+	border: 0;
+	cursor: pointer;
+	position: absolute;
+	top: 2.3rem;
+	right: 20rem;
+}
+.sch-input{
+	/*background: url(../../img/background.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	background-attachment: fixed;
+	-web-kit-appearance: none;
+	-moz-appearance: none;
+	border: 0;
+	text-indent: 5%;
+	font-size: 1.4em;
+	color: #ffffff;
+	border: 2px #47599f solid;
+	outline: 0;
+	width: 40%;
+	height: 3rem;
+	border-radius: 3px;*/
+	-web-kit-appearance:none;
+	-moz-appearance: none;
+	border:0;
+	background:url("../../img/qycx/ssk.png") no-repeat 0 center;
+	width: 922px;
+	height: 120px;
+	text-indent:2.5rem;
+	font-size:1.4em;
+	color: #ffffff;
+	outline:0;
+
+}
+

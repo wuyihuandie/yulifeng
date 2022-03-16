@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/countUp.js"></script>
+		<script type="text/javascript" src="../../source/js/sy/sy.js"></script>
+		<script type="text/javascript" src="../../source/js/qyfb/pagination.js"></script>
+		<!--分页方法js-->
+
+		<link rel="stylesheet" href="../../source/css/demo/demo.css" />
+		<link rel="stylesheet" href="../../source/css/common.css" />
+		<link rel="stylesheet" href="../../source/css/sy/sy.css" />
+		<link rel="stylesheet" href="../../source/ico/iconfont.css">
+		<!--字体样式-->
+		<link rel="stylesheet" href="../../source/css/pagination.css" />
+		<!--分页样式-->
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+			</div>
+
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<!--内容左边div-->
+					<div class="layui-col-md4 all-body-left vpdl10 vw28 cyfx_container">
+
+						<!--左上div标题-->
+						<div class="layui-col-md12 cyfz_title"><span class="areaTitle">江西省</span>数字经济核心产业规模</div>
+						<!--左上div标题下的边框-->
+						<div class="layui-col-md12 cyfx_title_border"></div>
+						<!--左上div内容-->
+						<div class="layui-col-md12 cyfx_cont3">
+							<div class="cyxz_box hcqy_box">
+								<!--<div class="boxl0">
+									核心企业
+								</div>-->
+								<div class="boxl1">
+									<div class="rect1 rectbox">
+										<div>
+											<dd>
+												<span id="ENTNUMS">-</span>
+											</dd>
+											<dt>企业总数（家）</dt>
+										</div>
+
+									</div>
+									<div class="rect2 rectbox">
+										<div>
+											<dd>
+												<span id="ENTZS">-</span>
+											</dd>
+											<dt>同比增速（%）</dt>
+										</div>
+
+									</div>
+
+								</div>
+								<div class="boxl2">
+									<div class="rect1 rectbox">
+										<div>
+											<dd>
+												<span class="GSENTNUMS">-</span>
+											</dd>
+											<dt>规上企业总数（家）</dt>
+										</div>
+
+									</div>
+									<div class="rect2 rectbox">
+										<div>
+											<dd>
+												<span class="GSENTZS">-</span>
+											</dd>
+											<dt>同比增速（%）</dt>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="cyxz_box hcgsqy_box">
+								<!--<div class="boxl0">
+									核心规上企业
+								</div>-->
+								<div class="boxl1">
+									<div class="rect1 rectbox">
+										<div>
+											<dd>
+												<span id="GSVENDINC">-</span>
+											</dd>
+											<dt>规上企业营收总额（亿元）</dt>
+										</div>
+
+									</div>
+									<div class="rect2 rectbox">
+										<div>
+											<dd>
+												<span id="GSVENDINCZS">-</span>
+											</dd>
+											<dt>同比增速（%）</dt>
+										</div>
+
+									</div>
+								</div>
+								<div class="boxl2">
+									<div class="rect1 rectbox">
+										<div>
+											<dd>
+												<span class="GSENTNUMS">-</span>
+											</dd>
+											<dt>规上企业总数（家）</dt>
+										</div>
+
+									</div>
+									<div class="rect2 rectbox">
+										<div>
+											<dd>
+												<span class="GSENTZS">-</span>
+											</dd>
+											<dt>同比增速（%）</dt>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--左下div标题-->
+						<div class="layui-col-md12 cyfz_title"><span class="areaTitle">江西省</span>数字经济<span class="chartTitle">核心产业企业</span>发展趋势</div>
+						<!--左下div标题下的边框-->
+						<div class="layui-col-md12 cyfx_title_border"></div>
+						<!--左下div内容-->
+						<div class="layui-col-md12 cyfx_cont7">
+							<div id="gsxFZQK" style="width: 100%; height: 100%">
+							</div>
+						</div>
+					</div>
+
+					<!-- 内容右边 -->
+					<div class="layui-col-md8 all-body-all vw70">
+						<!-- 内容右边上 -->
+						<div class="layui-col-md12 all-body-top">
+							<!-- 地图及按钮 -->
+							<div class="all-body-top-left">
+								<div class="dyfxbox">
+									<div class="dyfx_box">
+
+										<div class="calendar">
+											<div class="cleft"></div>
+											<div class="ctitle">2020</div>
+											<div class="cright"></div>
+										</div>
+										<div class="button1 exchange" onclick="changeButton('1',this)">
+											<div class="exchange1">
+												核心产业
+											</div>
+											<div class="exchange1">
+												企业数量
+											</div>
+
+										</div>
+										<div class="button1" onclick="changeButton('2',this)">
+											<div class="exchange1">
+												核心规上企业
+											</div>
+											<div class="exchange1">
+												营业收入
+											</div>
+
+										</div>
+
+									</div>
+									<div id="mapData" class="dyfx_box1"></div>
+								</div>
+							</div>
+							<!-- 排名 -->
+							<div class="all-body-top-right">
+								<!--右上div标题-->
+								<div class=" all-body-left-top-title" style="height: 8%;">
+									江西省各地市<span class="areaTableTitle">核心产业企业数量</span>排名
+								</div>
+								<!--左上div标题下的边框-->
+								<div class="all-body-left-top-title-border" style="height: 2.5%;">
+								</div>
+
+								<div class="dyfx_box2">
+									<div>
+										<table class="all-body-middle-pm-table" id="areaTable">
+											<thead>
+												<tr>
+													<th width="5%" class="pdl0 pdr0">排名</th>
+													<th width="25%">地市</th>
+													<th class="th_title ">企业数量（家）</th>
+													<th width="15%">增速</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div id="page" class="page mgt10"></div><!-- 2.创建一个页码容器，设定宽度 -->
+								<!--<div class="mgt10 posr">
+									<div class="posa r0 t0 botTime">
+										<em>数据采集截止日期：2020-09-01</em>
+									</div>
+								</div>-->
+							</div>
+						</div>
+						<!-- 内容右边下 -->
+						<div class="layui-col-md12 all-body-foot">
+							<div class="layui-col-md12 bf_title">江西省各地市<span class="chartTitle">核心产业企业营收</span>对比情况</div>
+							<div class="layui-col-md12 cyfx_title_border" style="width: 99%; height:26px; background-size: 100% 100%;"></div>
+							<div class="layui-col-md12 icon_title">
+								<div style="display: inline-block;width: 28%;text-align: center">计算机、通信和其他电子设备制造业</div>
+								<div style="display: inline-block;width: 23%;text-align: center">电信、广播电视和卫星传输服务</div>
+								<div style="display: inline-block;width: 23%;text-align: center">互联网和相关服务</div>
+								<div style="display: inline-block;width: 23%;text-align: center">软件和信息技术服务业</div>
+							</div>
+							<div class="layui-col-md12 cyfx_graph">
+								<div id="cyfzfxDom" style="height: 100%; width: 100%;"></div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+			<!--底div-->
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业链</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<link rel="stylesheet" href="../../source/css/cyl-3/cyl-yyly.css" />
+		<script type="text/javascript" src="../../source/js/cyl-3/cyl-yyly.js"></script>
+
+
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+
+					<!-- 中间布局 -->
+					<div class="all-body-center">
+						<div class="center-top">
+
+							<div class="top-three">
+								<div class="three-center">
+									<div class="twobutton twobutton-exchange">
+										物联网
+									</div>
+									<div class="twobutton" id="yjs">
+										云计算
+									</div>
+								</div>
+							</div>
+							<div class="top-four">
+								<svg width="100%" height="100%" viewBox="0 0 1297 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+									<path stroke-dasharray="2,2" d="M541 1V20.2308H436V41" stroke="#31F7FB" />
+									<path stroke-dasharray="2,2" d="M541 0V20.7407H871V40" stroke="#31F7FB" />
+									<path stroke-dasharray="2,2" d="M541 0V20.3636H1296V40" stroke="#31F7FB" />
+									<path stroke-dasharray="2,2" d="M541 1V20.6226H1V41" stroke="#31F7FB" />
+									<path d="M541 0V20.7407H871V40" stroke="#31F7FB" class="circle-load-svg2" />
+								</svg>
+							</div>
+							<div class="top-five">
+								<div class="fourbutton " id="industry">
+									<img src="../../source/img/cyl/icon_cyl_1.png">
+									产业链图
+								</div>
+								<div class="fourbutton" id="technology">
+									<img src="../../source/img/cyl/icon_jsxl_1.png">
+									技术路线图
+								</div>
+								<div class="fourbutton button-exchange" id="use">
+									<img src="../../source/img/cyl/icon_yyly_1.png">
+									应用领域图
+								</div>
+								<div class="fourbutton" id="district">
+									<img src="../../source/img/cyl/icon_qyfb_1.png">
+									区域分布图
+								</div>
+							</div>
+						</div>
+						<div class="center-body">
+
+							<div class="all-left">
+
+							</div>
+
+							<!-- 左边 -->
+							<div class="all-left" >
+								<div class="left-top">
+									领域项目数量
+								</div>
+								<div class="left-body">
+									<img src="../../source/img/title_border_left.png">
+								</div>
+								<div class="left" id="left">
+									
+								</div>
+							</div>
+							<div class="tree">
+								<div class="circle"></div>
+								<div class="location brigade" onclick="queryList('37',this)">
+									<div class="title">
+										智慧旅游
+									</div>
+									<div class="math" id="37">
+
+									</div>
+								</div>
+								<div class="location community" onclick="queryList('41',this)">
+									<div class="title">
+										智慧社区
+									</div>
+									<div class="math" id="41">
+
+									</div>
+								</div>
+								<div class="location education" onclick="queryList('34',this)">
+									<div class="title">
+										智慧教育
+									</div>
+									<div class="math" ID="34">
+
+									</div>
+								</div>
+								<div class="location treatment" onclick="queryList('46',this)">
+									<div class="title">
+										智慧医疗
+									</div>
+									<div class="math" id="46">
+
+									</div>
+								</div>
+
+								<div class="location manufacture" onclick="queryList('51',this)">
+									<div class="title">
+										智慧制造
+									</div>
+									<div class="math" id="51">
+
+									</div>
+								</div>
+								<div class="location agriculture" onclick="queryList('39',this)">
+									<div class="title">
+										智慧农林
+									</div>
+									<div class="math" id="39">
+
+									</div>
+								</div>
+								<div class="location distribution" onclick="queryList('56',this)">
+									<div class="title">
+										智慧物流
+									</div>
+									<div class="math" id="56">
+
+									</div>
+								</div>
+								<div class="location energy" onclick="queryList('38',this)">
+									<div class="title">
+										智慧能源
+									</div>
+									<div class="math" id="38">
+
+									</div>
+								</div>
+
+								<div class="location management" onclick="queryList('24',this)">
+									<div class="title">
+										智慧城管
+									</div>
+									<div class="math" id="24">
+
+									</div>
+								</div>
+								<div class="location police" onclick="queryList('55',this)">
+									<div class="title">
+										智慧警务
+									</div>
+									<div class="math" id="55">
+
+									</div>
+								</div>
+								<div class="location environmental" onclick="queryList('30',this)">
+									<div class="title">
+										智慧环保
+									</div>
+									<div class="math" id="30">
+
+									</div>
+								</div>
+								<div class="location protection" onclick="queryList('44',this)">
+									<div class="title">
+										智慧消防
+									</div>
+									<div class="math" id="44">
+
+									</div>
+								</div>
+								<div class="location traffic" onclick="queryList('33',this)">
+									<div class="title">
+										智慧交通
+									</div>
+									<div class="math" id="33">
+
+									</div>
+								</div>
+
+
+							</div>
+							<!-- 右边 -->
+							<div class="all-right">
+								<div class="left-two">
+									企业排名
+									<div class="layui-input-block downBox">
+										<select name="city" lay-verify="required" class="select" onchange="changeButton(this)">
+											<option value="2">营业收入</option>
+											<option value="3">利税总额</option>
+										</select>
+									</div>
+								</div>
+								<div class="left-three">
+									<img src="../../source/img/title_border_left.png">
+								</div>
+
+								<div class="left-five" id="entList">
+
+								</div>
+								<div class="right-five">
+									数据来源：<span id="dataSource"></span>
+									</br>
+									数据采集截止日期：<span id="dataCollectionTime"></span>
+								</div>
+							</div>
+						</div>
+						<div class="center-foot">
+							<div class="datalogo">
+								<img src="../../source/img/ncbd.png">
+								<span id="systemDepart">南昌市大数据发展管理局</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!--底div-->
+
+		</div>
+	</body>
+</html>

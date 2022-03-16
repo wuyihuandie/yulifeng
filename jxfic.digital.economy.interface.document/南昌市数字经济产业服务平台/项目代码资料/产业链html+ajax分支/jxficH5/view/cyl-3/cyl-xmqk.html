@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业链</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<script type="text/javascript" src="../../source/js/countUp.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<link rel="stylesheet" href="../../source/css/cyl-3/cyl-xmqk.css" />
+		<script type="text/javascript" src="../../source/js/cyl-3/cyl-xmqk.js"></script>
+		
+
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<div class="bigtit">
+						<div class="bicon"></div>
+						<div class="btitle">物联网&lt;省03专项5G项目情况&gt;</div>
+						<select class="selYear" name="city" id="sel">
+							<option value="2020">2020年</option>
+							<option value="2019">2019年</option>
+							<option value="2018">2018年</option>
+						</select>
+					</div>
+					<div class="bcont">
+						<div class="bleft">
+							<div class="sjzl">
+								<div class="border_title_text">数据总览</div>
+								<div class="border_title_line">
+									<div class="bleft"></div>
+									<div class="bcenter"></div>
+									<div class="bright"></div>
+								</div>
+								<div class="l1 ">
+									<div class="fleft">申报总数/同比增长</div>
+									<div class="fright">遴选入围/同比增长</div>
+								</div>
+								<div class="l2">
+									<div class="fleft">
+										<span class="col1" id="NUMS"></span>家，<span class="col1">-</span>%<span class="top"></span><span class="arraw"></span>
+									</div>
+									<div class="fright">
+										<span class="col2" id="RXNUMS"></span>家，<span class="col2">-</span>%<span class="top"></span><span class="arraw"></span>
+									</div>
+								</div>
+								<div class="l1" style="padding-top: 2rem;">
+									<div class="fleft">项目总金额/同比增长</div>
+								</div>
+								<div class="l2">
+									<div class="fleft">
+										<span class="col3" id="AMOUNT"></span>万元，<span class="col3">-</span>%<span class="top"></span><span class="arraw"></span>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="zbqk">
+								<div>
+									<div class="border_title_text">项目类别占比情况</div>
+									<div class="border_title_line">
+										<div class="bleft"></div>
+										<div class="bcenter"></div>
+										<div class="bright"></div>
+									</div>
+								</div>
+								<div class="charts">
+									<div id="chartsZbqk"></div>
+								</div>
+							</div>
+						</div>
+						<div class="bodycenter">
+							<div class="maparea">
+								<div class="graphTitle">
+									<span class="icon"></span>
+									<span class="text">项目分布情况</span>
+								</div>
+								<div class="mapCont">
+									<div id="chartsFBQK"></div>
+								</div>
+							</div>
+							<div class="yyqkarea">
+								<div>
+									<div class="border_title_text">项目应用情况</div>
+									<div class="border_title_line">
+										<div class="bleft"></div>
+										<div class="bcenter"></div>
+										<div class="bright"></div>
+									</div>
+								</div>
+								<div class="yyqk">
+									<div id="chartsYYQK"></div>
+								</div>
+							</div>
+						</div>
+						<div class="bodyright">
+							
+
+
+							<div class="rightTit">
+								<div class="border_title_tab">
+									<div class="on" >入选:<span id="RXRS"></span>家</div>
+									
+								</div>
+								<div class="border_title_line">
+									<div class="bleft"></div>
+									<div class="bcenter"></div>
+									<div class="bright"></div>
+								</div>
+
+
+
+
+							</div>
+							<div class="xmlist">
+								<div class="dyfx_box2">
+									<div>
+										<table class="all-body-middle-pm-table" id="areaTable">
+											<thead>
+												<tr>
+													<th width="15%" class="pdl0 pdr0">排名</th>
+													<th width="45%">项目名称</th>
+													<th>区域</th>
+													<th>项目金额(万元)</th>
+												</tr>
+											</thead>
+											<tbody id="03Specia">
+												<!-- <tr>
+													<td class="i1">1</td>
+													<td>红色智慧平安乡村建设项目</td>
+													<td>高新区</td>
+													<td>1500</td>
+												</tr> -->
+												
+											</tbody>
+										</table>
+									</div>
+									<div class="timePanel">
+										<div class="botTime">
+											数据来源：省统计局、市统计局、市市场监管局
+											</br>
+											数据采集截止日期：2020-10
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<!--底div-->
+
+		</div>
+	</body>
+</html>

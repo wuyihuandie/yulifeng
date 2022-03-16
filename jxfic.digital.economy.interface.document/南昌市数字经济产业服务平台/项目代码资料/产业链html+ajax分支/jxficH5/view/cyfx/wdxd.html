@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>产业布局</title>
+	<script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/zcircleMove.js" ></script>
+	<script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/countUp.js" ></script>
+	<script type="text/javascript" src="../../source/js/cyfx/wdxd.js" ></script>
+
+	<link rel="stylesheet" href="../../source/css/demo/demo.css" />
+	<link rel="stylesheet" href="../../source/css/common.css" />
+	<link rel="stylesheet" href="../../source/css/cyfx/wdxd.css" />
+	<link rel="stylesheet" href="../../source/ico/iconfont.css">
+
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+	<!--头div-->
+	<div class="layui-col-md12 all-head" id="headDiv"></div>
+
+	<!--div(用于背景图)-->
+	<div class="layui-col-md12 all-body-bg">
+		<!--内容div-->
+		<div class="all-body ">
+
+
+			<!--企业分析详情dailog占位-->
+			
+			
+
+			<div class="boxContent ">
+				<div class="svgpanel">
+					<div class="btnback"></div>
+					<svg id="svgfzfx" width="900" height="310">
+						<g>
+							<image x="105" y="0" width="700" height="320" xlink:href="../../source/img/qyfxpng/base.png" />
+						</g>
+						<path d="M140 150 A100 30 0 0 1 710 150  A100 30 180 0 1 140 150"  stroke-width="0" fill="none" id="myPath" />   
+						<g class="svgItem" data-id="4" data-bg="fh_bg.png">
+							<text class="svgTitle" x="-35" y="-20">
+								目标<tspan class="spnTarget">-</tspan>家,已完成<tspan class="spnComplete">-</tspan>家
+							</text>
+							<text class="svgseTitle" x="-35" y="-5" ></text>
+							<image class="svgIcon"  width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/fh.png" />
+							<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/fh_1.png"/>
+							<text class="percent" x="60" y="50" >--%</text>
+							<circle  cx="-30" cy="30" r="30" stroke-width="3" stroke-dasharray="0 188.5"   stroke-linecap="round"  />
+							<animateMotion begin="0s" dur = "45s" repeatCount = "indefinite">
+								<mpath xlink:href="#myPath"/>
+							</animateMotion>
+						</g>
+						<g class="svgItem" data-id="5" data-bg="dl_bg.png">
+							<text class="svgTitle" x="-35" y="-20">
+								目标<tspan class="spnTarget">-</tspan>家,已完成<tspan class="spnComplete">-</tspan>家
+							</text>
+							<text class="svgseTitle" x="-26" y="-5" ></text>
+							<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/dl.png" />
+							<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/dl_1.png"/>
+							<text class="percent" x="60" y="50" >--%</text>
+							<circle  cx="-30" cy="30" r="30" stroke-width="3"  stroke-dasharray="0 188.5" stroke-linecap="round"  />
+							<animateMotion begin="-15s" dur = "45s" repeatCount = "indefinite"  >
+								<mpath xlink:href="#myPath"/>
+							</animateMotion>
+						</g>
+						<g class="svgItem" data-id="6" data-bg="dl_bg.png">
+							<text class="svgTitle" x="-35" y="-20">
+								目标<tspan class="spnTarget">-</tspan>家,已完成<tspan class="spnComplete">-</tspan>家
+							</text>
+							<text class="svgseTitle" x="-26" y="-5" ></text>
+							<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/kp.png" />
+							<image class="svgIcon" width="50" height="50" x="5" y="5" xlink:href="../../source/img/qyfxpng/kp_1.png"/>
+							<text class="percent" x="60" y="50" >--%</text>
+							<circle  cx="-30" cy="30" r="30" stroke-width="3"  stroke-dasharray="0 188.5" stroke-linecap="round"  />
+							<animateMotion begin="-30s" dur = "45s" repeatCount = "indefinite"  >
+								<mpath xlink:href="#myPath"/>
+							</animateMotion>
+						</g>
+						
+						
+					</svg>
+				</div>
+				<div class="qyfxDom">
+					<div id="divCenterTitle" class="cyfx_title_text">五大行动</div>
+					<div class="cyfx_title_line">
+						<div class="bleft"></div>
+						<div class="bcenter"></div>
+						<div class="bright"></div>
+					</div>
+					
+					<div class="tjarea">
+						<div class="charts">
+							<div class="label1">目标：<span id="spnTarget"></span>家</div>
+							<div class="label2"><span id="spnComplete"></span>家</div>
+							<div class="label3">已完成</div>
+							<div class="canvas" >
+								<div id="cvsBackground" class="cvsbg" ></div>
+								<canvas  id="cvsCompletePercent"></canvas>
+							</div>
+						</div>
+						<div class="labelList">
+							<div class="line1">
+								<dd>企业总数</dd>
+								<dt><span id="ENTNUMS">-</span><label id="dw_qyzs"></label></dt>
+							</div>
+							<div class="line2">
+								<dd>规上企业</dd>
+								<dt><span id="GSQY">-</span><label id="dw_gsqy"></label></dt>
+							</div>
+							<div class="line4">
+								<dd>营业收入</dd>
+								<dt><span id="VENDINC">-</span><label id="dw_yysr"></label></dt>
+							</div>
+							<div class="line5">
+								<dd>纳税金额</dd>
+								<dt><span  id="RATGRO">-</span><label id="dw_nsje"></label></dt>
+							</div>
+							<div class="line6">
+								<dd>从业人员</dd>
+								<dt><span id="EMPNUM">-</span><label id="dw_cyry"></label></dt>
+							</div>
+						</div>
+
+					</div>
+
+
+					<!--左上div内容-->
+					<div class="qylist">
+						<table>
+							<thead>
+								<tr>
+									<td class="td1">排名</td>
+									<td class="td2">区域</td>
+									<td class="td3">企业名称</td>
+									<td class="td4">注册资金（万元）</td>
+									<td class="td5">注册日期</td>
+									<td class="td6">企业地址</td>
+									<td class="td7">营业收入（万元）</td>
+									<td class="td8">净利润（万元）</td>
+									<td class="td9">纳税金额（万元）</td>
+									<td class="td10">从业人员（人）</td>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+
+			
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>规格企业运行监测</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<script type="text/javascript" src="../../source/js/countUp.js"></script>
+		<script type="text/javascript" src="../../source/js/seamscroll.min.js"></script>
+		<script type="text/javascript" src="../../source/js/qyfb/pagination.js"></script><!--分页方法js-->
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/layui/layui.js"></script>
+		<link rel="stylesheet" href="../../source/css/qyyxjc/yxjc-2.css" />
+		<script type="text/javascript" src="../../source/js/qyyxjc/yxjc-2.js"></script>
+		<link rel="stylesheet" href="../../source/ico/iconfont.css" />
+		<link rel="stylesheet" href="../../source/css/pagination.css"/>
+
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body">
+					<div class="left">
+						<div class="ltop">
+							<div class="lt-title">
+								<div class="option">
+									企业规模
+									<div class="years">
+										<div class="cleft"></div>
+										<div class="ctitl"><span class="ctitle">2020</span>年</div>
+										<div class="cright"></div>
+									</div>
+									<div class="month">
+										<div class="mleft"></div>
+										<div class="mtitl"><span class="ctitle">12</span>月</div>
+										<div class="mright"></div>
+									</div>
+								</div>
+							</div>
+							<div class="lt">
+								<img src="../../source/img/qyhx/title_right.png">
+							</div>
+							<div class="lt-body">
+								<div class="bodybox">
+									<div class="item qyzs">
+										<dd>企业营收</dd>
+										<dt><span id="VENDINC">-</span>万</dt>
+									</div>
+									<div class="item rjqy">
+										<dd>同比增速</dd>
+										<dt><span id="VENDINCZS">-</span>%</dt>
+									</div>
+								</div>
+								<div class="bodybox">
+									<div class="item gsqy">
+										<dd>纳税金额</dd>
+										<dt><span id="RATGRO">-</span>万</dt>
+									</div>
+									<div class="item rjqy">
+										<dd>同比增速</dd>
+										<dt><span id="RATGROZS">-</span>%</dt>
+									</div>
+								</div>
+								<div class="bodybox">
+									<div class="item gxqy">
+										<dd>从业人员</dd>
+										<dt><span id="EMPNUM">-</span>人</dt>
+									</div>
+									<div class="item rjqy">
+										<dd>同比增速</dd>
+										<dt><span id="EMPNUMZS">-</span>%</dt>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="lfoot">
+							<div class="ftitle">
+								企业知识产权情况
+							</div>
+							<div class="lf">
+								<img src="../../source/img/title_right.png">
+							</div>
+							<div class="lf-body">
+								<div class="lf-button">
+									<div data-tab='patent' class="three-b">
+										专利 &nbsp; <span id="PATENT">0</span>项
+									</div>
+									<div data-tab='copyright' class="three-b bb">
+										软著 &nbsp; <span id="SOFT_WORK">0</span>项
+									</div>
+									<div data-tab='brand' class="three-b">
+										商标 &nbsp; <span id="BRAND">0</span>项
+									</div>
+								</div>
+								<div class="lf-exchange" id="pat">
+									<div class="topic">
+										<table>
+											<thead>
+												<tr>
+													<th width="10%">序号</th>
+													<th width="50%">名称</th>
+													<th width="20%">公开日期</th>
+													<th width="20%">操作</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+									<div class="details">
+										<table>
+											<tbody class="tbody" id="patentList"></tbody>
+										</table>
+									</div>
+									
+								</div>
+								<div class="lf-exchange" id="cop">
+									<div class="topic">
+										<table>
+											<thead>
+												<tr>
+													<th width="10%">序号</th>
+													<th width="50%">软件名称</th>
+													<th width="20%">发布日期</th>
+													<th width="20%">操作</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+									<div class="details">
+										<table>
+											<tbody class="tbody" id="entList"></tbody>
+										</table>
+									</div>
+								</div>
+								<div class="lf-exchange" id="bra">
+									<div class="topic">
+										<table>
+											<thead>
+												<tr>
+													<th width="10%">序号</th>
+													<th width="50%">商标名称</th>
+													<th width="20%">申请日期</th>
+													<th width="20%">操作</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+									<div class="details">
+										<table>
+											<tbody class="tbody" id="brandList"></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="center">
+						<div class="ctop">
+
+							<div class="cdata">
+								<div class="one ">
+									<div class="company" id="ENTNAME">
+
+									</div>
+									<div class="particulars" onclick="toDetails();">
+										<img src="../../source/img/yxjc/qyxq.png">
+									</div>
+								</div>
+								<div class="two">
+									<span>国民经济行业分类:<span id="CODE_NAME"></span></span>
+								</div>
+								<div class="three">
+									<div class="border">
+
+									</div>
+									<div class="name">
+										统一社会信用代码/注册号:
+									</div>
+									<div class="math" id="UNISCID">
+									</div>
+								</div>
+								<div class="four">
+									<div class="border">
+
+									</div>
+									<div class="name">
+										法定代表人:
+									</div>
+									<div class="math" id="NAME">
+									</div>
+								</div>
+								<div class="five">
+									<div class="border">
+
+									</div>
+									<div class="name">
+										地址:
+									</div>
+									<div class="math" id="DOM" style="font-size:1rem;">
+
+									</div>
+								</div>
+
+
+								<div class="six">
+									<div class="left">
+										<div class="border">
+
+										</div>
+										<div class="name">
+											成立日期:
+										</div>
+										<div class="math" id="ESTDATE">
+										</div>
+									</div>
+								</div>
+								<div class="six">
+									<div class="left">
+										<div class="border">
+
+										</div>
+										<div class="name">
+											注册资金:
+										</div>
+										<div class="math" id="REGCAP">
+										</div>
+									</div>
+								</div>
+
+								<div class="rbody">
+
+								</div>
+							</div>
+						</div>
+						<div class="cfoot">
+							<div class="title">
+								<div class="option">
+									企业<span class="chartTitle">累计营收</span>趋势
+									<select  name="city" onchange="changeSelect(this)">
+										<option value="2">营业收入</option>
+										<option value="3">累计纳税</option>
+										<!--<option value="4">利润总额</option>-->
+										<option value="5">从业人员</option>
+									</select>
+								</div>
+							</div>
+							<div class="tf">
+								<img src="../../source/img/title_right.png">
+							</div>
+							<div class="ft-body" id="chartsTrend">
+
+							</div>
+						</div>
+					</div>
+					<div class="right">
+						<div class="rtop">
+							<div class="left3">
+								<div class="company companyExg" onclick="getProjectDatas()">
+									<div class="companyCenter" >
+										项目
+									</div>
+									<div class="companyCenter">
+										<span id="projectNum">-</span>个
+									</div>
+								</div>
+								<div class="company" onclick="getRewardDatas()">
+									<div class="companyCenter" >
+										 证书
+									</div>
+									<div class="companyCenter">
+										<span id="rewardNum">-</span>项
+									</div>
+								</div>
+							</div>
+							<div class="left4">
+								<div class="programa1">
+								</div>
+								<div class="programa2">
+									<table id="DataTable">
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="rfoot">
+							<div class="title">
+								<div class="option">
+									舆情信息
+								</div>
+							</div>
+							<div class="rft">
+								<img src="../../source/img/title_right.png">
+							</div>
+							<div class="rfbody">
+								<div class="qyhx_cont ryqxx">
+									<div class="inner" id="qytable">
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--底div-->
+
+		</div>
+	</body>
+
+</html>

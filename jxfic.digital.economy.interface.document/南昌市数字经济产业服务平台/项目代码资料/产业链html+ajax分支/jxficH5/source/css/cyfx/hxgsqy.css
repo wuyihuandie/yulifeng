@@ -1,0 +1,233 @@
+html, body{
+	overflow-y: initial;
+}
+
+.all-body{display: flex;width: 96%;}
+
+
+.lay_left{width: 30%;height: 100%; }
+.lay_left .line1{position: relative;width: 100%;height: 5%;}
+.lay_left .line2{width: 100%;height: 30%;}
+.lay_left .line3{width: 100%;height: 30%;}
+.lay_left .line3 .pieDom{height: 15rem;}
+.lay_left .line4{width: 100%;height: 30%;}
+.lay_left .line4 .pieDom{height: 15rem;}
+
+
+.box_wdxd{display: grid; grid-template-rows: 3.5rem auto;}
+.box_wdxd .titles{}
+.box_wdxd .svgpanel{padding: 1rem;}
+
+
+
+
+.lay_right{width: 70%;height: 100%; overflow: hidden; display: grid; grid-template-rows: 65% 35%; }
+.lay_right .right1{ display: grid; grid-template-columns: 60% auto;}
+.lay_right .right1 .r_left{ display: grid; grid-template-rows: 42% 58%;}
+.lay_right .right1 .r_left .box_hxcy{ display:grid; grid-template-rows: 3.5rem auto; }
+.lay_right .right1 .r_left .box_hxcy .rect{display: grid; grid-template-columns: 50% auto; padding: 1rem 1.5rem; }
+.lay_right .right1 .r_left .box_hxcy .rect>div{margin: 0 0.2rem;}
+
+
+
+.lay_right .right1 .r_left .box_wdxd{}
+
+.lay_right .right1 .r_right{height: 100%;  overflow: hidden;  display: grid;   grid-template-rows: 3.5rem auto; }
+.lay_right .right1 .r_right .pmlist{padding: 1rem; overflow: hidden;}
+
+.lay_right .right2{display: grid; grid-template-rows: 3.5rem auto; }
+.lay_right .right2 .chartlist{padding: 1rem; display: grid; grid-template-columns: 33.3% 33.3% auto}
+
+#chart1{}
+#chart2{}
+#chart3{}
+
+
+/*左侧区域*/
+.calendar{width: 10rem;  height: 2.4rem; line-height: 2.4rem; display: grid; grid-template-columns: 1.7rem auto 1.7rem;
+position:absolute;  right: 0; bottom: 0;}
+.calendar .cleft{background-image: url(../../img/last@2x.png); background-size: 100% 100%; cursor: pointer;  }
+.calendar .ctitl{margin: 0 0.3rem; background: #0a5f81;  color: #fff; text-align: center;font-size: 20px; }
+.calendar .cright{background-image: url(../../img/next@2x.png); background-size: 100% 100%;  cursor: pointer;   }
+
+/*核心企业总览*/
+.qyitems{padding:0.5rem 1rem 0 1rem; display: grid; grid-template-columns: 70% auto; grid-template-rows: 3.5rem 3.5rem 3.5rem 3.5rem; }
+.qyitems .item{margin: 0.6rem 3%; background-size: 100% 100%; position: relative; }
+.qyitems .item.qyzs{background-image: url(../../img/cyfx/qyys.png); }
+.qyitems .item.rjqy{background-image: url(../../img/cyfx/zs.png); }
+.qyitems .item.gsqy{background-image: url(../../img/cyfx/rjqyys.png); }
+.qyitems .item.ssqy{background-image: url(../../img/cyfx/qyys.png); }
+.qyitems .item.gxqy{background-image: url(../../img/cyfx/yjqyys.png); }
+.qyitems .item.xzqy{background-image: url(../../img/cyfx/xzqy.png); }
+.qyitems .item dd{position: absolute; font-size: 1rem; left: 20%; bottom: 20%;}
+.qyitems .item dt{position: absolute; font-size: 0.9rem; left:60%; bottom: 20%;}
+.qyitems .item dt span{ font-size: 1.9rem; font-family:'electronicFont';color: yellow;}
+
+
+
+
+/*数字经济核心产业*/
+.box_hxcy .rect .rectleft{  background: url(../../img/cyfx/k2.png) no-repeat; background-size: 100% 100%; border: 1px dashed #888888; position: relative; }
+.box_hxcy .rect .rectleft .borders{width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: rgba(49,247,251,0.1);}
+.box_hxcy .rect .rectleft .borders .blt{width: 7rem; height: 1rem; border:2px solid #20ffee; border-bottom: none; border-right: none; position: absolute; left: 0; top: 0;}
+.box_hxcy .rect .rectleft .borders .brt{width: 1rem; height: 4rem; border:2px solid #20ffee; border-left: none; border-bottom: none; position: absolute; right: 0; top: 0;}
+.box_hxcy .rect .rectleft .borders .brb{width: 1rem; height: 1rem; border:2px solid #20ffee; border-left: none; border-top: none; position: absolute; right: 0; bottom: 0;}
+.box_hxcy .rect .rectleft .borders .blb{width: 1rem; height: 1rem; border:2px solid #20ffee; border-top: none; border-right: none; position: absolute; left: 0; bottom: 0;}
+.box_hxcy .rect .rectleft .l1{width: 100%; text-align: center; font-size: 1.1rem; font-weight: 500; position: absolute; top: 5%;font-weight:bold}
+.box_hxcy .rect .rectleft .lbtn{width: 15rem; height: 1.875rem; line-height:1.875rem; text-align: center;  background-image: url(../../img/cyfx/xz.png); 
+	background-size: 100% 100%; position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.8rem; cursor: pointer;color: #c3d6ef;}
+.box_hxcy .rect .rectleft .lbtn.btn1{top: 25%;}
+.box_hxcy .rect .rectleft .lbtn.btn2{top: 50%;}
+.box_hxcy .rect .rectleft .lbtn.btn3{top: 75%;}
+
+
+
+
+.box_hxcy .rect .rectright{   background: url(../../img/cyfx/k.png) no-repeat;background-size: 100% 100%; cursor: pointer; position: relative;}
+.box_hxcy .rect .rectright .borders{width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: rgba(76,194,255,0.1);}
+.box_hxcy .rect .rectright .borders .blt{width: 1rem; height: 4rem; border:2px solid #20ffee; border-bottom: none; border-right: none; position: absolute; left: 0; top: 0;}
+.box_hxcy .rect .rectright .borders .brt{width: 7rem; height: 1rem; border:2px solid #20ffee; border-left: none; border-bottom: none; position: absolute; right: 0; top: 0;}
+.box_hxcy .rect .rectright .borders .brb{width: 1rem; height: 1rem; border:2px solid #20ffee; border-left: none; border-top: none; position: absolute; right: 0; bottom: 0;}
+.box_hxcy .rect .rectright .borders .blb{width: 1rem; height: 1rem; border:2px solid #20ffee; border-top: none; border-right: none; position: absolute; left: 0; bottom: 0;}
+.box_hxcy .rect .rectright .textitem{font-size: 1.1rem;font-weight:bold }
+
+
+
+
+
+
+
+.growColumn .star { position: relative;}
+.growColumn .star i{ position: absolute; display: inline-block; border:2px solid rgba(255,255,255,.7); width: 6px; height: 6px;}
+.growColumn .star i.a1{ top: 0; left: 0; border-right: none; border-bottom: none;}
+.growColumn .star i.a2{ top:0; right: 0; border-bottom: none; border-left: none;}
+.growColumn .star i.a3{ bottom:0; right: 0; border-top: none; border-left: none;}
+.growColumn .star i.a4{ bottom:0; left: 0; border-top: none; border-right: none;}
+ 
+
+
+
+
+
+
+
+.cyfx_title_text{padding-top: 0.8rem; font-size: 1.2rem; text-indent: 2.6rem; overflow: hidden; }
+.cyfx_title_line{height:1.5rem; margin: 0 1rem; display: grid; grid-template-columns: 250px auto 5px; overflow: hidden;}
+.cyfx_title_line .bleft{ background: url(../../img/title_border_left.png);  background-repeat:repeat-x; background-size:auto 100%; }
+.cyfx_title_line .bcenter{ background: url(../../img/title_border_center.png);  background-repeat:repeat-x; background-size:auto 100%; }
+.cyfx_title_line .bright{ background: url(../../img/title_border_right.png);  background-repeat:repeat-x; background-size:auto 100%; }
+
+
+
+
+
+
+
+
+.rectbox{display: flex; align-items: center; text-align: center;}
+.rectbox .textitem{width: 100%; text-align:center;}
+
+
+
+
+
+
+/*矩形容器高亮提示*/
+.rectbox{position: relative;}
+.rectbox svg{}
+svg .line1 { stroke-dasharray: 300; stroke-dashoffset:40; animation: dash 1.5s linear alternate infinite; } 
+@keyframes dash { from { stroke-dashoffset: 340; } to { stroke-dashoffset: 40; }}
+
+
+
+
+
+
+
+
+
+/*顶部标签样式*/
+.growColumn ul{display:grid; grid-template-columns:25% 25% 25% 25%; }
+.growColumn ul li{ 
+	 margin: 0 0.5rem;  position:relative;  padding:.4rem 0; text-align: center;
+	color:#fff; background:rgba(6,172,189,.4); border:1px solid rgba(6,172,189,.6); cursor: pointer;}
+.growColumn ul li.star{ background:rgba(6,172,189,1); border:1px solid #30c1d4;}
+
+
+
+.rTbox .layui-table, .rTbox .layui-table tr td, .rTbox .layui-table tr th, .rTbox .layui-table thead tr{ background: none; border: none; color: #fff;cursor: pointer;}
+
+.rTbox .layui-table tbody tr:hover{background: rgba(6,171,188,.5);}
+
+.rTbox .layui-table tbody{ text-align: center;}
+
+
+
+.timePanel{position: relative;}
+.timePanel .botTime{position: absolute; right: 0; top: 1rem;}
+.botTime{ 
+    font-size: 0.54rem;
+    line-height: 2.2rem;
+    width: 23rem;
+    text-align: center;
+    height: 2.2rem;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAd0AAAArCAYAAAA9gVLeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OEIwM0Y2M0NDRjBFMTFFQTk0NUY5NzgwODM3NERDNzYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OEIwM0Y2M0RDRjBFMTFFQTk0NUY5NzgwODM3NERDNzYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4QjAzRjYzQUNGMEUxMUVBOTQ1Rjk3ODA4Mzc0REM3NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4QjAzRjYzQkNGMEUxMUVBOTQ1Rjk3ODA4Mzc0REM3NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsjRYXAAAALrSURBVHja7N3Lb4xRGAfg6agoFh2jJSWNhogWTUhcQ6hLEyVoqpWgLCqNyw4bbIiN7liKP4GdJYnESiwspFvL2li4bEiYmc85aCJCIo3zmdbzJG/6Zb5Je+bt4pdpJ/k1LH397nqhULhWAACSagwTQ7ep4c377sZ7D+9YCQD8fZ/PDj0ofr++kpWbX1WGes9YCwCkMRm6WZhz2cLSx8pg76i1AEC60I2qYU5kLaW5lSN7R6wGANKFbvQpzOGsdUFbZWDPSesBgHShG30I05ctKndWDvUctSIASBe60duvwbukdUvlwI5+awKAdKEbvfoavO2L91X6tvdZFQCkC93oZZh92bK2Y9XeLbutCwCmrvEPnjMeg7e2ov1x4dPnj7OePH9qbQDw99/pTnoWpr/WtfxSdXN3t7UBQLrQjR6FGa6t77xR61653OoAIF3oRvfDnK9uW3er1rGk1foAIF3oRnfDXK1tWjuYlZvnWSEApAvdaCwE7ovq3s2nrBAA0oZudFUzEQDkE7qaiQAgp9CNNBMBQE6hG2kmAoCcQjfSTAQAOYVupJkIAHIK3UgzEQDkFLqRZiIA+IXGRN9XMxEA5PBOd5JmIgDIKXQjzUQAkFPoRpqJACCn0I00EwEgdHP8WZqJABC6OYrNRBOaiQAQuunFZqLz2cLSB81EAAjd9GIz0XDWUmrSTASA0E0vNhP1ayYC4L8wd87sfxm6kWYiAP4LlYM7T4cvt4v/+ByaiQCY2YE72DualZtj3l0s1sF5NBMBMDMDd2DPqaylND9cjky0NmfFOjmXZiIAZlbgHuoZyhaVV4XLgRC48bNMyVqGpkIzEQAzI3D7tsd/ne4Kl1tD4L6ffLxYZ+fUTATAtFbt2bgtW9Z2PFzuD4E78eO9Yh2eVzMRANMzcDes6ap1dlwofPuT8vjP94t1em7NRABMKzGvahtWjxW+fWjq8a+e07D09bt6fg2Xw9z0qwRgmrgSAnfsdze/CDAAZLL15z7gB6sAAAAASUVORK5CYII=) no-repeat;
+    background-size: 100% auto; background-repeat: no-repeat;
+    color: #1beaf0;
+}
+
+.botTime em{ font-style: normal;}
+
+.topHeader th{ padding-left: 0px; padding-right: 0px; font-size: 1rem; color:#0cb5d5 !important; font-size: 20px; font-weight: normal; padding-bottom:10px;}
+
+.layui-table thead{ position: absolute; top: 0; width: 100%;}
+
+.rTbox .layui-table{ width: 100%;}
+
+.rTbox{ height: 95%; overflow-y: auto;}
+
+.rTbox .layui-table tr td i{font-style: normal;}
+
+.rTbox .layui-table tr:nth-child(2) td i, .rTbox .layui-table tr:nth-child(1) td i, .rTbox .layui-table tr:nth-child(3) td i
+{ height: 18px; width: 18px; display: inline-block; line-height: 18px; text-align: center; border-radius: 50px; text-indent:-1px; border: 1.5px solid rgba(20,63,110,1);
+  vertical-align: middle;
+}
+
+.rTbox .layui-table tr:nth-child(1) td i{
+	background: #c7453e;
+	box-shadow: 0 0 0 2px #c7453e;
+}
+
+.rTbox .layui-table tr:nth-child(2) td i{
+	background: #d77b2f;
+	box-shadow: 0 0 0 2px #d77b2f; 
+}
+
+.rTbox .layui-table tr:nth-child(3) td i{
+	background: #179068;
+	box-shadow: 0 0 0 2px #179068;
+}
+
+.titles{position: relative;}
+.btn_more{height: 2rem; line-height: 2rem; padding: 0 1rem; border: 1px solid #31f7fb; border-radius: 2rem; 
+ background-color: #125071; font-size: 1rem; position: absolute; right: 1.2rem; top: 0.5rem; cursor: pointer;}
+
+
+
+
+.svgpanel{position: relative;  }
+.svgpanel>svg{ left: 50%; top: 50%; transform: translate(-50%,-50%);   position: absolute; }
+.svgpanel .svgItem{cursor: pointer;  transition:all 0.2s ease-out;}
+.svgpanel .svgItem circle{stroke:#3bf9a5; fill: none; transform: rotateZ(-90deg);}
+.svgpanel .svgItem .svgTitle{font-size: 10px; fill:#ffffff;}
+.svgpanel .svgItem .svgTitle .spnTarget{ font-size: 20px;}
+.svgpanel .svgItem .svgTitle .spnComplete{fill: #9EFFBA; font-size: 20px;}
+.svgpanel .svgItem .svgseTitle{fill:#28f7ff; font-size: 12px;}
+.svgpanel .svgItem .percent{font-size: 10px; fill: #fff;}
+
+
+.svgpanel .svgItem:hover{transform: scale(1.05) translate(-2px,-2px);}
+.svgpanel .svgItem:hover circle{stroke:#e9f937;}
+.svgpanel .svgItem:hover .svgseTitle{fill:#eafa37; }
+.svgpanel .svgItem:hover .spnTarget{fill: #eafa37}
+.svgpanel .svgItem:hover .spnComplete{fill: #67F990}

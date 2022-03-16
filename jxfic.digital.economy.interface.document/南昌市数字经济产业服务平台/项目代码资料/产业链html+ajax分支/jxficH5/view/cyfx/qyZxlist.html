@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>企业列表</title>
+	<script type="text/javascript" src="../../source/js/public.js"></script><!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/includefile.js"></script><!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/cyfx/zxQylb.js"></script>
+	<link rel="stylesheet" href="../../source/css/common.css"/>
+	<style>
+		body{height: 100vh}
+		input::-webkit-input-placeholder{
+			color:#fff;
+		}
+		.layui-table td, .layui-table th {
+			text-align: center;
+			font-size: 0.8rem;
+		}
+		.layui-card-header {
+			padding: 0;
+			margin: 15px 0;
+			text-align: right;
+			padding-bottom: 15px;
+			font-size: 0.9rem;
+		}
+		.layui-btn-sm {
+			font-size: 0.8rem;
+		}
+		.layui-form-item .layui-inline {
+			color: #fff;
+		}
+		.layui-input, .layui-select, .layui-textarea {
+			border: 1px solid #ccc;
+			background-color: #0c3154;
+			color: #fff;
+		}
+		.layui-table{
+			background: none;
+			color: #fff;
+		}
+		.layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row] {
+			border: none;
+		}
+		.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even) {
+			background: none;
+		}
+		.layui-table-sort[lay-sort=asc] .layui-table-sort-asc{
+			border-bottom-color: red;
+		}
+		.layui-table-sort[lay-sort=desc] .layui-table-sort-desc {
+			border-top-color: red;
+		}
+		.layui-form-select dl {
+			color: #000;
+		}
+		.layui-laypage a, .layui-laypage span {
+			color: #fff;
+			font-size: 0.8rem;
+		}
+		.layui-laypage input {
+			background: none;
+		}
+		.layui-laypage button{
+			background-color: #009688;
+			border:none;
+			color:#fff;
+		}
+		.layui-laypage select{
+			background: none;
+			color:#fff;
+		}
+		.layui-laypage select option{
+			color:#000;
+		}
+		.layui-layer-setwin .layui-layer-close2 {
+			position: absolute;
+			right: -10px;
+			top: -10px;
+		}
+		#industrydiv .layui-form-select dl dd:nth-child(n+4) {
+			cursor: pointer;
+			color: #666565;
+		}
+		.layui-form-select dl dd, .layui-form-select dl dt {
+			line-height: 20px;
+		}
+	</style>
+</head>
+<body>
+<!--内容div-->
+<div class="all-body">
+	<div class="layui-card-body">
+		<div class="layui-form layui-card-header layuiadmin-card-header-auto">
+			<div class="layui-form-item">
+				<div class="layui-inline" style=";float:left;font-size: 0.8rem;">
+					<label class="layui-form-label" style="width: auto;font-weight: 500;" id="title"></label>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label" style="width: auto;">企业名称</label>
+					<div class="layui-input-inline">
+						<input id="ENTNAME" name="ENTNAME" type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label" style="width: auto;">统一社会信用代码</label>
+					<div class="layui-input-inline">
+						<input id="UNISCID" name="UNISCID" type="text" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-inline" id="areadiv">
+					<label class="layui-form-label" style="width: auto;">所属地区</label>
+					<div class="layui-input-inline" style="text-align: left">
+						<select id="AREA_VALUE" name="AREA_VALUE">
+							<option value="">--请选择--</option>
+							<option value="360102">东湖区</option>
+							<option value="360103">西湖区</option>
+							<option value="360104">青云谱区</option>
+							<option value="360105">湾里局</option>
+							<option value="360106">高新开发区</option>
+							<option value="360108">经济开发区</option>
+							<option value="360111">青山湖区</option>
+							<option value="360121">南昌县</option>
+							<option value="360122">新建区</option>
+							<option value="360123">安义县</option>
+							<option value="360124">进贤县</option>
+							<option value="360125">红谷滩区</option>
+							<option value="360126">临空经济区</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-inline" id="industrydiv">
+					<label class="layui-form-label" style="width: auto;">所属行业</label>
+					<div class="layui-input-inline" style="text-align: left">
+						<select id="INDUSTRY" name="INDUSTRY">
+							<option value="">--请选择--</option>
+							<option value="NK01">计算机、通信和其他电子设备制造业</option>
+							<option value="NK05" >信息传输、软件和信息技术服务业</option>
+							<option value="NK02" >&nbsp &nbsp &nbsp电信、广播电视和卫星传输服务</option>
+							<option value="NK03" >&nbsp &nbsp &nbsp互联网和相关 服务</option>
+							<option value="NK04">&nbsp &nbsp &nbsp软件和信息技术服务业</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-inline">
+                   <span class="layui-btn layuiadmin-btn-list layui-btn-sm" id="query" data-type="reload">查询</span>
+				</div>
+				<div class="layui-inline">
+					<button class="layui-btn layuiadmin-btn-list layui-btn-sm" id="exports" >导出报表</button>
+				</div>
+			</div>
+		</div>
+		<table id="demo" lay-filter="test"></table>
+	</div>
+</div>
+</body>
+</html>

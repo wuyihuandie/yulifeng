@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>企业名录</title>
+    <script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+    <script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+    <link rel="stylesheet" href="../../source/layui/css/layui.css">
+    <script src="../../source/layui/layui.js"></script>
+    <script src="../../source/js/qycx/qyml.js"></script>
+    <script src="../../source/js/jquery.nicescroll.js"></script>
+    <style>
+        .all-body div{
+            width: 21%;
+            margin:1% 1.5% 0 1.5%;
+            height: 29%;
+            float: left;
+            border: 2px solid rgba(49, 247, 251, 0.45);
+            background: #072B53;
+        }
+        .left_body{
+            margin-left: 3%!important;
+        }
+        .right_body{
+            margin-right: 2%!important;
+        }
+        .all-body div h3{
+            margin-top: 3%;
+            margin-left: 3%;
+            margin-right: 3%;
+            font-weight: bold;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .all-body div h3 span{
+            float: right;
+            font-weight: normal;
+            font-size: 1.3rem;
+            color: #9ACDE0;
+        }
+        .all-body div p{
+            margin-left: 3%;
+            margin-right: 3%;
+            line-height: 30px;
+            margin-top: 3%;
+            font-size: 1rem;
+            height: 60%;
+        }
+        .detail{
+            text-align: right;
+            color: #1beaf0;
+            height: 10%!important;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12" style="overflow: hidden;">
+    <!--头div-->
+    <div class="layui-col-md12 all-head" id="headDiv">
+
+    </div>
+    <!--div(用于背景图)-->
+    <div class="layui-col-md12 all-body-bg">
+        <!--内容div-->
+        <div class="all-body">
+        </div>
+    </div>
+    <!--底div-->
+
+</div>
+</body>
+</html>

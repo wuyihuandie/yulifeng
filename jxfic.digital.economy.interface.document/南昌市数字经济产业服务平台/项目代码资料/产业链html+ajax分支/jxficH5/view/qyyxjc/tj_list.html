@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>企业列表</title>
+    <script type="text/javascript" src="../../source/js/public.js"></script><!--公共引入js、css-->
+    <script type="text/javascript" src="../../source/js/includefile.js"></script><!--公共方法js-->
+    <script type="text/javascript" src="../../source/js/qyyxjc/tj_list.js"></script>
+    <style>
+        .layui-table{
+            width: 94%;
+            margin: auto;
+            margin-top:20px;
+            background-color: rgba(49, 247, 251, 0.03);
+            color: #fff;
+        }
+        .layui-table th,.layui-table td{
+            padding: 0px 3px;
+            height: 34px;
+            text-align: center;
+            border: #05254A 2px solid
+        }
+        .data_body td{
+            height: 50px;
+        }
+        .layui-table tbody tr:hover {
+            background-color: rgba(49, 247, 251, 0.5);
+        }
+        /*模拟对角线*/
+        .out{
+            width: 100%;
+            height: 100%;
+            position:relative;/*让里面的两个子容器绝对定位*/
+        }
+        .out b{font-style:normal;display:block;position:absolute;top:15px;left:170px;width:100px;}
+        .out em{font-style:normal;display:block;position:absolute;top:63px;width:100px!important;}
+        .out .t_line{
+            display: block;
+            width: 110%;
+            height: 2px;
+            background: #05254A;
+            -webkit-transform: rotate(20deg);
+            -ms-transform: rotate(20deg);
+            -moz-transform: rotate(20deg);
+            transform: rotate(20deg);
+            position: absolute;
+            top: 54px;
+            left: -13px;
+        }
+        .title_one{
+            background: rgba(49, 247, 251, 0.4);
+            color: #EDF6A5;
+        }
+        .title_second{
+            background: rgba(49, 247, 251, 0.2);
+            color: #09b4cd;
+        }
+        .title_third{
+            background: rgba(49, 247, 251, 0.15);
+            color: #78E9F9;
+        }
+        .title_fourth{
+            background: rgba(49, 247, 251, 0.1);
+            color: #D4FAFF;
+        }
+        .bg3{
+            background: rgba(49, 247, 251, 0.3);
+        }
+        .sort_th{
+            cursor: pointer;
+        }
+        .exportBtn {
+            margin-left: 300px;
+            padding: 0.3rem 0.5rem;
+            background-color: #0ca0a3;
+            cursor: pointer;
+        }
+        .border_title_text{ font-size: 1rem; position: relative;padding-left: 30px;}
+        .border_title_text>select{position: absolute;right: 0;top: 0;}
+        .years{position: absolute;left: 0px;top: 0;width: 142px; height: 30px; line-height: 1.875rem; display: flex;}
+        .years .cleft{width: 30px;height: 30px; background: url(../../source/img/last@2x.png) no-repeat; background-size:100% 100%; cursor: pointer;  }
+        .years .ctitl{width: 82px;height: 30px; background: #0a5f81;  color: #fff; text-align: center;font-size: 16px; margin-left: 5px;}
+        .years .cright{width: 30px;height: 30px;background-image: url(../../source/img/next@2x.png); background-size: 100% 100%;  cursor: pointer;margin-left: 5px;   }
+
+
+        .month{position: absolute;left: 160px;top: 0;width: 142px; height: 30px; line-height: 1.875rem; display: flex;}
+        .month .mleft{width: 30px;height: 30px; background: url(../../source/img/last@2x.png) no-repeat; background-size:100% 100%; cursor: pointer;  }
+        .month .mtitl{width: 82px;height: 30px; background: #0a5f81;  color: #fff; text-align: center;font-size: 16px; margin-left: 5px;}
+        .month .mright{width: 30px;height: 30px;background-image: url(../../source/img/next@2x.png); background-size: 100% 100%;  cursor: pointer;margin-left: 5px;   }
+
+        .title_select{
+            background-color: transparent;
+            color: #D4FAFF;
+            border: none;
+        }
+        .title_select option {
+            background-color: #0bb8d4;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+    <!--头div-->
+    <div class="layui-col-md12 all-head" id="headDiv">
+    </div>
+
+    <!--div(用于背景图)-->
+    <div class="layui-col-md12 all-body-bg">
+        <!--底div-->
+        <div style="width: 93%;margin: auto;font-size: 0.8rem;">
+            <div class="border_title_text">
+                <div class="years">
+                    <div class="cleft"></div>
+                    <div class="ctitl"><span class="ctitle"></span>年</div>
+                    <div class="cright"></div>
+                </div>
+                <div class="month">
+                    <div class="mleft"></div>
+                    <div class="mtitl"><span class="ctitle"></span>月</div>
+                    <div class="mright"></div>
+                </div>
+                <select style="height: 2rem; border:1px solid #ccc; background-color: #0c3154; color: #fff;" name="areaSelect" onchange="changeData(this)">
+                    <option value="1">信息传输、软件和信息技术服务业</option>
+                    <option value="2">互联网和相关服务业、软件和信息技术服务业</option>
+                    <option value="5">电信、广播电视和卫星传输服务</option>
+                    <option value="3">互联网和相关服务业</option>
+                    <option value="4">软件和信息技术服务业</option>
+                </select>
+                <span class="exportBtn" onclick="exportData()">导出</span>
+            </div>
+
+        </div>
+        <table id="demo" class="layui-table" cellspacing="1px">
+            <tr>
+                <th class="bg3" rowspan="3">序号</th>
+                <th colspan="2" rowspan="3" style="width: 16%;background: rgba(49, 247, 251, 0.3);">
+                    <div class="out">
+                        <b>数据指标</b>
+                        <span class="t_line"></span>
+                        <em>统计维度</em>
+                    </div>
+                </th>
+                <th colspan="8" class="title_second">1-<span class="lastmonth"></span>月实际上报</th>
+                <th colspan="6" class="title_second"><span class="localmonth"></span>月预测上报</th>
+            </tr>
+            <tr>
+                <th colspan="2" class="title_third">企业数量（家）</th>
+                <th colspan="6" class="title_third">营业收入（万元）</th>
+                <th colspan="2" class="title_third">企业数量（家）</th>
+                <th colspan="4" class="title_third">营业收入（万元）</th>
+            </tr>
+            <tr>
+                <th class="title_fourth">全年规上企业目标</th>
+                <th class="title_fourth">
+                    <select class="title_select" onchange="changeActualColumn(this)">
+                        <option value="actual_gsqy_num" selected>规上企业</option>
+                        <option value="actual_sgqy_num">上规企业</option>
+                        <option value="actual_xgqy_num">下规企业</option>
+                    </select>
+                </th>
+                <!--<th class="title_fourth ac_sg sort_th">上规企业</th>
+                <th class="title_fourth ac_xg sort_th">下规企业</th>-->
+                <!--<th class="title_fourth ac_qz sort_th">潜在上规企业</th>-->
+                <th class="title_fourth ac_ys sort_th">本年本期累计</th>
+                <th class="title_fourth">去年同期累计</th>
+                <th class="title_fourth ac_yszs sort_th">同比增速（%）</th>
+                <th class="title_fourth feedback_zs sort_th">反馈增速（%）</th>
+                <th class="title_fourth">目标增速（%）</th>
+                <th class="title_fourth ac_gxd sort_th">贡献度（%）</th>
+                <th class="title_fourth">规上企业目标</th>
+                <th class="title_fourth">
+                    <select class="title_select" onchange="changeYcColumn(this)">
+                        <option value="yg_gsqy_num" selected>规上企业</option>
+                        <option value="yg_sgqy_num">上规企业</option>
+                        <option value="yg_xgqy_num">下规企业</option>
+                    </select>
+                </th>
+                <!--<th class="title_fourth yc_sg sort_th">上规企业</th>
+                <th class="title_fourth yc_xg sort_th">下规企业</th>-->
+                <th class="title_fourth yc_ys sort_th">本年本期累计</th>
+                <th class="title_fourth yc_yszs sort_th">同比增速（%）</th>
+                <th class="title_fourth">目标增速（%）</th>
+                <th class="title_fourth yc_gxd sort_th">贡献度（%）</th>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>单点登录</title>
+		<script type="text/javascript" src="source/js/public.js"></script>
+		<script type="text/javascript" src="source/js/includefile.js"></script>
+	</head>
+	<body>
+		登录中请稍后...
+	</body>
+	<script>
+		flag="login";
+		$(function(){
+			var code = getUrlValue("code");
+			if(!code){
+				alert("code参数为空！")
+			}else{
+				$.ajax({
+					type: 'POST',
+					url : BASE_URL+'/ysnc_login',
+					data:{code:code},
+					success : function(text) {
+						var jsonData = JSON.parse(text);
+						console.log("jsonData:"+jsonData.status)
+						if(jsonData.status=='1'){
+							setCookie("token",jsonData.token,expireTime);//token存入cookie 24小时
+							setCookie("username",jsonData.user.username,expireTime);//token存入cookie 24小时
+							setCookie("area_value",jsonData.user.areacode,expireTime);//token存入cookie 24小时
+							setCookie("area_name",jsonData.user.area_name,expireTime);//token存入cookie 24小时
+							setCookie("realname",jsonData.user.realname,expireTime);//token存入cookie 24小时
+							window.location.href="view/sy/sy-nc2.html?menuType=0";
+						}else{
+							alert("登录失败");
+							window.location.href=LOGIN_URL;
+						}
+					}
+				})
+			}
+		})
+		function getUrlValue(name){
+			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
+		}
+	</script>
+</html>

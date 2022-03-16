@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>信息传输、软件和信息技术服务业</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/countUp.js"></script>
+		<script type="text/javascript" src="../../source/js/rjsdl/rjsdl-2.js"></script>
+		<script type="text/javascript" src="../../source/js/qyfb/pagination.js"></script>
+		<!--分页方法js-->
+		<link rel="stylesheet" href="../../source/css/rjsdl/rjsdl-2.css" />
+		<link rel="stylesheet" href="../../source/ico/iconfont.css">
+		<!--字体样式-->
+		<link rel="stylesheet" href="../../source/css/pagination.css" />
+		<!--分页样式-->
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv">
+			</div>
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+			    <!--内容div-->
+			    <div class="all-body">
+					<!-- 首栏 -->
+					<div class="one">
+						<!-- 标题 -->
+						<div class="top">
+							<div class="title">
+								信息传输、软件和信息技术服务业（江西省）
+							</div>
+							<div class="calendar">
+							    <div class="cleft"></div>
+							    <div class="ctitl"><span class="ctitle">2020</span>年</div>
+							    <div class="cright"></div>
+							</div>
+						</div>
+						<!-- 三大类 -->
+						<div class="classify">
+							<div class="classification">
+								<div class="ico">
+									<div class="image">
+										<img src="../../source/img/rjsdl/组 9.png" >
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>核心企业数量(家)</span>
+									</div>
+									<div class="month" id="ENTNUMS">
+
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>新增数量(家)</span>
+									</div>
+									<div class="month" id="XZENTNUMS">
+
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>同比增数(%)</span>
+									</div>
+									<div class="month" id="ENTZS">
+
+									</div>
+								</div>
+							</div>
+							<div class="classification">
+								<div class="ico">
+									<div class="image image1">
+										<img src="../../source/img/rjsdl/组9(1).png" >
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>规上企业营收(亿元)</span>
+									</div>
+									<div class="month" id="VENDINC">
+
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>新增(亿元)</span>
+									</div>
+									<div class="month" id="XZVENDINC">
+
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>同比增数(%)</span>
+									</div>
+									<div class="month" id="VENDINCZS">
+
+									</div>
+								</div>
+							</div>
+							<div class="classification">
+								<div class="ico">
+									<div class="image image2">
+										<img src="../../source/img/rjsdl/组 9(2).png" >
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>规上企业数量(家)</span>
+									</div>
+									<div class="month GSENTNUMS">
+
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>新增数量(家)</span>
+									</div>
+									<div class="month XZGSENTNUMS">
+
+									</div>
+								</div>
+								<div class="date">
+									<div class="quantity">
+										<span>同比增数(%)</span>
+									</div>
+									<div class="month GSENTZS">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 中栏 -->
+					<div class="two">
+						<!-- 左侧 -->
+						<div class="cutline">
+							<div class="echart">
+								<div class="bans">
+									<div class="bantit">
+										<span>规上企业<span class="chartTitle">营收</span>行业分类占比</span>
+									</div>
+									<div class="hengtiao">
+										<img src="../../source/img/title_right.png" >
+									</div>
+								</div>
+								<div class="bant" id="bing"></div>
+								
+							</div>
+							<div class="echart">
+								<div class="bans">
+									<div class="bantit">
+										<span>规上企业<span class="chartTitle">营收</span>趋势</span>
+									</div>
+									<div class="hengtiao">
+										<img src="../../source/img/title_right.png" >
+									</div>
+								</div>
+								<div class="bant" id="zhuzhuang"></div>
+							</div>
+						</div>
+						<!-- 中间 -->
+						<div class="cutline" id="mapData">
+							
+						</div>
+						<!-- 右侧 -->
+						<div class="cutline">
+							<div class="bans">
+								<div class="bantit">
+									<span>各地市规上企业<span class="chartTitle">营收</span>排名</span>
+								</div>
+								<div class="hengtiao">
+									<img src="../../source/img/title_right.png" >
+								</div>
+							</div>
+							<div class="rankk">
+								<div class="btr">
+									<div class="titnamer">
+										排名
+									</div>
+									<div class="titnamer">
+										地市
+									</div>
+									<div class="titnamer titnames sequence">
+										营收(亿元)
+									</div>
+									<div class="titnamer sequenced">
+										增速(%)
+									</div>
+								</div>
+								<div class="tabled">
+									<table class="all-body-middle-pm-table">
+										<tbody id="rjhy">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 底部 -->
+					<div class="three">
+						<div class="rank">
+							<div class="rtit">
+								<div class="fwy">
+									<img src="../../source/img/rjsdl/516(1).png" >
+									电信、广播电视和卫星传输服务业
+								</div>
+							</div>
+							<div class="ranking" >
+								<div class="bt">
+									<div class="titname">
+										排名
+									</div>
+									<div class="titname">
+										地市
+									</div>
+									<div class="titname titnames sequence1">
+										营收(亿元)
+									</div>
+									<div class="titname sequenced1">
+										增速(%)
+									</div>
+								</div>
+								<div class="nr">
+									<table class="all-body-middle-pm-table">
+										<tbody id="dx">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="rank">
+							<div class="rtit">
+								<div class="fwy">
+									<img src="../../source/img/rjsdl/515.png" >
+									互联网和相关服务业
+								</div>
+							</div>
+							<div class="ranking" >
+								<div class="bt">
+									<div class="titname">
+										排名
+									</div>
+									<div class="titname">
+										地市
+									</div>
+									<div class="titname titnames sequence2">
+										营收(亿元)
+									</div>
+									<div class="titname sequenced2">
+										增速(%)
+									</div>
+								</div>
+								<div class="nr">
+									<table class="all-body-middle-pm-table">
+										<tbody id="hlw">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="rank">
+							<div class="rtit">
+								<div class="fwy">
+									<img src="../../source/img/rjsdl/516.png" >
+									软件和信息技术服务业
+								</div>
+							</div>
+							<div class="ranking">
+								<div class="bt">
+									<div class="titname">
+										排名
+									</div>
+									<div class="titname">
+										地市
+									</div>
+									<div class="titname titnames sequence3">
+										营收(亿元)
+									</div>
+									<div class="titname sequenced3">
+										增速(%)
+									</div>
+								</div>
+								<div class="nr">
+									<table class="all-body-middle-pm-table">
+										<tbody id="rj">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

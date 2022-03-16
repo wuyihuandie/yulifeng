@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>产业分析-南昌市</title>
+    <script type="text/javascript" src="../../source/js/public.js"></script>
+    <!--公共引入js、css-->
+    <script type="text/javascript" src="../../source/js/includefile.js"></script>
+    <!--公共方法js-->
+    <script type="text/javascript" src="../../source/js/countUp.js"></script>
+    <script type="text/javascript" src="../../source/js/sy/sy-nc.js"></script>
+    <!--分页方法js-->
+    <link rel="stylesheet" href="../../source/css/sy/sy-nc2.css" />
+    <link rel="stylesheet" href="../../source/ico/iconfont.css">
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+    <!--头div-->
+    <div class="layui-col-md12 all-head" id="headDiv">
+    </div>
+
+    <!--div(用于背景图)-->
+    <div class="layui-col-md12 all-body-bg">
+        <!--内容div-->
+        <div class="all-body">
+            <!--内容左边div-->
+            <div class="layui-col-md4 all-body-left vpdl10 vw28 cyfx_container">
+
+                <!--左上div标题-->
+                <div class="layui-col-md12 cyfz_title">
+                    <span class="areaTitle">南昌市</span>数字经济<span class="chartTitle">核心产业企业数量</span>
+                </div>
+               <!-- 数字经济核心产业规上企业营收规模-->
+                <!--左上div标题下的边框-->
+                <div class="layui-col-md12 cyfx_title_border"></div>
+                <!--左上div内容-->
+                <div class="layui-col-md12 cyfz_foorm">
+                    <div class="cyxz_box hcqy_box">
+                        <div class="boxl1">
+                            <div class="rect1 rectbox" onclick="queryZl()" style="cursor: pointer">
+                                <div>
+                                    <dd>
+                                        <span id="ENTNUMS">0</span>
+                                    </dd>
+                                    <dt>企业总数(家)<br>*数字经济核心产业</dt>
+                                </div>
+
+                            </div>
+                            <div class="rect2 rectbox">
+                                <div>
+                                    <dd>
+                                        <span id="ENTZS">0</span>
+                                    </dd>
+                                    <dt>同比增速（%）</dt>
+                                </div>
+                            </div>
+                            <div class="rect2 rectbox" onclick="queryXz()" style="cursor: pointer">
+                                <div>
+                                    <dd>
+                                        <span id="XZENTNUMS">-</span>
+                                    </dd>
+                                    <dt>新增总数(家)</dt>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxl2">
+                            <div class="rect1 rectbox">
+                                <div>
+                                    <dd>
+                                        <span id="QSSCZT">-</span>
+                                    </dd>
+                                    <dt><label id="qsspan">全市</label>总企业数(家)</dt>
+                                </div>
+
+                            </div>
+                            <div class="rect2 rectbox">
+                                <div>
+                                    <dd>
+                                        <span id="QSSCZTZS">-</span>
+                                    </dd>
+                                    <dt>同比增速（%）</dt>
+                                </div>
+
+                            </div>
+                            <div class="rect2 rectbox">
+                                <div>
+                                    <dd>
+                                        <span id="QSSCZTXZ">-</span>
+                                    </dd>
+                                    <dt>新增总数(家)</dt>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cyxz_box hcgsqy_box hcgsqy_box1">
+                        <div class="boxl1">
+                            <div class="rect1 rectbox">
+                                <div>
+                                    <dd>
+                                        <span id="VENDINC">0</span>
+                                    </dd>
+                                    <dt>规上企业<br/>营收总额(亿元)</dt>
+                                </div>
+
+                            </div>
+							<div class="rect2 rectbox">
+							    <div>
+							        <dd>
+							            <span id="VENDINCZS">0</span>
+							        </dd>
+							        <dt>同比增速<br/>(%)</dt>
+							    </div>
+							
+							</div>
+							<div class="rect2 rectbox">
+							    <div>
+							        <dd>
+							            <span id="XZVENDINC">-</span>
+							        </dd>
+							        <dt>同比新增总额<br/>(亿元)</dt>
+							    </div>
+							
+							</div>
+                            
+                        </div>
+						<div class="boxl2">
+                            <div class="rect1 rectbox" onclick="queryGs()" style="cursor: pointer">
+                                <div>
+                                    <dd>
+                                        <span class="GSENTNUMS">0</span>
+                                    </dd>
+                                    <dt>规上企业数(家)</dt>
+                                </div>
+
+                            </div>
+							<div class="rect2 rectbox">
+							    <div>
+							        <dd>
+							            <span class="GSENTZS">0</span>
+							        </dd>
+							        <dt>同比增速(%)</dt>
+							    </div>
+							
+							</div>
+							<div class="rect2 rectbox">
+							    <div>
+							        <dd>
+							            <span class="XZGSENTNUMS">-</span>
+							        </dd>
+							        <dt>同比新增总数(家)</dt>
+							    </div>
+							
+							</div>
+                            
+                        </div>
+					</div>
+                </div>
+                <!--左下div标题-->
+                <div class="layui-col-md12 cyfz_title">
+                    <span class="areaTitle">南昌市</span><span class="chartTitle">核心产业企业数量</span>情况
+                </div>
+                <!--左下div标题下的边框-->
+                <div class="layui-col-md12 cyfx_title_border"></div>
+                <!--左下div内容-->
+                <div class="layui-col-md12 cyfz_ecs">
+<!--                <div id="cyfxDom" style="width: 100%; height: 100%"></div>-->
+                    <div id="cyfxDom" style="width: 96%; height: 100%;margin: auto">
+                        <div id="left_div" class="left_div" onclick="changeIndustry(0,this)">
+                            <p class="left_div_body">计算机、通信和其他电子设备制造业</p>
+                            <span id="nk01_value"></span>
+                        </div>
+                        <div class="right_div" >
+                            <div style="background: #4189E2;height: 24%;width: 100%;" onclick="changeIndustry(4,this)">
+                                <p class="right_div_body" style="font-size: 1.1rem;padding-top: 25px;">信息传输、软件和信息技术服务业<span id="nk_value" class="right_div_span" ></span></p>
+                            </div>
+                            <div onclick="changeIndustry(1,this)">
+                                <p class="right_div_body">电信、广播电视和卫星传输服务业<span id="nk02_value" class="right_div_span"></span></p>
+                            </div>
+                            <div onclick="changeIndustry(2,this)">
+                                <p class="right_div_body">互联网和相关服务业<span id="nk03_value" class="right_div_span"></span></p>
+                            </div>
+                            <div style="border-bottom: none;" onclick="changeIndustry(3,this)">
+                                <p class="right_div_body">软件和信息技术服务业<span id="nk04_value" class="right_div_span"></span></p>
+                            </div>
+                            <div style="background: #40ABE5;margin-top: 3%;height: 24%;width: 100%;" onclick="changeIndustry(5,this)">
+                                <p class="right_div_body" style="font-size: 1.1rem;padding-top: 25px;">互联网和相关服务业、软件和信息技术服务业<span id="nk05_value" class="right_div_span" ></span></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+				<div class="layui-col-md12 cyfz_ly">
+					<div class="details">
+						数据来源：<span id="dataSource"></span>
+                        </br>
+                        规上企业数据采集截止日期：<span id="gsdataCollectionTime"></span>
+						</br>
+                        其他数据采集截止日期：<span id="dataCollectionTime"></span>
+					</div>
+				</div>
+            </div>
+			
+            <!-- 内容右边 -->
+            <div class="layui-col-md8 all-body-all vw70">
+                <!-- 内容右上 -->
+                <div class="layui-col-md12 all-body-top">
+                    <!-- 地图及按钮 -->
+                    <div class="all-body-top-left">
+                        <div class="layui-col-md12 cyfx_map ">
+                            <div class="dyfxbox" >
+                                <div class="dyfx_box" >
+                                    <div class="years">
+                                        <div class="cleft"></div>
+                                        <div class="ctitl"><span class="ctitle"></span>年</div>
+                                        <div class="cright"></div>
+                                    </div>
+                                    <div class="month">
+                                        <div class="mleft"></div>
+                                        <div class="mtitl"><span class="ctitle"></span>月</div>
+                                        <div class="mright"></div>
+                                    </div>
+                                    <div class="button1 exchange" onclick="changeButton('1',this)" style="margin-top: 50px">
+                                        <p>核心产业</p>
+                                        <p>企业数量</p>
+                                    </div>
+                                    <div class="button1" onclick="changeButton('2',this)">
+                                        <p>核心规上企业</p>
+                                        <p>营业收入</p>
+
+                                    </div>
+                                    <div class="button1" onclick="openLayer();">
+                                        <p>核心规上企业</p>
+                                        <p>统计(国标)</p>
+                                    </div>
+									<div class="tkuang">
+										<div class="ztk">
+											计算机、通信和其他电子设备制造业
+										</div>
+										
+									</div>
+									
+                                </div>
+                                <div id="mapData" class="dyfx_box1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 排名 -->
+                    <div class="all-body-top-right">
+                        <!--右上div标题-->
+                        <div class="layui-col-md12 all-body-left-top-title" style="height: 8%;">
+                            各县区<span class="areaTableTitle">核心产业企业数量</span>排名
+                            <select name="zl" lay-verify="required" class="select" onchange="changeType(this)" style="display: none;">
+                                <option value="2">营业收入</option>
+                                <option value="6">企业数量</option>
+                            </select>
+                        </div>
+                        <!--左上div标题下的边框-->
+                        <div class="layui-col-md12 all-body-left-top-title-border" style="height: 2.5%;">
+                        </div>
+                        <div class="dyfx_box2">
+                            <div>
+                                <table class="all-body-middle-pm-table" id="areaTable">
+                                    <thead>
+                                    <tr>
+                                        <th width="12%" class="pdl0 pdr0">排名</th>
+                                        <th width="30%">地区</th>
+                                        <th class="th_title sequence">企业数量（家）</th>
+                                        <th width="15%"  class="sequenced">同比增速</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="page" class="page mgt10"></div><!-- 2.创建一个页码容器，设定宽度 -->
+
+                    </div>
+                </div>
+                <!-- 内容右下 -->
+                <div class="layui-col-md12 all-body-foot">
+                    <!--增速排名-->
+                    <div class="all-body-foot-left">
+                        <!--右上div标题-->
+                        <div class="all-body-left-top-title" style="height: 12%;">
+                            各县区<span class="areaChartTitle">核心产业新增企业数量</span>排名
+                        </div>
+                        <!--左上div标题下的边框-->
+                        <div class="all-body-left-top-title-border" style="height: 6%;width: 95%;">
+                        </div>
+                        <div id="gdsxzpmDom" style="width: 98%;height: 80%;">
+                        </div>
+                    </div>
+
+                    <!--四大类饼图-->
+                    <div class="all-body-foot-right">
+                        <!--右上div标题-->
+                        <div class="all-body-left-top-title" style="height: 12%;">
+							<span class="areaTitle">南昌市</span><span class="chartTitle">核心产业企业数量</span>发展趋势
+                        </div>
+                        <!--左上div标题下的边框-->
+                        <div class="all-body-left-top-title-border" style="height: 6%;">
+                            
+                        </div>
+                        <div id="gsxFZQK1" style="width: 100%;height: 80%;">
+
+                        </div>
+                        <div id="gsxFZQK2" style="width: 100%;height: 80%;display: none;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--底div-->
+
+</div>
+</body>
+
+</html>

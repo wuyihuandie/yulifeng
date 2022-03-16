@@ -1,0 +1,117 @@
+html,body{
+	width: 100%;
+	min-height: 100%;
+	background: url("../img/background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-attachment: fixed;
+    font-size: 16px;/*rem单位由此计算*/
+    color:white;
+    overflow-y: auto;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+    width: 10px;
+    border-radius: 50px;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 50px;
+    background: #0E8B96;
+}
+/*定义最上方和最下方的按钮*/
+::-webkit-scrollbar-button{
+    display: none;
+}
+.all-head{
+	background: url("../img/zrlogo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 6.25rem;/*定义头部整体高度*/
+}
+.all-head table{
+	float: right;
+	height: 3.125rem;
+	width: 47%;
+	margin-top: 2.5rem;
+	margin-right: 0.5%;
+}
+.all-head table td{
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1rem;
+	cursor: pointer;
+	color: #07afc1;
+	font-weight: bold;
+}
+.all-head table td a {
+	font-size: 1rem;
+}
+.cyl-menu{
+	background:url('../img/skip.png') no-repeat;
+	background-size: 100% 100%;
+}
+.all-body-bg{
+	width: 100%;
+	height: 61.875rem;/*定义内容整体高度*/
+    background: url(../img/bg_border.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding-top: 1rem;
+}
+.all-body{
+	width: 96%;
+	height: 98%;
+	margin: auto;
+}
+.logoText{
+	float: left;
+	width: 43rem;
+	height: 40px;
+	font-size: 33px;
+	font-weight: 400;
+	margin-top: 50px;
+	margin-left: 11%;
+	font-family: SimHei;
+}
+.qpbtn{
+	float: right;
+	width: 25px;
+	height: 25px;
+	cursor:pointer;
+	margin-top: 3.2rem;
+	margin-right: 2%;
+}
+.qpbtn img{
+	width: 100%;
+	height: 100%;
+}
+.layui-nav .layui-nav-more{
+	border-top-color: #07afc1;
+}
+.layui-nav .layui-nav-item>a{padding: 0;}
+.layui-nav .layui-nav-more{right: -15px;}
+.layui-nav-child{left: -20px;}
+
+
+.layui-nav .layui-nav-mored, .layui-nav-itemed>a .layui-nav-more {
+	margin-top: -9px;
+	border-style: dashed dashed solid;
+	border-color: transparent transparent #07afc1;
+}
+
+@font-face {
+	font-family:'electronicFont';
+	src:url("../../source/font/DS-DIGIT.TTF");
+	font-size: 2.5rem;
+}

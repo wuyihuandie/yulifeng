@@ -1,0 +1,114 @@
+{
+  "id": "352927",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "755536",
+      "name": "电路图",
+      "font_class": "dianlutu",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "1177724",
+      "name": "软件服务 (1)",
+      "font_class": "ruanjianfuwu1",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "3876828",
+      "name": "08 运算中心",
+      "font_class": "yunsuanzhongxin",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "6965088",
+      "name": "人工智能",
+      "font_class": "rengongzhineng",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "6965100",
+      "name": "物联网",
+      "font_class": "wulianwang",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "10307204",
+      "name": "计算机学院",
+      "font_class": "jisuanjixueyuan",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "12340916",
+      "name": "dc-icon-智能制造",
+      "font_class": "dc-icon-zhinengzhizao",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "12683886",
+      "name": "机器人",
+      "font_class": "icon_huabanfuben",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "13546163",
+      "name": "lvwang 内容安全",
+      "font_class": "lvwangneironganquan",
+      "unicode": "e6d2",
+      "unicode_decimal": 59090
+    },
+    {
+      "icon_id": "14227101",
+      "name": "智能硬件",
+      "font_class": "zhinengyingjian",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    },
+    {
+      "icon_id": "15344297",
+      "name": "汽车",
+      "font_class": "qiche",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "13954959",
+      "name": "园区管理",
+      "font_class": "yuanquguanli",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "5838759",
+      "name": "分布",
+      "font_class": "fenbu",
+      "unicode": "e867",
+      "unicode_decimal": 59495
+    },
+    {
+      "icon_id": "14560657",
+      "name": "布局",
+      "font_class": "buju",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "1494621",
+      "name": "大数据",
+      "font_class": "dashuju",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

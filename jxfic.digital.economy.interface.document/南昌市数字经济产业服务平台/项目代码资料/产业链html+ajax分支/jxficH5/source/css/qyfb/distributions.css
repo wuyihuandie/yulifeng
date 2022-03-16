@@ -1,0 +1,178 @@
+html, body{
+	overflow-y: initial;
+}
+.growDetails, .companyDetails{
+	position: absolute;
+	z-index: 9;
+	right: 0;
+	top: 0px;
+}
+			
+.companyDetails em, .growDetails em{
+	font-size: .8rem;
+	z-index: 0;
+	display: inline-block;
+	background: #1b5d76;
+	text-align: center;
+	padding: .3rem 1rem .3rem 1rem;
+	border: 1px solid #237d97;
+	color: #04c2d6;
+	font-style: normal;
+	cursor: pointer;
+}
+
+.growDetails em{
+	align-items: center;
+	justify-content: center;
+	transform: skewX(-15deg);
+}
+
+.companyDetails em{
+	border-radius: 3rem;
+}
+
+.growDetails em span{
+	cursor: pointer;
+}
+
+.star, .star span{
+	color: #fff;
+}
+
+.growColumn ul li a, .growColumn ul li, .growColumn ul{
+	display: inline-block;
+}
+
+.growColumn ul li{
+	margin-right: .2rem;
+	margin-left: .2rem;
+}
+
+.growColumn ul li a{ 
+	padding:.4rem 1.4rem .4rem 1.4rem;
+	color:#fff;
+	background:rgba(6,172,189,.4);
+	border:1px solid rgba(6,172,189,.6)
+}
+
+.growColumn ul li.star a{
+	background:rgba(6,172,189,1);
+	border:1px solid #30c1d4;
+	cursor: pointer;
+}
+
+.growContent{
+	width:30%;
+	height: 43.7vh;
+	overflow-y: auto;
+	border: 1px solid rgba(30,100,150,.5);
+}
+
+.growContent ul{
+	background: rgba(14,66,106,.4);
+	padding: .5rem 1rem .5rem 1rem;
+	border-radius: .2rem;
+}
+
+.growContent ul li{
+	line-height: 1.8rem;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.growContent ul li:hover{
+	color: #04c2d6;
+}
+
+.growContent ul li.star{
+	color: #04c2d6;
+}
+
+.growContent ul li span{
+	margin-right: .4rem;
+}
+
+.all-body-left-top-title-border2{
+	background: url(../../img/title_line2.311d8cce.png) top left no-repeat;
+	background-size: 100% 100%;
+	height: 5%;
+}
+
+.rDistributionsBox{
+	min-height: 19%;
+	text-align: center;
+}
+
+.rDistributionsBox h3{ line-height: 4rem; color: #57CDED; display: inline-block; margin-top: 4%;}
+
+.rTbox .layui-table, .rTbox .layui-table tr td, .rTbox .layui-table tr th, .rTbox .layui-table thead tr{ background: none; border: none; color: #fff;cursor: pointer;}
+
+.rTbox .layui-table tbody tr:hover{background: rgba(6,171,188,.5);}
+
+.rTbox .layui-table tbody{ text-align: center;}
+
+.botTime{ 
+    font-size: 0.54rem;
+    width: 477px;
+    text-align: center;
+    line-height: 45px;
+    height: 45px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAd0AAAArCAYAAAA9gVLeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OEIwM0Y2M0NDRjBFMTFFQTk0NUY5NzgwODM3NERDNzYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OEIwM0Y2M0RDRjBFMTFFQTk0NUY5NzgwODM3NERDNzYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4QjAzRjYzQUNGMEUxMUVBOTQ1Rjk3ODA4Mzc0REM3NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4QjAzRjYzQkNGMEUxMUVBOTQ1Rjk3ODA4Mzc0REM3NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsjRYXAAAALrSURBVHja7N3Lb4xRGAfg6agoFh2jJSWNhogWTUhcQ6hLEyVoqpWgLCqNyw4bbIiN7liKP4GdJYnESiwspFvL2li4bEiYmc85aCJCIo3zmdbzJG/6Zb5Je+bt4pdpJ/k1LH397nqhULhWAACSagwTQ7ep4c377sZ7D+9YCQD8fZ/PDj0ofr++kpWbX1WGes9YCwCkMRm6WZhz2cLSx8pg76i1AEC60I2qYU5kLaW5lSN7R6wGANKFbvQpzOGsdUFbZWDPSesBgHShG30I05ctKndWDvUctSIASBe60duvwbukdUvlwI5+awKAdKEbvfoavO2L91X6tvdZFQCkC93oZZh92bK2Y9XeLbutCwCmrvEPnjMeg7e2ov1x4dPnj7OePH9qbQDw99/pTnoWpr/WtfxSdXN3t7UBQLrQjR6FGa6t77xR61653OoAIF3oRvfDnK9uW3er1rGk1foAIF3oRnfDXK1tWjuYlZvnWSEApAvdaCwE7ovq3s2nrBAA0oZudFUzEQDkE7qaiQAgp9CNNBMBQE6hG2kmAoCcQjfSTAQAOYVupJkIAHIK3UgzEQDkFLqRZiIA+IXGRN9XMxEA5PBOd5JmIgDIKXQjzUQAkFPoRpqJACCn0I00EwEgdHP8WZqJABC6OYrNRBOaiQAQuunFZqLz2cLSB81EAAjd9GIz0XDWUmrSTASA0E0vNhP1ayYC4L8wd87sfxm6kWYiAP4LlYM7T4cvt4v/+ByaiQCY2YE72DualZtj3l0s1sF5NBMBMDMDd2DPqaylND9cjky0NmfFOjmXZiIAZlbgHuoZyhaVV4XLgRC48bNMyVqGpkIzEQAzI3D7tsd/ne4Kl1tD4L6ffLxYZ+fUTATAtFbt2bgtW9Z2PFzuD4E78eO9Yh2eVzMRANMzcDes6ap1dlwofPuT8vjP94t1em7NRABMKzGvahtWjxW+fWjq8a+e07D09bt6fg2Xw9z0qwRgmrgSAnfsdze/CDAAZLL15z7gB6sAAAAASUVORK5CYII=) no-repeat;
+    margin-left: auto;
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+    color: #1beaf0;
+    }
+
+.botTime em{ font-style: normal;}
+
+.topHeader th{ padding-left: 0px; padding-right: 0px; font-size: 1rem; color:#0cb5d5 !important; font-size: 20px; font-weight: normal; padding-bottom:10px;}
+
+.layui-table thead{ position: absolute; top: 0; width: 100%;}
+
+.rTbox .layui-table{ width: 100%;}
+
+.rTbox{ height: 57%; overflow-y: auto;}
+
+.rTbox .layui-table tr td i{font-style: normal;}
+
+.rTbox .layui-table tr:nth-child(2) td i, .rTbox .layui-table tr:nth-child(1) td i, .rTbox .layui-table tr:nth-child(3) td i
+{ height: 18px; width: 18px; display: inline-block; line-height: 18px; v text-align: center; border-radius: 50px; text-indent:-1px; border: 1.5px solid rgba(20,63,110,1);
+  vertical-align: middle;
+}
+
+.rTbox .layui-table tr:nth-child(1) td i{
+	background: #c7453e;
+	box-shadow: 0 0 0 2px #c7453e;
+}
+
+.rTbox .layui-table tr:nth-child(2) td i{
+	background: #d77b2f;
+	box-shadow: 0 0 0 2px #d77b2f;
+}
+
+.rTbox .layui-table tr:nth-child(3) td i{
+	background: #179068;
+	box-shadow: 0 0 0 2px #179068;
+}
+
+
+
+.rDistributionsBox h3 #comTotal{letter-spacing:1vw; margin-left: 10px; text-align: center; font-size: 1.5rem; padding-left: 25px;}
+
+.tSize{
+	padding: 10px;
+	background-color: #072C60;
+	margin-right: 10px;
+	color: #57CDED;
+	font-weight: bold;
+}
+.growColumn .star { position: relative;}
+.growColumn .star i{ position: absolute; display: inline-block; border:2px solid rgba(255,255,255,.7); width: 6px; height: 6px;}
+
+.growColumn .star i.a1{ top: 0; left: 0; border-right: none; border-bottom: none;}
+.growColumn .star i.a2{ top:0; right: 0; border-bottom: none; border-left: none;}
+
+.growColumn .star i.a3{ bottom:0; right: 0; border-top: none; border-left: none;}
+.growColumn .star i.a4{ bottom:0; left: 0; border-top: none; border-right: none;}
+ 

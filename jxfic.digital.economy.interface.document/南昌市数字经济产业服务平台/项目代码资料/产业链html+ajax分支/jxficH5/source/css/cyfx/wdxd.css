@@ -1,0 +1,109 @@
+
+
+.boxContent{display: grid; grid-template-rows: 310px auto; }
+.btnback{width: 85px; height: 35px; background-image: url(../../img/back.png); position: absolute; left: 1rem; top: 1rem; cursor: pointer;}
+
+
+
+.boxContent .line2{ }
+
+
+
+
+
+
+/*产业发展分析*/
+.svgpanel{position: relative;  }
+.svgpanel>svg{ }
+.svgpanel .svgItem{cursor: pointer;  transition:all 0.2s ease-out;}
+.svgpanel .svgItem circle{stroke:#3bf9a5; fill: none; transform: rotateZ(-90deg);}
+.svgpanel .svgItem .svgTitle{font-size: 10px; fill:#ffffff;}
+.svgpanel .svgItem .svgTitle .spnTarget{ font-size: 20px;}
+.svgpanel .svgItem .svgTitle .spnComplete{fill: #9EFFBA; font-size: 20px;}
+.svgpanel .svgItem .svgseTitle{fill:#28f7ff; font-size: 12px;}
+.svgpanel .svgItem .percent{font-size: 10px; fill: #fff;}
+.svgpanel .svgItem image:nth-child(3){display: block;}
+.svgpanel .svgItem image:nth-child(4){display: none;}
+
+
+
+.svgpanel .svgItem.on{transform: scale(1.05) translate(-2px,-2px);}
+.svgpanel .svgItem.on circle{stroke:#e9f937;}
+.svgpanel .svgItem.on .svgseTitle{fill:#eafa37; }
+.svgpanel .svgItem.on .spnTarget{fill: #eafa37}
+.svgpanel .svgItem.on .spnComplete{fill: #67F990}
+.svgpanel .svgItem.on image:nth-child(3){display: none;}
+.svgpanel .svgItem.on image:nth-child(4){display: block;}
+
+.svgpanel .svgItem:hover{transform: scale(1.05) translate(-2px,-2px);}
+.svgpanel .svgItem:hover circle{stroke:#e9f937;}
+.svgpanel .svgItem:hover .svgseTitle{fill:#eafa37; }
+.svgpanel .svgItem:hover .spnTarget{fill: #eafa37}
+.svgpanel .svgItem:hover .spnComplete{fill: #67F990}
+.svgpanel .svgItem:hover image:nth-child(3){display: none;}
+.svgpanel .svgItem:hover image:nth-child(4){display: block;}
+
+
+
+
+/*企业分析详情样式*/
+.qyfxDom{position: relative; }
+.cyfx_title_text{height: 3rem; line-height: 240%; font-size: 1.2rem; padding:0 5%;  }
+.cyfx_title_line{height:1.5rem; margin: 0 3%; display: grid; grid-template-columns: 250px auto 5px;}
+.cyfx_title_line .bleft{ background: url(../../img/title_border_left.png);  background-repeat:repeat-x; background-size:auto 100%; }
+.cyfx_title_line .bcenter{ background: url(../../img/title_border_center.png);  background-repeat:repeat-x; background-size:auto 100%; }
+.cyfx_title_line .bright{ background: url(../../img/title_border_right.png);  background-repeat:repeat-x; background-size:auto 100%; }
+
+
+
+/*统计区域*/
+.tjarea{width: 60rem; margin: 0 auto; display: grid; grid-template-columns: 220px auto ;}
+.tjarea .charts{position: relative;}
+.tjarea .charts .canvas{width: 200px; height: 200px; margin: 0 auto;  position: relative;}
+.tjarea .charts .canvas .cvsbg{width:53%; height: 53%; border: 2px dashed #134e72; position: absolute;
+ left: 50%; top: 50%; transform: translate(-50%,-50%); border-radius: 100%; box-sizing: border-box;
+ background-size: 80% auto;	background-repeat: no-repeat; background-position:center ; z-index: 0;  }
+
+
+
+.tjarea .charts .label1{width: 100%; font-size: 0.7rem; text-align: center; position: absolute; top: 36%; left: 0; z-index: 90;}
+.tjarea .charts .label2{width: 100%; color: #31f7fb; text-align: center; position: absolute; top: 45%; left: 0; z-index: 90;}
+.tjarea .charts .label2 span{font-size: 1.2rem; }
+.tjarea .charts .label3{width: 100%; font-size: 0.8rem; text-align: center; position: absolute; top: 55%; left: 0; z-index: 90;}
+
+
+
+.tjarea .labelList{ padding-left: 2.2rem; padding-top: 1.6rem; }
+.tjarea .labelList>div{width: 20rem; height: 2.6rem; margin: 0.3rem 8% 0.3rem 0; background-size: 100% 100%; position: relative; font-size: 1.2rem; float: left;}
+.tjarea .labelList>div:nth-child(2n){margin-right: 0; }
+.tjarea .labelList>div>dd{line-height: 2rem; position: absolute; left: 16%; bottom: 10%; }
+.tjarea .labelList>div>dt{line-height: 2rem; white-space: nowrap; position: absolute; left: 52%; bottom: 10%;}
+.tjarea .labelList>div>dt span{font-size: 2.5rem;font-family:'electronicFont';}
+.tjarea .labelList .line1{background-image: url(../../img/qyfx/qyzs@2x.png);}
+.tjarea .labelList .line2{background-image: url(../../img/qyfx/gsqy@2x.png);}
+.tjarea .labelList .line3{background-image: url(../../img/qyfx/jlr@2x.png);}
+.tjarea .labelList .line4{background-image: url(../../img/qyfx/yysr@2x.png);}
+.tjarea .labelList .line5{background-image: url(../../img/qyfx/nsje@2x.png);}
+.tjarea .labelList .line6{background-image: url(../../img/qyfx/cyry@2x.png);}
+
+
+
+
+
+
+
+
+/*数据列表*/
+.qyfxDom .qylist{ margin: 0 5%; padding-top: 1rem; }
+.qyfxDom .qylist>table{width: 100%;}
+.qyfxDom .qylist>table td{text-align: center; padding: 0.5rem 0;}
+.qyfxDom .qylist>table thead td{color: #0bb8d4; }
+.qyfxDom .qylist .td1{width: 5%;}
+.qyfxDom .qylist .td2{width: 7%;}
+.qyfxDom .qylist>table tbody tr td i{ height: 18px; width: 18px; display: inline-block; line-height: 18px; text-align: center; 
+    border-radius: 50px; text-indent:-1px; border: 1.5px solid rgba(20,63,110,1); vertical-align: middle; font-style: normal;}
+.qyfxDom .qylist>table tbody tr:nth-child(1) td i{background: #c7453e; box-shadow: 0 0 0 2px #c7453e;}
+.qyfxDom .qylist>table tbody tr:nth-child(2) td i{background: #d77b2f; box-shadow: 0 0 0 2px #d77b2f;}
+.qyfxDom .qylist>table tbody tr:nth-child(3) td i{background: #179068; box-shadow: 0 0 0 2px #179068;}
+.qyfxDom .qylist>table tbody tr:nth-child(4) td i{background: #1AB9C3; box-shadow: 0 0 0 2px #1AB9C3;}
+.qyfxDom .qylist>table tbody tr:nth-child(n+5) td i{background: #2A9CCF; box-shadow: 0 0 0 2px #2A9CCF;}

@@ -1,0 +1,92 @@
+/* 总体布局 */
+.all-body{width: 94%;}
+.first{
+	width: 100%;
+	height: 10%;
+}
+.second{
+	width: 100%;
+	height: 8%;
+	display: flex;
+	margin-bottom: 1%;
+}
+.third{
+	width: 100%;
+	height: 30%;
+	display: flex;
+}
+.fourth{
+	width: 100%;
+	height: 30%;
+	display: flex;
+}
+.fifth{
+	width: 100%;
+	height: 15%;
+}
+
+
+/* first */
+.f-title{width: 100%;height: 40%;position: relative;}
+.f-title .Ctitle{width: 30%;height: 100%;position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;font-weight: 800;font-size: 26px;}
+.f-title .Ctitle span{font-weight: 400;font-size: 20px;}
+.f-t-title{width: 100%;height: 30%;font-size: 24px;padding-left: 1.875rem;}
+.long_img{width: 100%;height: 30%;}
+.long_img img{width: 100%;}
+
+
+
+/* second */
+.second-l{height: 100%;flex: 1;display: flex;}
+.sLeft{height: 100%;width: 50%;display: flex;}
+.sRight{height: 100%;width: 50%;display: flex;}
+.left-1{height: 100%;width: 35%;}
+.right-1{height: 100%;width: 50%;}
+.right-t{width: 100%;height: 30%;color: #D6D8D9;}
+.right-f{width: 100%;height: 70%;font-size: 32px;color: #67E5F0;}
+.right-f span{font-size: 16px;color: #D6D8D9;}
+#right-f{color: #7CF6BA;}
+
+
+.second-r{height: 100%;flex: 3;display: flex;}
+.second-r .frame{flex: 1;position: relative;}
+.frameee{width: 18.75rem;height: 3.125rem;position: relative;position: absolute;left: 0;bottom: 0;}
+.frame1{background: url(../../img/ztfx/zb_1.png);}
+.frame2{background: url(../../img/ztfx/zb_2.png);}
+.frame3{background: url(../../img/ztfx/zb_3.png);}
+.frame4{background: url(../../img/ztfx/zb_4.png);}
+.frame-tit{position: absolute;bottom: 1.25rem;left: 3rem;font-size: 15px;}
+.fram-num{position: absolute;bottom: 1.25rem;left: 9.375rem;font-size: 26px;}
+.fram-num span{font-size: 14px;color: #ffffff;}
+
+
+
+/* third */
+.t-frame{flex: 1;}
+.thirdTit{width: 100%;height: 10%;font-size: 20px;}
+.thirdFot{width: 100%;height: 80%;}
+
+
+
+
+
+
+
+
+
+
+/* fourth */
+.f-frame{flex: 1;}
+.fourthTit{height:10%;width: 90%;font-size: 24px;padding-left: 1.25rem;}
+.fourthImg{height:8%;width: 90%;}
+.fourthImg img{width: 100%;}
+.fourthEchs{height: 80%;width: 90%;}
+
+
+
+
+/* fifth */
+.fifthTit{width: 100%;height: 20%;font-size: 24px;padding-left: 1.25rem;}
+.fifthImg{width: 100%;height: 20%;}
+.fifthImg img{width: 100%;}
+.fifthCenter{width: 100%;height: 60%;}

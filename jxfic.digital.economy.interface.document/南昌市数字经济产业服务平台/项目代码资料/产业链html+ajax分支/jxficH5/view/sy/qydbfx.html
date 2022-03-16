@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产业分析-区域对比分析</title>
+    <script type="text/javascript" src="../../source/js/public.js"></script>
+    <!--公共引入js、css-->
+    <script type="text/javascript" src="../../source/js/includefile.js"></script>
+    <link rel="stylesheet" href="../../source/css/common.css" />
+    <link rel="stylesheet" href="../../source/css/sy/qydbfx.css" />
+    <script type="text/javascript" src="../../source/js/sy/qydbfx.js"></script>
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+
+    <!--头div-->
+    <div class="layui-col-md12 all-head" id="headDiv">
+    </div>
+
+    <!--div(用于背景图)-->
+    <div class="layui-col-md12 all-body-bg">
+        <!--内容div-->
+        <div class="all-body">
+            <div class="all-body-top">
+                <div class="top-left">
+                    <div class="top-left-box">
+                        <img src="../../source/img/qydbfx/nanchang.png">
+                        <span style="color: #31F7FB">南昌市</span>
+                    </div>
+                    <div class="top-left-box"><span style="left: -100%;font-size: 2rem;">VS</span></div>
+                    <div class="top-left-box">
+                        <img src="../../source/img/qydbfx/compare_area.png">
+                        <span style="color:#FFFD61;" class="compare_area">吉安市</span>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="top-right-box" style="margin-left: 10%">
+                        <h3><label class="yeartitle"></label>南昌市数据总览</h3>
+                        <p>规上企业营收<span id="VENDINC1"></span>亿元</p>
+                        <p>规上企业数量<span id="ENTNUMS1"></span>家</p>
+                    </div>
+                    <div class="top-right-box-vs"><span>VS</span></div>
+                    <div class="top-right-box">
+                        <h3><label class="yeartitle"></label><span class="compare_area">吉安市</span>数据总览</h3>
+                        <p>规上企业营收<span id="VENDINC2"></span>亿元</p>
+                        <p>规上企业数量<span id="ENTNUMS2"></span>家</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="all-body-middle">
+                <ul class="middle-box">
+                    <li style="margin-left: 0">景德镇市</li>
+                    <li>萍乡市</li>
+                    <li>九江市</li>
+                    <li>新余市</li>
+                    <li>鹰潭市</li>
+                    <li>赣州市</li>
+                    <li class="xz">吉安市</li>
+                    <li>宜春市</li>
+                    <li>抚州市</li>
+                    <li style="margin-right: 0">上饶市</li>
+                </ul>
+                <ul class="industry-box" style="padding: 0;">
+                    <li style="margin-left: 0" class="xz">计算机、通信和其他电子设备制造业</li>
+                    <li >电信、广播电视和卫星传输服务业</li>
+                    <li>互联网和相关服务业</li>
+                    <li style="margin-right: 0">软件和信息技术服务业</li>
+
+                </ul>
+            </div>
+            <div class="all-body-bottom">
+                <div class="all-body-bottom-body">
+                    <div class="bottom-box">
+                        <!--左上div标题-->
+                        <div class="bottom_title">
+                            <span class="chart_title">计算机、通信和其他电子设备制造业</span>规上企业营收情况
+                        </div>
+                        <!--左上div标题下的边框-->
+                        <div class="bottom_title_border"></div>
+                        <div id="industry1" style="width: 90%;height: 80%;margin: auto;">
+
+                        </div>
+                        <div class="cyfz_ly">
+                            <div class="details">
+                                数据来源：<span id="dataSource"></span>
+                                </br>
+                                规上企业数据采集截止日期：<span id="gsdataCollectionTime"></span>
+                                </br>
+                                其他数据采集截止日期：<span id="dataCollectionTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="all-body-bottom-body">
+                    <div class="bottom-box">
+                        <!--左上div标题-->
+                        <div class="bottom_title">
+                            <span class="chart_title">计算机、通信和其他电子设备制造业</span>规上企业数量情况
+                        </div>
+                        <!--左上div标题下的边框-->
+                        <div class="bottom_title_border"></div>
+                        <div id="industry2" style="width: 90%;height: 90%;margin: auto;">
+
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="all-body-bottom-body">
+                    <div class="bottom-box qylb">
+                        &lt;!&ndash;左上div标题&ndash;&gt;
+                        <div class="bottom_title">南昌市<span class="chart_title">计算机、通信和其他电子设备制造业</span>规上企业企业列表</div>
+                        &lt;!&ndash;左上div标题下的边框&ndash;&gt;
+                        <div class="bottom_title_border"></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%;">序号</th>
+                                    <th style="width: 55%;">企业名称</th>
+                                    <th style="width: 35%;">营业收入(万元)</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="rTbox">
+                            <table>
+                                <tbody id="qytable1">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cyfz_ly">
+                            <div class="details">
+                                数据来源：<span id="dataSource"></span>
+                                </br>
+                                规上企业数据采集截止日期：<span id="gsdataCollectionTime"></span>
+                                </br>
+                                其他数据采集截止日期：<span id="dataCollectionTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+
+    <!--底div-->
+
+</div>
+</body>
+</html>

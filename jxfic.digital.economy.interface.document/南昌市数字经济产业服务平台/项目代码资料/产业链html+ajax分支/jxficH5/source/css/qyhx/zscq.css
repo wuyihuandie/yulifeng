@@ -1,0 +1,204 @@
+.zscq{
+    height: 100%;
+    width: 100%;
+}
+.maincontent .companyname {
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.maincontent .companyname-content {
+    padding: 22px 34px;
+    height:222px
+}
+
+.maincontent .companyname-content img {
+    width: 175px;
+}
+
+.maincontent .companyname-content-txt {
+    width: 600px;
+}
+
+.maincontent .companyname-content-txt h3 {
+    display: inline-block;
+}
+
+.maincontent .companyname-content-txt .basic {
+    margin-top: 13px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto 90%;
+    display: block !important;
+    color: #393939;
+}
+
+.maincontent .companyname-content-txt .basic span {
+    color: #529fe7;
+    font-size: 15px;
+}
+
+.maincontent .companyname-content-btn {
+    float: right;
+}
+
+.maincontent .companyname-content-btn button {
+    margin-top: 20px;
+    display: block;
+    width: 140px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.maincontent .companyname-content-btn button img {
+    width: 30px;
+    height: 30px;
+}
+
+.maincontent .nav {
+    width: calc(100% - 16px);
+    height: 35px;
+    margin-top: 20px;
+    padding: 5px 0 0 16px;
+    background-color: #438eb9;
+    color: #fff;
+}
+
+.maincontent .nav div {
+    float: left;
+    height: 35px;
+    padding: 0 13px;
+    line-height: 35px;
+    font-size: 16px;
+}
+
+.maincontent .nav .active {
+    background-color: #fff;
+    color: #438eb9;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 16px;
+}
+
+.maincontent .selectyear {
+    background-color: #fbfbfb;
+    padding: 14px 0px;
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    border-top: none;
+}
+
+.maincontent .selectyear div {
+    display: inline-block;
+    line-height: 14px;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.maincontent .selectyear div	a {
+    color: #438eb9;
+    font-family: Arial;
+}
+
+.maincontent .selectyear .select {
+    color: #eec007;
+}
+
+.maincontent .zmxx {
+    background-color: #FFF;
+    border: 1px solid #F0F0F0;
+    border-top: none;
+}
+
+.maincontent .zmxx-content {
+    position: relative;
+    padding: 20px 20px 20px 20px;
+}
+
+.maincontent .zmxx-content h4 {
+    padding-left: 10px;
+    border-left: 4px solid #438eb9;
+    color: #000;
+    font-weight: bold;
+    font-size: 1srem;
+}
+
+.maincontent .zmxx-content table {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.maincontent .zmxx-content tr {
+    text-indent: 15px;
+}
+
+.maincontent .zmxx-content td {
+    padding: 8px;
+    text-indent: 0px;
+    font-size: 13px;
+    border: 1px solid #F0F0F0;
+    color: #999999;
+}
+
+.maincontent .zmxx-content td span {
+    color: #393939;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.maincontent .gd-table {
+    margin-top: 18px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: center;
+}
+
+.maincontent .gd-table td {
+    height: 40px;
+    font-size: 13px;
+    text-align: center;
+    color: #999999;
+    border: 1px solid #ddd;
+}
+
+.maincontent .gd-table thead td {
+    background-color: #dce5ec;
+    color: #393939;
+}
+
+.maincontent .gd-table thead td {
+    background-color: #f9f9f9;
+}
+
+.maincontent .zyry-box {
+    padding-bottom: 20px;
+}
+
+.maincontent .zyry-box .mainman {
+    float: left;
+    width: 120px;
+    height: 60px;
+    text-align: center;
+    border: 1px solid #F0F0F0;
+    margin-top: 20px;
+    background-color: #F7F8FA;
+    margin-left: 12px;
+}
+
+.maincontent .zyry-box .mainman h5 {
+    margin: 5px 0px;
+    color: #404141;
+    font-weight: normal;
+}
+
+.maincontent .zyry-box .mainman p {
+    color: #bfbfbf;
+    font-size: 13px;
+}

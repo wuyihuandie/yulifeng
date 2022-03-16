@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>产业布局</title>
+		<script type="text/javascript" src="../../source/js/public.js"></script>
+		<!--公共引入js、css-->
+		<script type="text/javascript" src="../../source/js/includefile.js"></script>
+		<!--公共方法js-->
+		<script type="text/javascript" src="../../source/js/cyl-3/cyl-qyqd-2.js"></script>
+		<link rel="stylesheet" href="../../source/css/cyl-3/cyl-qyqd-2.css" />
+		<script type="text/javascript" src="../../source/js/countUp.js"></script>
+		<style>
+			.listDetailed{
+				border-left: 1px solid #4AABB3;
+				border-bottom: 1px solid #4AABB3;
+			}
+			.listDetailed tr td{
+				border-right: 1px solid #4AABB3;
+				border-top: 1px solid #4AABB3;
+			}
+		</style>
+	</head>
+	<body>
+		<!--外部框架div-->
+		<div class="layui-col-md12">
+
+			<!--头div-->
+			<div class="layui-col-md12 all-head" id="headDiv"></div>
+
+			<!--div(用于背景图)-->
+			<div class="layui-col-md12 all-body-bg">
+				<!--内容div-->
+				<div class="all-body ">
+					<div class="option">
+						<div class="top-two"></div>
+						<div class="top-three">
+							<div class="style">
+								<div class="logo">
+									<img src="../../source/img/icon_qysl.png">
+									<b>&nbsp;物&nbsp;联&nbsp;网</b>
+								</div>
+
+								<div class="time">
+									<img src="../../source/img/cyl/last.png">
+									<span>2020</span>
+									<img src="../../source/img/cyl/next.png">
+								</div>
+
+							</div>
+							<div class="three-center">
+								<div class="twobutton twobutton-exchange">
+									物联网
+								</div>
+								<div class="twobutton" id="yjs">
+									云计算
+								</div>
+							</div>
+						</div>
+						<div class="top-four">
+							<svg width="100%" height="100%" viewBox="0 0 1297 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+								<path stroke-dasharray="2,2" d="M541 1V20.2308H436V41" stroke="#31F7FB" />
+								<path stroke-dasharray="2,2" d="M541 0V20.7407H871V40" stroke="#31F7FB" />
+								<path stroke-dasharray="2,2" d="M541 0V20.3636H1296V40" stroke="#31F7FB" />
+								<path stroke-dasharray="2,2" d="M541 1V20.6226H1V41" stroke="#31F7FB" />
+								<path d="M541 0V20.7407H871V40" stroke="#31F7FB" class="circle-load-svg2" />
+							</svg>
+						</div>
+						<div class="top-five">
+							<div class="fourbutton button-exchange" data-index="0">
+								<img src="../../source/img/cyl/inventory/icon_qjqd.png">
+								企业清单
+							</div>
+							<div class="fourbutton" data-index="1">
+								<img src="../../source/img/cyl/inventory/icon_zdxm.png">
+								重点项目清单
+							</div>
+							<div class="fourbutton" data-index="2">
+								<img src="../../source/img/cyl/inventory/icon_zcqd.png">
+								政策清单
+							</div>
+							<div class="fourbutton" data-index="3">
+								<img src="../../source/img/cyl/inventory/icon_qjqd.png">
+								集群清单
+							</div>
+							<div class="fourbutton" data-index="4">
+								<img src="../../source/img/cyl/inventory/icon_wtqd.png">
+								问题清单
+							</div>
+						</div>
+					</div>
+					<!--企业清单-->
+					<div class="boxContent" style="display: grid;">
+
+						<div class="line2">
+							<div class="cyfx_title_text">
+								<div class="qyqd" style="float: left;">
+									企业清单
+								</div>
+								<div class="dollar">
+									<span>企业名称：</span>
+									<span>
+										<input class="searchContent" id="ENTNAME" type="text">
+									</span>
+									<span>
+										<input class="search" onclick="searchEntname()" type="button" value="搜索">
+									</span>
+								</div>
+								<div class="dollar">
+									<span>利税总额：</span>
+									<select class="searchContent" name="LSZE">
+										<option value=""></option>
+										<option value="1">50万以下</option>
+										<option value="2">50-300万</option>
+										<option value="3">300-500万</option>
+										<option value="4">500-1000万</option>
+										<option value="5">1000万及以上</option>
+									</select>
+								</div>
+								<div class="dollar">
+									<span>营业收入：</span>
+									<select class="searchContent" name="YYSR">
+										<option value=""></option>
+										<option value="1">1000万以下</option>
+										<option value="2">1000-2000万</option>
+										<option value="3">2000-5000万</option>
+										<option value="4">5000-10000万</option>
+										<option value="5">10000万及以上</option>
+									</select>
+								</div>
+								<div class="dollar">
+									<span>所属产业链环节：</span>
+									<select class="searchContent" name="LEVEL_NAME">
+										<option value=""></option>
+										<option value="感知层">感知层</option>
+										<option value="网络层">网络层</option>
+										<option value="平台层">平台层</option>
+										<option value="应用层">应用层</option>
+									</select>
+								</div>
+								<div class="dollar">
+									<span>成立时间：</span>
+									<select class="searchContent" name="CLSJ">
+										<option value=""></option>
+										<option value="1">1年以下</option>
+										<option value="2">1-3年</option>
+										<option value="3">3-5年</option>
+										<option value="4">5-10年</option>
+										<option value="5">10年及以上</option>
+									</select>
+								</div>
+								<div class="dollar">
+									<span>注册资本：</span>
+									<select class="searchContent" name="ZCZJ">
+										<option value=""></option>
+										<option value="1">100万以下</option>
+										<option value="2">100-500万</option>
+										<option value="3">500-1000万</option>
+										<option value="4">1000-2000万</option>
+										<option value="5">2000万及以上</option>
+									</select>
+								</div>
+							</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<!--左上div内容-->
+						<div class="qylist">
+							<div class="table-head">
+								<table>
+									<thead>
+										<tr>
+											<th class="td1">序号</th>
+											<th class="td2">企业名称</th>
+											<th class="td3">
+												<div class="menusControls">
+													<dd class="menuItem">
+														<dl data-select="">所属区域</dl>
+														<i></i>
+													</dd>
+													<div class="menuList">
+														<span data-key="">全部</span>
+														<span data-key="红谷滩区">红谷滩区</span>
+														<span data-key="高新开发区">高新开发区</span>
+														<span data-key="青山湖区">青山湖区</span>
+														<span data-key="西湖区">西湖区</span>
+														<span data-key="青云谱区">青云谱区</span>
+														<span data-key="南昌县">南昌县</span>
+														<span data-key="经济开发区">经济开发区</span>
+														<span data-key="东湖区">东湖区</span>
+														<span data-key="新建区">新建区</span>
+														<span data-key="安义县">安义县</span>
+														<span data-key="进贤县">进贤县</span>
+														<span data-key="湾里局">湾里局</span>
+														<span data-key="临空经济区">临空经济区</span>
+													</div>
+												</div>
+											</th>
+											<th class="td4"><span class="sortSpan " data-key="REGCAP">注册资本(万元)</span></th>
+											<th class="td5"><span class="sortSpan " data-key="ESTDATE">成立时间</span></th>
+											<th class="td6">所属产业链环节</th>
+											<th class="td7">细分产业链环节</th>
+											<th class="td8">应用领域</th>
+											<th class="td9"><span class="sortSpan " data-key="VENDINC">营业收入(万元)</span></th>
+											<th class="td10"><span class="sortSpan " data-key="RATGRO">利税总额(万元)</span></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div class="table-body">
+								<table>
+									<tbody id="tabQYList" class="entBody">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--重点项目清单-->
+					<div class="boxContent">
+						<div class="line2">
+							<div class="cyfx_title_text">
+								重点项目清单
+								<div class="dollar">
+									<span>项目名称：</span>
+									<span>
+										<input class="searchContent" id="projectName" type="text">
+									</span>
+									<span>
+										<input class="search" onclick="searchProjectName()" type="button" value="搜索">
+									</span>
+								</div>
+								<div class="dollar">
+									<span>项目状态：</span>
+									<select class="searchContent" name="PROJECT_STATUS">
+										<option value=""></option>
+										<option value="0">未开工</option>
+										<option value="1">在建</option>
+										<option value="2">已开工</option>
+										<option value="3">部分投产</option>
+										<option value="4">完工投产</option>
+									</select>
+								</div>
+								<div class="dollar">
+									<span>项目性质：</span>
+									<select class="searchContent" name="TYPE">
+										<option value=""></option>
+										<option value="1">新建</option>
+										<option value="2">技改</option>
+										<option value="3">已立项</option>
+										<option value="4">在建</option>
+									</select>
+								</div>
+								<div class="dollar">
+									<span>总投资：</span>
+									<select class="searchContent" name="INVESTMENT">
+										<option value=""></option>
+										<option value="1">500万以下</option>
+										<option value="2">500-1000万</option>
+										<option value="3">1000-5000万</option>
+										<option value="4">5000-10000万</option>
+										<option value="5">10000万及以上</option>
+									</select>
+								</div>
+							</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<!--左上div内容-->
+						<div class="qylist">
+							<div class="table-head">
+								<table>
+									<thead>
+										<tr>
+											<th class="td1">序号</th>
+											<th class="td2" style="width: 20%;">项目名称</th>
+											<th class="td8">项目承建单位</th>
+											<th class="td3">
+												<div class="menusPControls">
+													<dd class="menuItem">
+														<dl data-select="">建设区域</dl>
+														<i></i>
+													</dd>
+													<div class="menuList">
+														<span data-key="">全部</span>
+														<span data-key="红谷滩区">红谷滩区</span>
+														<span data-key="高新开发区">高新开发区</span>
+														<span data-key="青山湖区">青山湖区</span>
+														<span data-key="西湖区">西湖区</span>
+														<span data-key="青云谱区">青云谱区</span>
+														<span data-key="南昌县">南昌县</span>
+														<span data-key="经济开发区">经济开发区</span>
+														<span data-key="东湖区">东湖区</span>
+														<span data-key="新建区">新建区</span>
+														<span data-key="安义县">安义县</span>
+														<span data-key="进贤县">进贤县</span>
+														<span data-key="湾里局">湾里局</span>
+														<span data-key="临空经济区">临空经济区</span>
+													</div>
+												</div>
+											</th>
+											<th class="td4">应用示范领域</th>
+											<th class="td5"><span class="sortSpan" data-key="INVESTMENT">总投资(万元)</span></th>
+											<th class="td6"><span class="sortSpan" data-key="CONSTRUCTION_CIRCLE">建设周期</span></th>
+											<th class="td7">项目性质</th>
+											<th class="td9">项目状态</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div class="table-body">
+								<table>
+									<table>
+										<tbody id="projectList">
+										</tbody>
+									</table>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--政策清单-->
+					<div class="boxContent"style="grid-template-rows:4.6rem 4.6rem  auto ;">
+						<div class="line2">
+							<div class="cyfx_title_text">政策清单
+								<!-- <div class="find">
+									<span>文件名称：</span>
+									<span>
+										<input class="searchContent" id="policyName" type="text">
+									</span>
+									<span>
+										<input class="search" onclick="searchPolicyName()" type="button" value="搜索">
+									</span>
+								</div> -->
+								<div class="cyfx-title">
+									<span>筛选：</span>
+									<div class="booox" onclick="queryType('tax')">
+										税收政策（<span id="tax">0</span>）
+									</div>
+									<div class="booox" onclick="queryType('finance')">
+										财政支撑（<span id="finance">0</span>）
+									</div>
+									
+									<div class="booox" onclick="queryType('help')">
+										企业助力（<span id="help">0</span>）
+									</div>
+									<div class="booox" onclick="queryType('other')">
+										其他（<span id="other">0</span>）
+									</div>
+								</div>
+							</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<!--左上div内容-->
+						<div class="line-2">
+							<div class="line-2x">
+								<div class="linexxx" onclick="SBQYSL();">
+									申报企业数量:<span id="linexxxID"></span>家
+								</div>
+								<div class="linexxx-2" style="width: 50%;">
+									已兑现金额:<span id="linexxx-2ID"></span>万元
+								</div>
+							</div>
+						</div>
+						<div class="qylist" style="height: 33rem;">
+							<div class="table-head">
+								<table>
+									<thead>
+										<tr>
+											<th class="td1" style="width: 3%;">序号</th>
+											<th class="td2" style="width: 7%;">文件名称</th>
+											<th class="td3" style="width: 3%;">级别</th>
+											<th class="td4" style="width: 5%;">文号</th>
+											<th class="td5" style="width: 5%;">发文单位</th>
+											<th class="td6">内容概括</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div class="table-body">
+								<table>
+									<tbody id="policyList">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--集群清单-->
+					<div class="boxContent ">
+						<div class="line2">
+							<div class="cyfx_title_text">集群清单</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+						<!--左上div内容-->
+						<div class="qylist">
+							<table border="0" cellpadding="0" cellspacing="1" class="listDetailed" id="clusterList">
+
+								<!--<table border="0" cellpadding="0" cellspacing="1" class="listDetailed" id="clusterList">
+
+								</table>-->
+								<!-- <tr >
+							    <td width="49" height="80" valign="center" ><p align="center" >1 </p></td>
+							    <td width="182" valign="center" ><p align="center" >高新区物联网产业集群 </p></td>
+							    <td width="68" valign="center" ><p align="center" >40000 </p></td>
+							    <td width="54" valign="center" ><p align="center" >53 </p></td>
+							    <td width="45" valign="center" ><p align="center" >52 </p></td>
+							    <td width="69" valign="center" ><p align="center" >292.42 </p></td>
+							    <td width="54" valign="center" ><p align="center" >/ </p></td>
+							    <td width="116" valign="center" ><p align="center" >115.48 </p></td>
+							    <td width="58" valign="center" ><p align="center" >/ </p></td>
+							    <td width="63" valign="center" ><p align="center" >71.19 </p></td>
+							    <td width="68" valign="center" ><p align="center" >/ </p></td>
+							    <td width="80" valign="center" ><p align="center" >6.53 </p></td>
+							    <td width="69" valign="center" ><p align="center" >/ </p></td>
+							  </tr>-->
+								<!--<tr id="clusterList"></tr>-->
+
+							</table>
+						</div>
+					</div>
+					<!--问题清单-->
+					<div class="boxContent ">
+
+						<div class="line2">
+							<div class="cyfx_title_text">问题清单</div>
+							<div class="cyfx_title_line">
+								<div class="bleft"></div>
+								<div class="bcenter"></div>
+								<div class="bright"></div>
+							</div>
+						</div>
+
+						<!--左上div内容-->
+						<div class="qylist">
+							<div class="table-head">
+								<table>
+									<thead>
+										<tr>
+											<th class="td1" style="width: 3%;">序号</th>
+											<th class="td2" style="width: 15%;">问题类型</th>
+											<th class="td3" style="width: 60%;">问题内容</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div class="table-body">
+								<table>
+									<tbody id="questionList">
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--底div-->
+
+		</div>
+	</body>
+
+</html>

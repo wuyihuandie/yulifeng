@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>营商环境</title>
+    <script type="text/javascript" src="../../source/js/public.js" ></script><!--公共引入js、css-->
+	<script type="text/javascript" src="../../source/js/includefile.js" ></script><!--公共方法js-->
+	<script type="text/javascript" src="../../source/js/yxhj/yxhj.js"></script>
+    <link rel="stylesheet" href="../../source/css/yxhj/yxhj.css" />
+</head>
+<body>
+<!--外部框架div-->
+<div class="layui-col-md12">
+    <!--头div-->
+    <div class="layui-col-md12 all-head" id="headDiv">
+    </div>
+    <!--div(用于背景图)-->
+    <div class="layui-col-md12 all-body-bg">
+        <!--内容div-->
+        <div class="all-body">
+            <!--内容右边div-->
+            <div class="layui-col-md4 all-body-left">
+                <!--右上div-->
+                <div class="layui-col-md12 all-body-left-top">
+                    <!--右上div标题-->
+                    <div class="layui-col-md12 all-body-left-top-title">
+                        微观问卷指标
+                    </div>
+                    <!--右上div标题下的边框-->
+                    <div class="layui-col-md12 all-body-left-top-title-border">
+                    </div>
+                    <!--右上div内容-->
+                    <div class="layui-col-md12 all-body-left-top-content">
+                        <div class="jdt">
+                            <div class="layui-progress layui-progress-big wgwjzb" lay-filter="wgwjzb">
+                                <div class="layui-progress-bar layui-bg-blue" ></div>
+                            </div>
+                        </div>
+                        <div id="wgwjzb"></div>
+                    </div>
+                </div>
+                <!--右下div-->
+                <div class="layui-col-md12 all-body-left-bottom">
+                    <!--右下div标题-->
+                    <div class="layui-col-md12 all-body-left-top-title">
+                        宏观指标
+                    </div>
+                    <!--右下div标题下的边框-->
+                    <div class="layui-col-md12 all-body-left-top-title-border">
+                    </div>
+                    <!--右下div内容-->
+                    <div class="layui-col-md12 all-body-left-top-content">
+                        <div class="jdt">
+                            <div class="layui-progress layui-progress-big hgzb" lay-filter="hgzb">
+                                <div class="layui-progress-bar layui-bg-green"></div>
+                            </div>
+                        </div>
+                        <div id="hgzb"></div>
+                    </div>
+                </div>
+            </div>
+            <!--内容中间div-->
+            <div class="layui-col-md4 all-body-middle">
+                <div class="all-body-middle-pm">
+                    <table class="all-body-middle-pm-table">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="mapData"></div>
+            </div>
+            <!--内容右边div-->
+            <div class="layui-col-md4 all-body-right">
+                <div class="layui-col-md12 all-body-right-body">
+                    <!--右下div标题-->
+                    <div class="layui-col-md12 all-body-right-body-title">
+                        各地市子环境加权得分及排名
+                        <div class="all-body-right-body-title-select">
+                            <select id="infoType">
+
+                            </select>
+                        </div>
+                    </div>
+                    <!--右下div标题下的边框-->
+                    <div class="layui-col-md12 all-body-right-body-border">
+                    </div>
+                    <!--右下div内容-->
+                    <div class="layui-col-md12 all-body-left-top-content">
+                        <div class="all-body-left-top-content-title">
+                            <button class="all-body-left-top-content-button button-xz">要素环境</button>
+                            <button class="all-body-left-top-content-button">法治环境</button>
+                            <button class="all-body-left-top-content-button">政务环境</button>
+                            <button class="all-body-left-top-content-button">市场环境</button>
+                            <button class="all-body-left-top-content-button">生活环境</button>
+                            <button class="all-body-left-top-content-button">融资环境</button>
+                        </div>
+                        <table class="all-body-left-top-content-table" style="border-collapse: separate;border-spacing: 0px 10px;">
+                            <thead>
+                                <tr>
+                                    <th width="15%">排名</th>
+                                    <th width="50%">地区</th>
+                                    <th width="35%">子环境加权得分</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="all-body-right-content">
+                            <table class="all-body-left-top-content-table">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
